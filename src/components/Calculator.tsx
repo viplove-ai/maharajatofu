@@ -79,17 +79,10 @@ export function Calculator({ onResult }: { onResult?: (o: CalculatorOutcome) => 
   )
   const result = mode === 'swap' ? swap : plan
 
+  // Only meaningful in plan mode, which is the only mode that asks who eats.
   const dailyNeed = useMemo(
-    () =>
-      householdDailyProtein({
-        adults: mode === 'swap' ? 2 : adults,
-        avgAdultWeightKg: 65,
-        activity: 'desk',
-        kids4to9: mode === 'swap' ? 0 : kids4to9,
-        kids10to12: mode === 'swap' ? 0 : kids10to12,
-        teens: mode === 'swap' ? 0 : teens,
-      }),
-    [mode, adults, teens, kids10to12, kids4to9],
+    () => householdDailyProtein({ adults, avgAdultWeightKg: 65, activity: 'desk', kids4to9, kids10to12, teens }),
+    [adults, teens, kids10to12, kids4to9],
   )
 
   const shareText =
@@ -225,8 +218,11 @@ export function Calculator({ onResult }: { onResult?: (o: CalculatorOutcome) => 
         <div className="border-t border-line pt-4 text-sm">
           <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">The protein, honestly</p>
           <p className="mt-1">
-            {result.proteinPerWeek} g of protein a week — about {proteinSharePct(result, dailyNeed)}% of what your
-            household needs.{' '}
+            {result.proteinPerWeek} g of protein a week
+            {/* Only quote a share of the household need in plan mode, where we
+                actually asked who is in the house. In swap mode we never asked,
+                so a percentage would be a denominator we invented. */}
+            {mode === 'plan' && <> — about {proteinSharePct(result, dailyNeed)}% of what your household needs</>}.{' '}
             {mode === 'swap' && !matchProtein && (
               <>
                 The paneer you&rsquo;re replacing would have given {swap.paneerProteinPerWeek} g. Tick &ldquo;match my
