@@ -20,6 +20,16 @@ need flyctl
 need gh
 need psql
 
+# Safe to re-run. Deleting the Fly app invalidates its deploy token and wipes
+# its secrets, so re-running this is the recovery path for that too.
+echo "==> Checking the Fly app exists"
+if flyctl status --app "$TOFU_APP" >/dev/null 2>&1; then
+  echo "    $TOFU_APP is there"
+else
+  echo "    $TOFU_APP not found — creating it"
+  flyctl apps create "$TOFU_APP" --org personal
+fi
+
 echo "==> Reading Neon credentials from $NIRMAN_APP"
 # nirman holds the JDBC URL and the credentials as three separate secrets.
 env_blob=$(flyctl ssh console --app "$NIRMAN_APP" \
@@ -71,6 +81,9 @@ printf '%s' "$tofu_url" | gh secret set DATABASE_URL --repo "$REPO"
 echo "==> Creating a Fly deploy token and setting FLY_API_TOKEN"
 # Scoped to this app alone — nirman's token is never reused, and the value goes
 # straight from flyctl into the GitHub secret without touching a terminal.
+# A token issued for a deleted app stops resolving, which surfaces as
+# "app not found" at deploy time rather than as an auth error, so this always
+# issues a fresh one rather than checking whether a secret already exists.
 flyctl tokens create deploy --app "$TOFU_APP" --name github-actions --expiry 8760h \
   | tr -d '\n' \
   | gh secret set FLY_API_TOKEN --repo "$REPO"
