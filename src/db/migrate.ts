@@ -10,11 +10,17 @@ import { migrate } from 'drizzle-orm/neon-http/migrator'
 
 config({ path: ['.env.local', '.env'] })
 
-const url = process.env.DATABASE_URL
-if (!url) {
-  console.error('DATABASE_URL is not set')
-  process.exit(1)
+// Wrapped rather than a top-level await: tsx compiles this to CJS, which has no
+// top-level await, and the failure only shows up when the script actually runs.
+async function main() {
+  const url = process.env.DATABASE_URL
+  if (!url) throw new Error('DATABASE_URL is not set')
+
+  await migrate(drizzle(neon(url)), { migrationsFolder: './drizzle' })
+  console.log('migrations applied')
 }
 
-await migrate(drizzle(neon(url)), { migrationsFolder: './drizzle' })
-console.log('migrations applied')
+main().catch((error) => {
+  console.error(error instanceof Error ? error.message : error)
+  process.exit(1)
+})

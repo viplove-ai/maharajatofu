@@ -33,6 +33,16 @@ jobs:
       - name: Unit tests
         run: npm run test
 
+      # The migrate script is never exercised by the unit tests and only runs in
+      # the deploy pipeline, so a syntax or module-format problem in it used to
+      # surface against production. Running it without DATABASE_URL proves it
+      # loads and reaches its own error rather than failing to transpile.
+      - name: Migration runner loads
+        run: |
+          out=$(npx tsx src/db/migrate.ts 2>&1) && { echo "expected a failure, got success"; exit 1; }
+          echo "$out"
+          echo "$out" | grep -q 'DATABASE_URL is not set' || { echo "::error::migrate.ts failed for the wrong reason"; exit 1; }
+
       # No DATABASE_URL here on purpose. Every page that touches Postgres is
       # marked dynamic, so a production build never queries — and if someone
       # makes a DB-reading page static by accident, this job is where it fails.
