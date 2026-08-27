@@ -39,57 +39,53 @@ flyctl apps create maharaja-tofu
 If you pick a different name, update `app =` in `fly.toml` and the two smoke-test URLs in
 `.github/workflows/deploy.yml`.
 
-### 2. Database
-
-A separate database inside the **existing** Neon project — same project, same free tier, no
-new billing, and cleanly separated from nirman's data:
+### 2–4. Database and secrets, in one step
 
 ```bash
-psql '<nirman connection string>' -c 'CREATE DATABASE maharaja_tofu;'
+./scripts/setup-secrets.sh
 ```
 
-Take the connection string, swap the database name at the end for `maharaja_tofu`, and use
-the **pooled** host (the one containing `-pooler`).
+That script reads the Neon credentials out of the running `nirman-constructions-api`
+machine — Fly stores digests rather than values, so that environment is the only place they
+exist — creates a `maharaja_tofu` database inside the same Neon project, and pipes the
+results into the Fly secret and the two GitHub Actions secrets. Nothing is ever printed.
+
+Three details in it that are easy to get wrong by hand:
+
+- **`CREATE DATABASE` runs against the direct endpoint**, not the pooled one. It cannot run
+  inside a transaction, and PgBouncer in transaction mode would wrap it in one.
+- **The app uses the pooled endpoint.** The opposite of nirman's constraint: Hikari holds
+  prepared statements that PgBouncer breaks, whereas `@neondatabase/serverless` speaks HTTP
+  and holds none.
+- **The Fly deploy token is scoped to this app.** Never reuse nirman's.
+
+Doing it by hand instead:
+
+```bash
+psql '<nirman connection string, direct endpoint>' -c 'CREATE DATABASE maharaja_tofu;'
+```
+
+```bash
+flyctl tokens create deploy --app maharaja-tofu --name github-actions --expiry 8760h | gh secret set FLY_API_TOKEN --repo viplove-ai/maharajatofu
+```
+
+Set `DATABASE_URL` — pooled host, `maharaja_tofu` database — both as a Fly secret on the app
+and as a GitHub Actions secret for the migration job. Keep it out of your shell history and
+never put it in `fly.toml`; that file is committed and the repository is public.
 
 > One thing to know: Neon's free tier limits storage and compute **per project**, so this
 > database and nirman's share that ceiling. At pilot volume — a few hundred rows — it is not
 > a concern. Move this to its own project before anything here gets busy.
 
-### 3. Secrets
-
-```bash
-flyctl secrets set --app maharaja-tofu DATABASE_URL='postgresql://user:pass@ep-xxx-pooler.ap-southeast-1.aws.neon.tech/maharaja_tofu?sslmode=require'
-```
-
-Never put this in `fly.toml` — that file is committed.
-
-### 4. GitHub secrets
-
-```bash
-flyctl tokens create deploy --name github-actions --expiry 8760h
-```
-
-Under Settings → Secrets and variables → Actions, add:
-
-| Secret | Value |
-|---|---|
-| `FLY_API_TOKEN` | the token printed above |
-| `DATABASE_URL` | the same connection string, for the migration job |
-
-Create a `production` environment (Settings → Environments) if you want a manual approval
-gate — both deploy jobs already reference it.
-
 ### 5. First deploy
 
 ```bash
-npm run db:migrate
+git commit --allow-empty -m 'Trigger first deploy' && git push
 ```
 
-```bash
-flyctl deploy --remote-only
-```
-
-After that, every push to `main` does both automatically.
+The pipeline does the rest: CI, then migrations, then `flyctl deploy`, then the smoke test.
+There is no separate first-deploy dance — the same path that ships every later change ships
+the first one, which is the point of having it.
 
 ### 6. Custom domain
 

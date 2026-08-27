@@ -1,0 +1,423 @@
+{
+  "brand": {
+    "name": "Maharaja Tofu",
+    "devanagari": "महाराजा टोफ़ू",
+    "domain": "maharajatofu.com",
+    "claim": {
+      "hi": "उतना ही प्रोटीन। आधी कैलोरी।",
+      "latin": "Utna hi protein. Aadhi calories."
+    },
+    "heroHeadline": {
+      "line1": "वही सब्ज़ी।",
+      "line2": "आधी कैलोरी।"
+    },
+    "heroSub": "Fresh soya tofu, made in a home kitchen in Ghaziabad. Delivered Tuesday & Friday in Sector 62 and Vasundhara.",
+    "address": "Maharaja Foods, H-114, Sector 10, Rajendra Nagar, Ghaziabad, Uttar Pradesh 201005",
+    "fssai": "REPLACE_WITH_REAL_FSSAI_LICENCE",
+    "whatsapp": "REPLACE_WITH_REAL_NUMBER",
+    "whatsappPrefill": "Namaste! Maharaja Tofu ke baare mein poochhna hai.",
+    "founders": [
+      {
+        "name": "Ritu",
+        "role": "presses every batch"
+      },
+      {
+        "name": "Arjun",
+        "role": "drives the route"
+      }
+    ],
+    "batchDays": "Mon & Thu, pressed 05:30",
+    "deliveryDays": "Tue & Fri, 6–9 PM",
+    "launchDate": "2026-09-15",
+    "visitSlots": "Saturdays 10–12, four households a week"
+  },
+  "products": [
+    {
+      "slug": "classic-tofu",
+      "name": "Classic Firm Tofu",
+      "sku": "classic",
+      "price": 79,
+      "netQty": "200 g",
+      "perKg": 395,
+      "ingredients": [
+        "Soybean",
+        "Water",
+        "Coagulant"
+      ],
+      "allergen": "Contains soy",
+      "per100g": {
+        "kcal": 76,
+        "protein": 10,
+        "fat": 4.2,
+        "satFat": 0.6,
+        "transFat": 0,
+        "cholesterol": 0,
+        "carb": 1.9,
+        "sugars": 0.5,
+        "sodium": 12
+      },
+      "line": "Plain, pressed. Swaps into any paneer recipe 1:1."
+    },
+    {
+      "slug": "masala-tofu",
+      "name": "Masala Tofu",
+      "sku": "masala",
+      "price": 99,
+      "netQty": "200 g",
+      "ingredients": [
+        "Soybean",
+        "Water",
+        "Coagulant",
+        "Mustard oil",
+        "Chilli",
+        "Turmeric",
+        "Fenugreek",
+        "Salt"
+      ],
+      "allergen": "Contains soy, mustard",
+      "per100g": {
+        "kcal": 112,
+        "protein": 9.6,
+        "fat": 7.4,
+        "satFat": 1,
+        "transFat": 0,
+        "cholesterol": 0,
+        "carb": 2.4,
+        "sugars": 0.6,
+        "sodium": 340
+      },
+      "perTub": {
+        "protein": 20,
+        "kcal": 224
+      },
+      "line": "Achaari-tandoori marinated. Eat cold, straight from the tub.",
+      "headline": "सीधे डिब्बे से खाओ।"
+    },
+    {
+      "slug": "block-1kg",
+      "name": "1 kg Firm Tofu Block",
+      "b2b": true,
+      "netQty": "1 kg",
+      "yield": "~34 portions of 30 g",
+      "slabs": [
+        {
+          "range": "5–10 kg/week",
+          "perKg": 340
+        },
+        {
+          "range": "10–25 kg/week",
+          "perKg": 315
+        },
+        {
+          "range": "25 kg+",
+          "perKg": null,
+          "note": "Talk to Ritu"
+        }
+      ]
+    }
+  ],
+  "comparison": {
+    "tofu": {
+      "serving": "180 g",
+      "kcal": 137,
+      "protein": 18,
+      "satFat": 1.1,
+      "cholesterol": 0
+    },
+    "paneer": {
+      "serving": "100 g",
+      "kcal": 265,
+      "protein": 18,
+      "satFat": 2.3,
+      "cholesterol": 72
+    },
+    "paneerRetailPerKg": "₹475–500",
+    "honesty": "Per 100 g, paneer has more protein — 18 g against our 10 g. That is why the honest comparison is per serving.",
+    "source": "Our lab report (batch 0412) & ICMR-NIN IFCT 2017 for paneer"
+  },
+  "plans": [
+    {
+      "packs": 2,
+      "name": "Chhota Plan",
+      "price": 155,
+      "who": "One person, two dinners a week."
+    },
+    {
+      "packs": 4,
+      "name": "Ghar Plan",
+      "price": 305,
+      "who": "A family of three to four, cooking tofu twice."
+    },
+    {
+      "packs": 6,
+      "name": "Bada Plan",
+      "price": 455,
+      "who": "Bigger household or a serious gym week."
+    },
+    {
+      "packs": 10,
+      "name": "Gym / Cloud Kitchen",
+      "price": 765,
+      "who": "Cafés, cloud kitchens and PG messes — 1 kg blocks."
+    }
+  ],
+  "areas": [
+    "Noida Sector 62",
+    "Noida Sector 63",
+    "Noida Sector 60",
+    "Noida Sector 61",
+    "Noida Sector 58",
+    "Nyay Khand 1",
+    "Nyay Khand 2",
+    "Indirapuram (Shakti Khand)",
+    "Vasundhara Sector 1–5",
+    "Vasundhara Sector 6–9",
+    "Vasundhara Sector 10–13",
+    "Vasundhara Sector 14–17",
+    "Vaishali Sector 1–4",
+    "Vaishali Sector 5–9",
+    "Kaushambi",
+    "Rajendra Nagar Sector 2",
+    "Rajendra Nagar Sector 5",
+    "Rajendra Nagar Sector 10",
+    "Shalimar Garden Extn 1",
+    "Shalimar Garden Extn 2",
+    "Crossings Republik",
+    "Ahinsa Khand 1",
+    "Ahinsa Khand 2",
+    "Vijay Nagar",
+    "Somewhere else"
+  ],
+  "pincodeZone": {
+    "201001": "Ghaziabad City",
+    "201005": "Rajendra Nagar",
+    "201010": "Vaishali",
+    "201012": "Vasundhara",
+    "201014": "Indirapuram",
+    "201016": "Shalimar Garden",
+    "201019": "Kaushambi",
+    "201301": "Noida Sector 60",
+    "201309": "Noida Sector 62"
+  },
+  "outOfZone": {
+    "threshold": 25,
+    "copy": {
+      "headline": "अभी नहीं — पर आपका पिन नोट कर लिया",
+      "body": "We open a new route once 25 people from one pincode ask.",
+      "cta": "मुझे बताइए जब शुरू हो"
+    }
+  },
+  "form": {
+    "headline": "चार चीज़ें, बस।",
+    "sub": "No address, no flat number — area and pincode are enough to plan the route.",
+    "labels": {
+      "name": "NAAM · FIRST NAME",
+      "phone": "WHATSAPP NUMBER",
+      "area": "AAPKA AREA",
+      "pincode": "PINCODE",
+      "intent": "KAB ORDER KARENGE?"
+    },
+    "intents": [
+      {
+        "key": "launch",
+        "label": "Launch week — पहले हफ़्ते"
+      },
+      {
+        "key": "month",
+        "label": "Within a month"
+      },
+      {
+        "key": "explore",
+        "label": "Just exploring"
+      }
+    ],
+    "consent": {
+      "ticked": false,
+      "label": "हाँ, मुझे WhatsApp पर launch update और early-bird coupon भेजिए।",
+      "sub": "Only these two messages. Reply STOP any time and we delete your number the same day."
+    },
+    "submit": {
+      "idle": "Coupon भेज दीजिए",
+      "loading": "भेज रहे हैं…",
+      "done": "हो गया ✓"
+    },
+    "errors": {
+      "phone": "10 digits daal dijiye — we only ever use it on WhatsApp.",
+      "consent": "We need this tick to message you — DPDP rules, and honestly it is the only way we can reach you."
+    },
+    "hiddenFields": [
+      "utm_source",
+      "utm_medium",
+      "utm_campaign",
+      "utm_content",
+      "ad_id",
+      "fbclid",
+      "landing_path",
+      "plan",
+      "packs"
+    ]
+  },
+  "ladder": [
+    {
+      "rank": "1–100",
+      "name": "Founding Member",
+      "perks": [
+        "25% off first order",
+        "Free Masala Tofu pack",
+        "Subscription price locked 3 months",
+        "Unique code MT-{NAME}-{RANK}"
+      ]
+    },
+    {
+      "rank": "101+",
+      "name": "Early Bird",
+      "perks": [
+        "15% off first order"
+      ]
+    },
+    {
+      "rank": "referrer",
+      "name": "Padosi Bonus",
+      "perks": [
+        "A free pack when a neighbour from the same society signs up"
+      ]
+    }
+  ],
+  "scarcity": {
+    "capacity": "one kitchen presses about 60 kg a week",
+    "updatedLine": "COUNTED BY HAND AFTER EVERY BATCH · LAST UPDATED TODAY 06:40 BY RITU",
+    "forbidden": [
+      "countdown clock",
+      "midnight reset",
+      "client-side decrement",
+      "red flashing"
+    ]
+  },
+  "faqs": [
+    {
+      "q": "Paneer जैसा लगेगा?",
+      "a": "Texture is close to firm paneer, taste is milder — which is why the masala goes in as usual. Nine out of ten people in our test kitchen could not tell in a gravy; in a plain cube, they could."
+    },
+    {
+      "q": "कितने दिन चलेगा?",
+      "a": "5 days from the date of packing, refrigerated at 0–4 °C. Change the water daily and finish within 3 days of opening."
+    },
+    {
+      "q": "Soy allergy?",
+      "a": "Then this is not for you — it is soybean, water and coagulant, and we say so on the front of the pack. Nothing else is made in the kitchen."
+    },
+    {
+      "q": "Freezer में रख सकते हैं?",
+      "a": "You can, but the texture turns spongy. Better: tell us on WhatsApp and we shift your delivery day."
+    },
+    {
+      "q": "इसमें क्या डला है?",
+      "a": "Soybean, water, coagulant. That is the complete list, printed at the same size as the brand name."
+    },
+    {
+      "q": "Launch कब है?",
+      "a": "Deliveries begin Tuesday 15 September 2026 in Sector 62 and Vasundhara. Founding members get the date on WhatsApp a week earlier."
+    }
+  ],
+  "recipes": [
+    {
+      "slug": "tawa-masala-tofu",
+      "name": "तवा मसाला टोफ़ू",
+      "minutes": 6,
+      "packs": 2,
+      "tag": "quick",
+      "serves": 4,
+      "proteinPerPortion": 18,
+      "kcalPerPortion": 148,
+      "paneerKcalPerPortion": 265,
+      "steps": [
+        "Press 10 min, cube",
+        "Tawa hot, 1 tsp oil, 3 min",
+        "Pyaaz-tamatar masala, 2 min",
+        "Kasuri methi, toss, done"
+      ]
+    },
+    {
+      "slug": "tofu-bhurji",
+      "name": "टोफ़ू भुर्जी",
+      "minutes": 8,
+      "packs": 1,
+      "tag": "quick"
+    },
+    {
+      "slug": "palak-tofu",
+      "name": "पालक टोफ़ू",
+      "minutes": 25,
+      "packs": 2,
+      "tag": "family"
+    },
+    {
+      "slug": "shahi-tofu",
+      "name": "शाही टोफ़ू",
+      "minutes": 30,
+      "packs": 3,
+      "tag": "family"
+    },
+    {
+      "slug": "achaari-tofu-roll",
+      "name": "अचारी टोफ़ू रोल",
+      "minutes": 4,
+      "packs": 1,
+      "tag": "quick"
+    },
+    {
+      "slug": "tofu-tikka",
+      "name": "टोफ़ू टिक्का",
+      "minutes": 20,
+      "packs": 2,
+      "tag": "family"
+    }
+  ],
+  "recipesNote": "16 total for launch; six above are designed. Every one is a paneer recipe with the paneer swapped 1:1 — the masala dabba stays as it is.",
+  "voice": {
+    "alwaysSay": [
+      "Teen cheezein. Bas.",
+      "Aaj subah bana.",
+      "Kitchen aa jao."
+    ],
+    "neverSay": [
+      "Never claim more protein than paneer per 100 g",
+      "Never attack another brand or a local paneer seller, and never cite paneer-adulteration statistics",
+      "Never frame it as giving up paneer — no diet talk, no cheat day, no before-and-after bodies"
+    ],
+    "bannedWords": [
+      "clean eating",
+      "guilt-free",
+      "superfood",
+      "detox",
+      "wellness"
+    ],
+    "approvedClaims": [
+      "same protein per serving",
+      "half the calories",
+      "zero cholesterol",
+      "half the saturated fat",
+      "lactose-free",
+      "swaps into any paneer recipe 1:1"
+    ]
+  },
+  "privacy": {
+    "keeps": [
+      "first name",
+      "phone number",
+      "area",
+      "pincode"
+    ],
+    "uses": [
+      "launch date message",
+      "coupon message",
+      "delivery route planning"
+    ],
+    "rules": [
+      "No selling. No sharing. No ads.",
+      "Reply STOP → deleted same day",
+      "Ask for your data → sent in 48 h",
+      "Stored in India · DPDP Act 2023"
+    ]
+  }
+}

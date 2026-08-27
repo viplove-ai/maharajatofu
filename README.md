@@ -29,16 +29,12 @@ npm install
 cp .env.example .env.local
 ```
 
-Fill in `DATABASE_URL`. To create the database inside the existing Neon project, alongside
-nirman's:
+Fill in `DATABASE_URL`, using the **pooled** endpoint — the one with `-pooler` in the host.
+This app talks to Neon over HTTP and holds no prepared-statement state, so unlike nirman's
+Hikari pool there is nothing here for PgBouncer to break.
 
-```bash
-psql '<nirman connection string>' -c 'CREATE DATABASE maharaja_tofu;'
-```
-
-Then point `DATABASE_URL` at it, using the **pooled** endpoint — the one with `-pooler` in
-the host. This app talks to Neon over HTTP and holds no prepared-statement state, so unlike
-nirman's Hikari pool there is nothing here for PgBouncer to break.
+If the database and the deploy secrets do not exist yet, `./scripts/setup-secrets.sh` does
+all of it in one go. See [`docs/deployment.md`](docs/deployment.md).
 
 ```bash
 npm run db:migrate

@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Black&family=Yatra+One&family=Mukta:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  body { margin: 0; background: #DED7C8; }
+  a { color: #E1442A; text-decoration: none; }
+  a:hover { color: #14224A; }
+  input[type=range] { accent-color: #E1442A; }
+  input, select, button { font-family: Archivo, Helvetica, sans-serif; }
+  ::-webkit-scrollbar { width: 0; height: 0; }
+</style>
+</helmet>
+
+<div style="font-family: Archivo, Helvetica, sans-serif; color: #0E1526; padding: 56px; display: grid; gap: 72px; text-wrap: pretty;">
+
+  <!-- ===== DOC HEADER ===== -->
+  <div style="display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end; background: #14224A; color: #F4EBDA; padding: 46px 52px; width: 3260px; box-sizing: border-box;">
+    <div>
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.22em; color: #F2A118;">MAHARAJATOFU.COM · 6-WEEK VALIDATION PILOT · MOBILE-FIRST · v1.0</div>
+      <div style="font-family: Yatra One, serif; font-size: 56px; line-height: 1.1; margin-top: 18px;">महाराजा टोफ़ू — वेबसाइट</div>
+      <div style="font-family: 'Archivo Black', sans-serif; font-size: 22px; letter-spacing: 0.14em; margin-top: 10px;">SITE DESIGN &amp; WORKING CALCULATOR</div>
+      <div style="font-size: 16px; line-height: 1.6; margin-top: 16px; max-width: 760px; color: rgba(244,235,218,0.85);">No cart, no payments. One job: turn an Instagram tap into a named, reachable, located, ranked person in under 90 seconds, one-handed. The home page and both calculator modes below are live — drag the slider, switch modes, type a pincode, submit the form.</div>
+    </div>
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1.9; color: rgba(244,235,218,0.8); text-align: right;">
+      <div>01 HOME — MOBILE, WORKING</div>
+      <div>02 CALCULATOR — BOTH MODES</div>
+      <div>03 HOME — DESKTOP GRID</div>
+      <div>04 ARRIVAL &amp; FORM STATES</div>
+      <div>05 REMAINING PAGES</div>
+    </div>
+  </div>
+
+  <!-- ===== 01 MOBILE HOME (WORKING) ===== -->
+  <div style="display: grid; gap: 20px;">
+    <div style="display: flex; align-items: baseline; gap: 18px;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.2em; color: #E1442A;">01</div>
+      <div style="font-family: 'Archivo Black', sans-serif; font-size: 26px;">HOME — MOBILE 390 PX, LIVE</div>
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #6E6757;">FULL SCROLL SHOWN UNROLLED · 11 BLOCKS · STICKY BAR PINNED AT BLOCK 11</div>
+    </div>
+
+    <div style="display: flex; gap: 40px; align-items: flex-start;">
+
+      <!-- PHONE FRAME -->
+      <div style="width: 430px; background: #0E1526; border-radius: 46px; padding: 20px; flex: none;">
+        <div style="background: #FBF7EE; border-radius: 30px; overflow: hidden;">
+          <!-- status bar -->
+          <div style="background: #14224A; color: #F4EBDA; padding: 10px 22px 8px; display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 11px;">
+            <div>9:41</div>
+            <div>4G · 78%</div>
+          </div>
+
+          <!-- nav -->
+          <div style="background: #14224A; color: #F4EBDA; padding: 8px 20px 14px; display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <div style="width: 34px; height: 34px; border-radius: 50%; background: #F4EBDA; display: grid; place-items: center;"><span style="font-family: Yatra One, serif; font-size: 20px; color: #14224A; line-height: 1;">म</span></div>
+              <div>
+                <div style="font-family: Yatra One, serif; font-size: 17px; line-height: 1;">महाराजा टोफ़ू</div>
+                <div style="font-family: 'IBM Plex Mono', monospace; font-size: 8.5px; letter-spacing: 0.16em; color: #F2A118; margin-top: 2px;">GHAZIABAD · 5 KM</div>
+              </div>
+            </div>
+            <div style="display: grid; gap: 4px;">
+              <div style="width: 22px; height: 2px; background: #F4EBDA;"></div>
+              <div style="width: 22px; height: 2px; background: #F4EBDA;"></div>
+              <div style="width: 22px; height: 2px; background: #F4EBDA;"></div>
+            </div>
+          </div>
+
+          <!-- 1 HERO -->
+          <div style="background: #14224A; color: #F4EBDA; padding: 4px 20px 26px;">
+            <div style="font-family: Mukta, sans-serif; font-weight: 800; font-size: 40px; line-height: 1.1;">वही सब्ज़ी।<br /><span style="color: #F2A118;">आधी कैलोरी।</span></div>
+            <div style="font-size: 14.5px; line-height: 1.55; margin-top: 12px; color: rgba(244,235,218,0.88);">Fresh soya tofu, made in a home kitchen in Ghaziabad. Delivered <b>Tuesday &amp; Friday</b> in Sector 62 and Vasundhara.</div>
+            <div style="margin-top: 16px; height: 210px; background-image: repeating-linear-gradient(45deg, #1B2C58 0 7px, #22345F 7px 14px); display: grid; place-items: center; border: 1px solid rgba(242,161,24,0.4);">
+              <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; text-align: center; line-height: 1.7; color: rgba(244,235,218,0.75);">HERO PHOTO 4:3<br />cut tofu face, hard side light,<br />steel plate, hand in frame</div>
+            </div>
+            <button type="button" onClick="{{ goCalc }}" style="width: 100%; margin-top: 18px; background: #E1442A; color: #FBF7EE; border: 0; padding: 0 18px; height: 58px; font-family: Mukta, sans-serif; font-weight: 800; font-size: 19px; display: flex; align-items: center; justify-content: space-between; cursor: pointer;">
+              <span>कितना चाहिए? Calculate करें</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 16px;">→</span>
+            </button>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: rgba(244,235,218,0.6); margin-top: 8px; text-align: center;">40 SECONDS · NO PAYMENT · NO ACCOUNT</div>
+          </div>
+
+          <!-- 2 PINCODE CHECK -->
+          <div style="background: #F4EBDA; padding: 22px 20px; border-bottom: 3px solid #E1442A;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: #E1442A;">02 — DELIVERY CHECK</div>
+            <div style="font-family: Mukta, sans-serif; font-weight: 800; font-size: 22px; color: #14224A; margin-top: 6px;">आपके यहाँ पहुँचाते हैं?</div>
+            <div style="display: flex; gap: 10px; margin-top: 12px;">
+              <input value="{{ pin }}" onChange="{{ onPin }}" inputmode="numeric" maxlength="6" placeholder="201012" style="flex: 1; height: 56px; border: 2px solid #14224A; background: #FBF7EE; padding: 0 14px; font-family: 'IBM Plex Mono', monospace; font-size: 20px; letter-spacing: 0.14em; color: #0E1526; box-sizing: border-box;" />
+              <button type="button" onClick="{{ checkPin }}" style="width: 106px; height: 56px; background: #14224A; color: #F4EBDA; border: 0; font-family: Mukta, sans-serif; font-weight: 800; font-size: 16px; cursor: pointer;">Check</button>
+            </div>
+            <sc-if value="{{ pinIdle }}" hint-placeholder-val="{{ true }}">
+              <div style="font-size: 12.5px; color: #6E6757; margin-top: 10px; line-height: 1.5;">Pilot zone: 5 km around Sector 10, Ghaziabad — Vasundhara, Vaishali, Indirapuram, Noida 62 / 63 / 60.</div>
+            </sc-if>
+            <sc-if value="{{ pinLoading }}" hint-placeholder-val="{{ false }}">
+              <div style="display: flex; gap: 10px; align-items: center; margin-top: 12px; background: #FBF7EE; border: 1px dashed #7E7768; padding: 12px 14px;">
+                <div style="width: 14px; height: 14px; border: 2px solid #E1442A; border-right-color: transparent; border-radius: 50%;"></div>
+                <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: #14224A;">CHECKING ROUTE…</div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ pinShort }}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top: 12px; background: #FBF7EE; border-left: 4px solid #E1442A; padding: 12px 14px; font-size: 13.5px; color: #0E1526;">6 digits chahiye — Vasundhara is 201012, Sector 62 is 201309.</div>
+            </sc-if>
+            <sc-if value="{{ pinOk }}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top: 12px; background: #14224A; color: #F4EBDA; padding: 16px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <div style="width: 22px; height: 22px; background: #1E7B34; display: grid; place-items: center; flex: none;"><span style="color: #fff; font-size: 13px; font-weight: 700;">✓</span></div>
+                  <div style="font-family: Mukta, sans-serif; font-weight: 800; font-size: 19px;">{{ pinArea }} — हाँ जी, पहुँचाते हैं</div>
+                </div>
+                <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; line-height: 1.8; margin-top: 10px; color: rgba(244,235,218,0.85);">DELIVERY DAYS · TUE &amp; FRI, 6–9 PM<br />FOUNDING SLOTS LEFT HERE · {{ slotsLeft }}</div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ pinOut }}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top: 12px; background: #FBF7EE; border: 2px solid #F2A118; padding: 16px;">
+                <div style="font-family: Mukta, sans-serif; font-weight: 800; font-size: 19px; color: #14224A;">अभी नहीं — पर आपका पिन नोट कर लिया</div>
+                <div style="font-size: 13.5px; line-height: 1.55; color: #2A3350; margin-top: 8px;">{{ pin }} is outside the 5 km pilot. We open a new route once <b>25 people</b> from one pincode ask. Yours is <b>#{{ waitCount }}</b>.</div>
+                <div style="height: 8px; background: #DCD3C0; margin-top: 12px;"><div style="height: 8px; background: #E1442A; width: {{ waitPct }};"></div></div>
+                <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: #6E6757; margin-top: 6px;">{{ waitCount }} / 25 IN {{ pin }}</div>
+                <button type="button" onClick="{{ goForm }}" style="width: 100%; margin-top: 14px; height: 54px; background: #14224A; color: #F4EBDA; border: 0; font-family: Mukta, sans-serif; font-weight: 800; font-size: 17px; cursor: pointer;">मुझे बताइए जब शुरू हो</button>
+              </div>
+            </sc-if>
+          </div>
+
+          <!-- 3 TWO PRODUCTS -->
+          <div style="padding: 26px 20px 24px;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: #E1442A;">03 — DO TARAH KA TOFU</div>
+            <div style="display: grid; gap: 14px; margin-top: 14px;">
+              <div style="background: #14224A; color: #F4EBDA; display: grid; grid-template-columns: 118px 1fr;">
+                <div style="background-image: repeating-linear-gradient(45deg, #1B2C58 0 7px, #22345F 7px 14px); display: grid; place-items: center; border-right: 6px solid #F2A118;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9px; text-align: center; color: rgba(244,235,218,0.7); line-height: 1.6;">TUB<br />PHOTO</span></div>
+                <div style="padding: 16px 16px 14px;">
+                  <div style="font-family: 'Archivo Black', sans-serif; font-size: 17px; color: #F2A118;">CLASSIC FIRM</div>
+                  <div style="font-size: 13px; color: rgba(244,235,218,0.85); margin-top: 4px; line-height: 1.45;">Plain, pressed. Swaps into any paneer recipe 1:1.</div>
+                  <div style="display: flex; align-items: baseline; gap: 8px; margin-top: 10px;">
+                    <div style="font-family: 'Archivo Black', sans-serif; font-size: 20px;">₹79</div>
+                    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: rgba(244,235,218,0.7);">/ 200 G</div>
+                  </div>
+                </div>
+              </div>
+              <div style="background: #14224A; color: #F4EBDA; display: grid; grid-template-columns: 118px 1fr;">
+                <div style="background-image: repeating-linear-gradient(45deg, #1B2C58 0 7px, #22345F 7px 14px); display: grid; place-items: center; border-right: 6px solid #B4202A;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9px; text-align: center; color: rgba(244,235,218,0.7); line-height: 1.6;">TUB<br />PHOTO</span></div>
+                <div style="padding: 16px 16px 14px;">
+                  <div style="font-family: 'Archivo Black', sans-serif; font-size: 17px; color: #E1442A;">MASALA</div>
+                  <div style="font-size: 13px; color: rgba(244,235,218,0.85); margin-top: 4px; line-height: 1.45;">Achaari-tandoori marinated. Eat cold, straight from the tub.</div>
+                  <div style="display: flex; align-items: baseline; gap: 8px; margin-top: 10px;">
+                    <div style="font-family: 'Archivo Black', sans-serif; font-size: 20px;">₹99</div>
+                    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: rgba(244,235,218,0.7);">/ 200 G</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 HONEST COMPARISON -->
+          <div style="background: #F4EBDA; padding: 26px 20px;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: #E1442A;">04 — THE ARITHMETIC, IN FULL</div>
+            <div style="font-family: Mukta, sans-serif; font-weight: 800; font-size: 24px; color: #14224A; margin-top: 6px; line-height: 1.25;">एक ही प्रोटीन, आधी कैलोरी। हिसाब देख लीजिए।</div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px;">
+              <div style="background: #14224A; color: #F4EBDA; padding: 14px;">
+                <div style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.14em; color: #F2A118;">180 G TOFU</div>
+                <div style="font-family: 'Archivo Black', sans-serif; font-size: 30px; margin-top: 8px;">137</div>
+                <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: rgba(244,235,218,0.7);">KCAL</div>
+                <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; line-height: 1.8; margin-top: 10px;">PROTEIN 18 G<br />SAT FAT 1.1 G<br />CHOLESTEROL 0 MG</div>
+              </div>
+              <div style="background: #FBF7EE; border: 2px solid #DCD3C0; padding: 14px;">
+                <div style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.14em; color: #7E7768;">100 G PANEER</div>
+                <div style="font-family: 'Archivo Black', sans-serif; font-size: 30px; margin-top: 8px; color: #0E1526;">265</div>
+                <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #7E7768;">KCAL</div>
+                <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; line-height: 1.8; margin-top: 10px; color: #2A3350;">PROTEIN 18 G<br />SAT FAT 2.3 G<br />CHOLESTEROL 72 MG</div>
+              </div>
+            </div>
+            <div style="background: #FBF7EE; border-left: 4px solid #14224A; padding: 14px; margin-top: 14px;">
+              <div style="font-family: 'Archivo Black', sans-serif; font-size: 13px; color: #14224A;">WHERE PANEER WINS</div>
+              <div style="font-size: 13.5px; line-height: 1.55; color: #2A3350; margin-top: 6px;">Per 100 g, paneer has more protein — 18 g against our 10 g. That is why the honest comparison is <b>per serving</b>: 180 g of tofu, 100 g of paneer, 18 g of protein each. Eat a little more, save half the calories.</div>
+            </div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; color: #6E6757; margin-top: 10px; line-height: 1.6;">SOURCE — OUR LAB REPORT (BATCH 0412) &amp; ICMR-NIN IFCT 2017 FOR PANEER</div>
+          </div>
+
+          <!-- 5 TEEN CHEEZEIN -->
+          <div style="background: #14224A; color: #F4EBDA; padding: 26px 20px;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: #F2A118;">05 — TEEN CHEEZEIN</div>
+            <div style="margin-top: 14px; height: 190px; background-image: repeating-linear-gradient(45deg, #1B2C58 0 7px, #22345F 7px 14px); display: grid; place-items: center; border: 1px solid rgba(242,161,24,0.4);">
+              <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; text-align: center; line-height: 1.7; color: rgba(244,235,218,0.75);">PHOTO — SOYBEANS IN A STEEL BOWL,<br />WATER, MUSLIN, THE PRESS.<br />06:00, KITCHEN WINDOW LIGHT.</div>
+            </div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 27px; line-height: 1.5; margin-top: 18px;">1 SOYBEAN<br />2 WATER<br />3 COAGULANT</div>
+            <div style="height: 2px; background: #E1442A; margin-top: 14px;"></div>
+            <div style="font-family: Mukta, sans-serif; font-weight: 700; font-size: 18px; margin-top: 12px;">बस इतना ही। पूरी लिस्ट।</div>
+            <div style="font-size: 13.5px; line-height: 1.55; color: rgba(244,235,218,0.85); margin-top: 6px;">No starch, no preservative, no colour. Every tub carries its batch number and the date it was pressed — and you are welcome to come watch it happen on a Saturday.</div>
+            <a href="#kitchen" style="display: inline-block; margin-top: 14px; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; letter-spacing: 0.12em; color: #F2A118; border-bottom: 1px solid #F2A118;">KITCHEN DEKHIYE →</a>
+          </div>
+
+          <!-- 6 CALCULATOR (LIVE) -->
+          <div id="calc" style="padding: 26px 20px 28px; background: #FBF7EE;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: #E1442A;">06 — PROTEIN CALCULATOR</div>
+            <div style="font-family: Mukta, sans-serif; font-weight: 800; font-size: 24px; color: #14224A; margin-top: 6px; line-height: 1.25;">घर के हिसाब से बताइए, हम पैक गिन देंगे</div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 16px; border: 2px solid #14224A;">
+              <button type="button" onClick="{{ setSwap }}" style="border: 0; cursor: pointer; height: 50px; font-family: Mukta, sans-serif; font-weight: 800; font-size: 15px; background: {{ swapTabBg }}; color: {{ swapTabFg }};">Paneer swap करें</button>
+              <button type="button" onClick="{{ setWeek }}" style="border: 0; cursor: pointer; height: 50px; font-family: Mukta, sans-serif; font-weight: 800; font-size: 15px; background: {{ weekTabBg }}; color: {{ weekTabFg }};">हफ़्ते का plan</button>
+            </div>
+
+            <!-- MODE 1 -->
+            <sc-if value="{{ isSwap }}" hint-placeholder-val="{{ true }}">
+              <div style="background: #F4EBDA; padding: 18px 16px; margin-top: 14px;">
+                <div style="font-family: 'Archivo Black', sans-serif; font-size: 12px; letter-spacing: 0.08em; color: #14224A;">1 · PANEER PER WEEK, GHAR MEIN</div>
+                <div style="display: flex; align-items: baseline; gap: 10px; margin-top: 10px;">
+                  <div style="font-family: 'Archivo Black', sans-serif; font-size: 34px; color: #E1442A;">{{ res.paneerLabel }}</div>
+                  <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #6E6757;">PER WEEK</div>
+                </div>
+                <input type="range" min="250" max="3000" step="250" value="{{ paneerG }}" onChange="{{ onPaneer }}" style="width: 100%; height: 44px; margin-top: 4px;" />
+                <div style="display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #7E7768;"><span>250 G</span><span>3 KG</span></div>
+
+                <div style="font-family: 'Archivo Black', sans-serif; font-size: 12px; letter-spacing: 0.08em; color: #14224A; margin-top: 20px;">2 · KITNA SWAP KARNA HAI</div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px;">
+                  <button type="button" onClick="{{ pct25 }}" style="height: 52px; border: 2px solid #14224A; cursor: pointer; font-family: 'Archivo Black', sans-serif; font-size: 15px; background: {{ pct25Bg }}; color: {{ pct25Fg }};">25%</button>
+                  <button type="button" onClick="{{ pct50 }}" style="height: 52px; border: 2px solid #14224A; cursor: pointer; font-family: 'Archivo Black', sans-serif; font-size: 15px; background: {{ pct50Bg }}; color: {{ pct50Fg }};">50%</button>
+                  <button type="button" onClick="{{ pct100 }}" style="height: 52px; border: 2px solid #14224A; cursor: pointer; font-family: 'Archivo Black', sans-serif; font-size: 15px; background: {{ pct100Bg }}; color: {{ pct100Fg }};">100%</button>
+                </div>
+
+                <div onClick="{{ toggleMatch }}" style="display: flex; align-items: center; gap: 12px; margin-top: 18px; background: #FBF7EE; border: 2px solid #14224A; padding: 12px 14px; cursor: pointer;">
+                  <div style="width: 50px; height: 28px; border-radius: 14px; flex: none; background: {{ matchTrack }}; position: relative;">
+                    <div style="position: absolute; top: 3px; left: {{ matchKnob }}; width: 22px; height: 22px; border-radius: 50%; background: #FBF7EE;"></div>
+                  </div>
+                  <div>
+                    <div style="font-family: Mukta, sans-serif; font-weight: 700; font-size: 15px; color: #14224A;">प्रोटीन बराबर रखें</div>
+                    <div style="font-size: 11.5px; color: #6E6757; line-height: 1.4;">Match my protein — uses 1.8× by weight</div>
+                  </div>
+                </div>
+              </div>
+            </sc-if>
+
+            <!-- MODE 2 -->
+            <sc-if value="{{ isWeek }}" hint-placeholder-val="{{ false }}">
+              <div style="background: #F4EBDA; padding: 18px 16px; margin-top: 14px;">
+                <div style="font-family: 'Archivo Black', sans-serif; font-size: 12px; letter-spacing: 0.08em; color: #14224A;">1 · KAUN KHAYEGA (not who lives here)</div>
+                <div style="font-size: 12px; color: #6E6757; line-height: 1.45; margin-top: 4px;">In most homes one person won't touch it in week one. Count only the eaters — an honest count makes an honest basket.</div>
+                <div style="display: grid; gap: 8px; margin-top: 12px;">
+                  <sc-for list="{{ eaters }}" as="row" hint-placeholder-count="4">
+                    <div style="display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; background: #FBF7EE; border: 1px solid #DCD3C0; padding: 10px 12px;">
+                      <div>
+                        <div style="font-family: Mukta, sans-serif; font-weight: 700; font-size: 15px; color: #14224A;">{{ row.label }}</div>
+                        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; color: #7E7768; letter-spacing: 0.08em;">{{ row.note }}</div>
+                      </div>
+                      <div style="display: flex; align-items: center; gap: 6px;">
+                        <button type="button" onClick="{{ row.dec }}" style="width: 46px; height: 46px; border: 2px solid #14224A; background: #FBF7EE; color: #14224A; font-size: 22px; cursor: pointer; line-height: 1;">−</button>
+                        <div style="width: 34px; text-align: center; font-family: 'Archivo Black', sans-serif; font-size: 20px;">{{ row.count }}</div>
+                        <button type="button" onClick="{{ row.inc }}" style="width: 46px; height: 46px; border: 2px solid #14224A; background: #14224A; color: #F4EBDA; font-size: 22px; cursor: pointer; line-height: 1;">+</button>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+
+                <div style="font-family: 'Archivo Black', sans-serif; font-size: 12px; letter-spacing: 0.08em; color: #14224A; margin-top: 20px;">2 · HAFTE MEIN KITNI BAAR, KIS TARAH</div>
+                <div style="display: grid; gap: 8px; margin-top: 12px;">
+                  <sc-for list="{{ dishes }}" as="row" hint-placeholder-count="4">
+                    <div style="display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; background: #FBF7EE; border: 1px solid #DCD3C0; padding: 10px 12px;">
+                      <div>
+                        <div style="font-family: Mukta, sans-serif; font-weight: 700; font-size: 15px; color: #14224A;">{{ row.label }}</div>
+                        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; color: #7E7768; letter-spacing: 0.08em;">{{ row.note }}</div>
+                      </div>
+                      <div style="display: flex; align-items: center; gap: 6px;">
+                        <button type="button" onClick="{{ row.dec }}" style="width: 46px; height: 46px; border: 2px solid #14224A; background: #FBF7EE; color: #14224A; font-size: 22px; cursor: pointer; line-height: 1;">−</button>
+                        <div style="width: 34px; text-align: center; font-family: 'Archivo Black', sans-serif; font-size: 20px;">{{ row.meals }}</div>
+                        <button type="button" onClick="{{ row.inc }}" style="width: 46px; height: 46px; border: 2px solid #14224A; background: #14224A; color: #F4EBDA; font-size: 22px; cursor: pointer; line-height: 1;">+</button>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+
+                <div onClick="{{ toggleTrains }}" style="display: flex; align-items: center; gap: 12px; margin-top: 18px; background: #FBF7EE; border: 2px solid #14224A; padding: 12px 14px; cursor: pointer;">
+                  <div style="width: 50px; height: 28px; border-radius: 14px; flex: none; background: {{ trainsTrack }}; position: relative;">
+                    <div style="position: absolute; top: 3px; left: {{ trainsKnob }}; width: 22px; height: 22px; border-radius: 50%; background: #FBF7EE;"></div>
+                  </div>
+                  <div>
+                    <div style="font-family: Mukta, sans-serif; font-weight: 700; font-size: 15px; color: #14224A;">कोई हफ़्ते में 4+ दिन gym जाता है</div>
+                    <div style="font-size: 11.5px; color: #6E6757; line-height: 1.4;">1.4× on personal plates only — never on a shared gravy</div>
+                  </div>
+                </div>
+              </div>
+            </sc-if>
+
+            <!-- RESULT CARD -->
+            <div style="background: #14224A; color: #F4EBDA; margin-top: 14px; padding: 22px 18px 20px; position: relative; overflow: hidden;">
+              <div style="position: absolute; left: 0; right: 0; top: 0; height: 8px; background: #F2A118;"></div>
+              <div style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.2em; color: #F2A118; margin-top: 6px;">{{ res.modeLabel }} · {{ res.stamp }}</div>
+
+              <div style="display: flex; align-items: flex-end; gap: 12px; margin-top: 12px;">
+                <div style="font-family: 'Archivo Black', sans-serif; font-size: 60px; line-height: 0.9;">{{ res.packs }}</div>
+                <div style="padding-bottom: 6px;">
+                  <div style="font-family: Mukta, sans-serif; font-weight: 800; font-size: 20px;">पैक हफ़्ते में</div>
+                  <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: rgba(244,235,218,0.75);">{{ res.gramsLabel }} · 200 G TUBS</div>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 8px; margin-top: 12px;">
+                <div style="flex: 1; border: 1px solid rgba(244,235,218,0.35); padding: 10px 12px;">
+                  <div style="font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.12em; color: #F2A118;">TUESDAY</div>
+                  <div style="font-family: 'Archivo Black', sans-serif; font-size: 18px; margin-top: 2px;">{{ res.tue }} packs</div>
+                </div>
+                <div style="flex: 1; border: 1px solid rgba(244,235,218,0.35); padding: 10px 12px;">
+                  <div style="font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.12em; color: #F2A118;">FRIDAY</div>
+                  <div style="font-family: 'Archivo Black', sans-serif; font-size: 18px; margin-top: 2px;">{{ res.fri }} packs</div>
+                </div>
+              </div>
+
+              <sc-if value="{{ res.showSplit }}" hint-placeholder-val="{{ false }}">
+                <div style="font-size: 12.5px; line-height: 1.5; color: rgba(244,235,218,0.88); margin-top: 10px; border-left: 3px solid #E1442A; padding-left: 10px;">Fresh tofu keeps about 5 days, so {{ res.packs }} packs come in two drops — that is exactly why we deliver Tuesday and Friday.</div>
+              </sc-if>
+
+              <div style="background: #F2A118; color: #14224A; margin-top: 16px; padding: 16px;">
+                <div style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.16em;">CALORIES SAVED THIS WEEK</div>
+                <div style="font-family: 'Archivo Black', sans-serif; font-size: 54px; line-height: 1; margin-top: 4px;">{{ res.kcal }}</div>
+                <div style="font-family: Mukta, sans-serif; font-weight: 700; font-size: 15px; margin-top: 2px;">kcal — वही सब्ज़ी खाकर</div>
+                <div style="font-size: 12px; line-height: 1.45; margin-top: 6px; color: #2A3350;">Against the same weight of paneer, cooked the same way. Over 4 weeks: <b>{{ res.kcalMonth }} kcal</b>.</div>
+              </div>
+
+              <div style="border: 1px solid rgba(244,235,218,0.35); padding: 14px; margin-top: 12px;">
+                <div style="font-family: 'Archivo Black', sans-serif; font-size: 12px; color: #F2A118;">THE HONEST PROTEIN LINE</div>
+                <div style="font-size: 13px; line-height: 1.55; margin-top: 6px; color: rgba(244,235,218,0.9);">{{ res.proteinLine }}</div>
+                <div style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; color: rgba(244,235,218,0.6); margin-top: 8px; line-height: 1.6;">RDA REFERENCE — ICMR-NIN 2020: 0.83 G PROTEIN / KG BODY WEIGHT / DAY</div>
+              </div>
+
+              <sc-if value="{{ res.showNudge }}" hint-placeholder-val="{{ false }}">
+                <div style="background: #FBF7EE; color: #14224A; padding: 14px; margin-top: 12px;">
+                  <div style="font-family: Mukta, sans-serif; font-weight: 800; font-size: 16px;">पहले 2 हफ़्ते {{ res.nudgePacks }} पैक से शुरू करें</div>
+                  <div style="font-size: 12.5px; line-height: 1.5; color: #2A3350; margin-top: 4px;">Week one is where people over-order, throw tofu away and quit. Start smaller, then move up — we change your plan on WhatsApp in one message.</div>
+                </div>
+              </sc-if>
+
+              <div style="display: grid; gap: 8px; margin-top: 16px;">
+                <a href="{{ res.waHref }}" style="height: 56px; background: #1E7B34; color: #FBF7EE; display: flex; align-items: center; justify-content: center; gap: 10px; font-family: Mukta, sans-serif; font-weight: 800; font-size: 17px;">WhatsApp पर भेजें</a>
+                <button type="button" onClick="{{ goForm }}" style="height: 56px; background: #E1442A; color: #FBF7EE; border: 0; font-family: Mukta, sans-serif; font-weight: 800; font-size: 17px; cursor: pointer;">यही plan चुनें — {{ res.planName }}</button>
+              </div>
+              <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: rgba(244,235,218,0.7); margin-top: 10px; text-align: center;">{{ res.planName }} · {{ res.planPrice }} / WEEK · CHANGE ANYTIME</div>
+            </div>
+          </div>
+
+          <!-- 7 RECIPES -->
+          <div style="padding: 26px 20px; background: #F4EBDA;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: #E1442A;">07 — RECIPES, PANEER KE JAISE</div>
+            <div style="display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap;">
+              <button type="button" onClick="{{ filAll }}" style="height: 44px; padding: 0 16px; border: 2px solid #14224A; cursor: pointer; font-family: Mukta, sans-serif; font-weight: 700; font-size: 14px; background: {{ filAllBg }}; color: {{ filAllFg }};">सब</button>
+              <button type="button" onClick="{{ filQuick }}" style="height: 44px; padding: 0 16px; border: 2px solid #14224A; cursor: pointer; font-family: Mukta, sans-serif; font-weight: 700; font-size: 14px; background: {{ filQuickBg }}; color: {{ filQuickFg }};">Under 5 minutes</button>
+              <button type="button" onClick="{{ filFamily }}" style="height: 44px; padding: 0 16px; border: 2px solid #14224A; cursor: pointer; font-family: Mukta, sans-serif; font-weight: 700; font-size: 14px; background: {{ filFamilyBg }}; color: {{ filFamilyFg }};">Family dinner</button>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px;">
+              <sc-for list="{{ recipes }}" as="r" hint-placeholder-count="6">
+                <div style="background: #FBF7EE; border: 1px solid #DCD3C0;">
+                  <div style="height: 92px; background-image: repeating-linear-gradient(45deg, #E6DBC4 0 6px, #EFE6D2 6px 12px); display: grid; place-items: center;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 8.5px; color: #7E7768;">PHOTO 4:3</span></div>
+                  <div style="padding: 10px 12px 12px;">
+                    <div style="font-family: Mukta, sans-serif; font-weight: 700; font-size: 14.5px; color: #14224A; line-height: 1.25;">{{ r.name }}</div>
+                    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; color: #7E7768; margin-top: 4px; letter-spacing: 0.06em;">{{ r.meta }}</div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <!-- 8 KITCHEN + PRICE FRAMING -->
+          <div id="kitchen" style="padding: 26px 20px; background: #FBF7EE;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: #E1442A;">08 — KITCHEN, KEEMAT AUR BHAROSA</div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px;">
+              <div style="height: 128px; background-image: repeating-linear-gradient(45deg, #E6DBC4 0 6px, #EFE6D2 6px 12px); display: grid; place-items: center;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9px; text-align: center; color: #7E7768; line-height: 1.6;">PHOTO<br />Ritu at the press,<br />06:10</span></div>
+              <div style="height: 128px; background-image: repeating-linear-gradient(45deg, #E6DBC4 0 6px, #EFE6D2 6px 12px); display: grid; place-items: center;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9px; text-align: center; color: #7E7768; line-height: 1.6;">PHOTO<br />Arjun loading the<br />insulated bag</span></div>
+            </div>
+            <div style="font-family: Mukta, sans-serif; font-weight: 800; font-size: 21px; color: #14224A; margin-top: 14px; line-height: 1.3;">दो लोग, एक रसोई, हफ़्ते में दो बार।</div>
+            <div style="font-size: 13.5px; line-height: 1.55; color: #2A3350; margin-top: 6px;">Ritu and Arjun press every batch by hand in Sector 10, Rajendra Nagar, and drive it out the same morning. Saturday visits are open — knock, taste, look inside the fridge.</div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; line-height: 1.9; color: #14224A; margin-top: 12px; border-top: 2px solid #DCD3C0; padding-top: 12px;">FSSAI LIC. NO. 12722•••••••••<br />BATCH DAYS · MON &amp; THU, PRESSED 05:30<br />DELIVERY · TUE &amp; FRI, 6–9 PM</div>
+
+            <div style="background: #F4EBDA; padding: 16px; margin-top: 16px;">
+              <div style="font-family: 'Archivo Black', sans-serif; font-size: 12px; color: #14224A; letter-spacing: 0.06em;">WHAT IT COSTS, AGAINST WHAT YOU BUY NOW</div>
+              <div style="display: grid; gap: 8px; margin-top: 12px;">
+                <div style="display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: baseline; border-bottom: 1px solid #DCD3C0; padding-bottom: 6px;">
+                  <div style="font-size: 13.5px; color: #2A3350;">Branded paneer, 1 kg</div>
+                  <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13.5px; color: #7E7768;">₹475–500</div>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: baseline;">
+                  <div style="font-size: 13.5px; color: #14224A; font-weight: 600;">Maharaja Classic, 1 kg (5 tubs)</div>
+                  <div style="font-family: 'Archivo Black', sans-serif; font-size: 17px; color: #E1442A;">₹395</div>
+                </div>
+              </div>
+              <div style="font-size: 12.5px; line-height: 1.5; color: #2A3350; margin-top: 10px;">Cheaper per kilo, half the calories, and delivered to your door twice a week. Plans start at <b>₹155 a week</b>.</div>
+            </div>
+          </div>
+
+          <!-- 9 SIGNUP + LADDER -->
+          <div style="background: #14224A; color: #F4EBDA; padding: 26px 20px 28px;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: #F2A118;">09 — EARLY BIRD</div>
+            <div style="font-family: Mukta, sans-serif; font-weight: 800; font-size: 26px; margin-top: 6px; line-height: 1.2;">पहले 100 लोग<br />Founding Members हैं</div>
+
+            <div style="background: #1B2C58; border: 1px solid rgba(242,161,24,0.5); padding: 14px; margin-top: 14px;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                <div style="font-family: 'Archivo Black', sans-serif; font-size: 30px; color: #F2A118;">{{ slotsLeft }}</div>
+                <div style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.1em; color: rgba(244,235,218,0.7); text-align: right; line-height: 1.6;">FOUNDING SLOTS LEFT<br />SECTOR 62</div>
+              </div>
+              <div style="height: 8px; background: rgba(244,235,218,0.2); margin-top: 10px;"><div style="height: 8px; background: #F2A118; width: {{ slotsPct }};"></div></div>
+              <div style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; color: rgba(244,235,218,0.65); margin-top: 8px; line-height: 1.6;">{{ slotsTaken }} OF 100 CONFIRMED · COUNTED BY HAND AFTER EVERY BATCH · LAST UPDATED TODAY 06:40 BY RITU</div>
+              <div style="font-size: 12px; line-height: 1.5; color: rgba(244,235,218,0.8); margin-top: 8px;">Capacity is real: one kitchen presses about 60 kg a week. When 100 founding tubs are committed, the ladder closes — no countdown clock, no reset at midnight.</div>
+            </div>
+
+            <div style="display: grid; gap: 10px; margin-top: 16px;">
+              <div style="border: 2px solid #F2A118; padding: 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                  <div style="font-family: 'Archivo Black', sans-serif; font-size: 15px; color: #F2A118;">FOUNDING MEMBER</div>
+                  <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: rgba(244,235,218,0.7);">CONFIRMED 1–100</div>
+                </div>
+                <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; line-height: 1.9; margin-top: 8px;">25% OFF FIRST ORDER<br />FREE MASALA TOFU PACK<br />SUBSCRIPTION PRICE LOCKED 3 MONTHS<br />YOUR OWN CODE</div>
+              </div>
+              <div style="border: 1px solid rgba(244,235,218,0.4); padding: 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                  <div style="font-family: 'Archivo Black', sans-serif; font-size: 15px;">EARLY BIRD</div>
+                  <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: rgba(244,235,218,0.7);">CONFIRMED 101+</div>
+                </div>
+                <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; line-height: 1.9; margin-top: 8px;">15% OFF FIRST ORDER</div>
+              </div>
+              <div style="border: 1px solid rgba(244,235,218,0.4); padding: 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                  <div style="font-family: 'Archivo Black', sans-serif; font-size: 15px;">PADOSI BONUS</div>
+                  <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: rgba(244,235,218,0.7);">ANY REFERRER</div>
+                </div>
+                <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; line-height: 1.9; margin-top: 8px;">FREE PACK WHEN A NEIGHBOUR<br />FROM YOUR SOCIETY SIGNS UP</div>
+              </div>
+            </div>
+
+            <!-- THE FORM -->
+            <div id="form" style="background: #FBF7EE; color: #0E1526; padding: 20px 18px 22px; margin-top: 18px;">
+              <div style="font-family: Mukta, sans-serif; font-weight: 800; font-size: 22px; color: #14224A;">चार चीज़ें, बस।</div>
+              <div style="font-size: 12.5px; color: #6E6757; line-height: 1.5; margin-top: 4px;">No address, no flat number — area and pincode are enough to plan the route.</div>
+
+              <div style="display: grid; gap: 14px; margin-top: 16px;">
+                <div>
+                  <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: #14224A;">NAAM · FIRST NAME</div>
+                  <input value="{{ fName }}" onChange="{{ onName }}" placeholder="Ritu" style="width: 100%; height: 56px; margin-top: 6px; border: 2px solid #14224A; background: #fff; padding: 0 14px; font-size: 17px; box-sizing: border-box;" />
+                </div>
+                <div>
+                  <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: #14224A;">WHATSAPP NUMBER</div>
+                  <div style="display: flex; gap: 0; margin-top: 6px;">
+                    <div style="width: 62px; height: 56px; border: 2px solid #14224A; border-right: 0; display: grid; place-items: center; font-family: 'IBM Plex Mono', monospace; font-size: 16px; background: #F4EBDA; box-sizing: border-box;">+91</div>
+                    <input value="{{ fPhone }}" onChange="{{ onPhone }}" inputmode="numeric" maxlength="10" placeholder="98765 43210" style="flex: 1; height: 56px; border: 2px solid #14224A; background: #fff; padding: 0 14px; font-family: 'IBM Plex Mono', monospace; font-size: 18px; letter-spacing: 0.08em; box-sizing: border-box;" />
+                  </div>
+                  <sc-if value="{{ phoneErr }}" hint-placeholder-val="{{ false }}">
+                    <div style="font-size: 12.5px; color: #B4202A; margin-top: 6px; font-weight: 600;">10 digits daal dijiye — we only ever use it on WhatsApp.</div>
+                  </sc-if>
+                </div>
+                <div>
+                  <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: #14224A;">AAPKA AREA</div>
+                  <select value="{{ fArea }}" onChange="{{ onArea }}" style="width: 100%; height: 56px; margin-top: 6px; border: 2px solid #14224A; background: #fff; padding: 0 12px; font-size: 16px; box-sizing: border-box;">
+                    <option value="">— select karein —</option>
+                    <sc-for list="{{ areas }}" as="a" hint-placeholder-count="6">
+                      <option value="{{ a.v }}">{{ a.v }}</option>
+                    </sc-for>
+                  </select>
+                </div>
+                <div>
+                  <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: #14224A;">PINCODE</div>
+                  <input value="{{ fPin }}" onChange="{{ onFPin }}" inputmode="numeric" maxlength="6" placeholder="201012" style="width: 100%; height: 56px; margin-top: 6px; border: 2px solid #14224A; background: #fff; padding: 0 14px; font-family: 'IBM Plex Mono', monospace; font-size: 18px; letter-spacing: 0.14em; box-sizing: border-box;" />
+                </div>
+
+                <div style="background: #F4EBDA; padding: 12px 14px;">
+                  <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: #14224A;">AUTO-FILLED FROM CALCULATOR</div>
+                  <div style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 6px;">
+                    <div style="font-family: Mukta, sans-serif; font-weight: 800; font-size: 17px; color: #14224A;">{{ res.planName }} · {{ res.packs }} packs</div>
+                    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #E1442A;">{{ res.planPrice }}/wk</div>
+                  </div>
+                  <button type="button" onClick="{{ goCalc }}" style="background: none; border: 0; padding: 0; margin-top: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.1em; color: #6E6757; text-decoration: underline; cursor: pointer;">CHANGE IN CALCULATOR</button>
+                </div>
+
+                <div>
+                  <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: #14224A;">KAB ORDER KARENGE?</div>
+                  <div style="display: grid; gap: 8px; margin-top: 8px;">
+                    <sc-for list="{{ intents }}" as="i" hint-placeholder-count="3">
+                      <button type="button" onClick="{{ i.pick }}" style="height: 52px; border: 2px solid #14224A; cursor: pointer; font-family: Mukta, sans-serif; font-weight: 700; font-size: 15px; text-align: left; padding: 0 14px; background: {{ i.bg }}; color: {{ i.fg }};">{{ i.label }}</button>
+                    </sc-for>
+                  </div>
+                </div>
+
+                <div onClick="{{ toggleConsent }}" style="display: flex; gap: 12px; align-items: flex-start; background: #F4EBDA; border: 2px solid #14224A; padding: 14px; cursor: pointer;">
+                  <div style="width: 28px; height: 28px; border: 2px solid #14224A; flex: none; display: grid; place-items: center; background: {{ consentBg }};"><span style="color: #FBF7EE; font-size: 16px; font-weight: 700;">{{ consentTick }}</span></div>
+                  <div>
+                    <div style="font-family: Mukta, sans-serif; font-weight: 700; font-size: 15px; color: #14224A; line-height: 1.4;">हाँ, मुझे WhatsApp पर launch update और early-bird coupon भेजिए।</div>
+                    <div style="font-size: 11.5px; color: #6E6757; line-height: 1.5; margin-top: 6px;">Only these two messages, from +91 98•••••••• . Reply STOP any time and we delete your number the same day. <a href="#privacy">Privacy</a>.</div>
+                  </div>
+                </div>
+                <sc-if value="{{ consentErr }}" hint-placeholder-val="{{ false }}">
+                  <div style="font-size: 12.5px; color: #B4202A; font-weight: 600;">We need this tick to message you — DPDP rules, and honestly it is the only way we can reach you.</div>
+                </sc-if>
+
+                <button type="button" onClick="{{ submit }}" style="height: 58px; background: #E1442A; color: #FBF7EE; border: 0; font-family: Mukta, sans-serif; font-weight: 800; font-size: 19px; cursor: pointer;">{{ submitLabel }}</button>
+                <div style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.08em; color: #7E7768; line-height: 1.7;">HIDDEN · UTM_SOURCE={{ utm.source }} · UTM_CAMPAIGN={{ utm.campaign }} · AD_ID={{ utm.ad }} · FBCLID={{ utm.fbclid }} · CARRIED FROM THE LANDING URL SO EVERY ROW KNOWS WHICH CREATIVE MADE IT</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 10 FAQ -->
+          <div style="padding: 26px 20px; background: #FBF7EE;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: #E1442A;">10 — SAWAAL JAWAAB</div>
+            <div style="display: grid; gap: 0; margin-top: 12px; border-top: 2px solid #14224A;">
+              <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="6">
+                <div style="border-bottom: 1px solid #DCD3C0; padding: 14px 0;">
+                  <div style="display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: start;">
+                    <div style="font-family: Mukta, sans-serif; font-weight: 700; font-size: 16px; color: #14224A; line-height: 1.35;">{{ f.q }}</div>
+                    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 16px; color: #E1442A;">+</div>
+                  </div>
+                  <div style="font-size: 13.5px; line-height: 1.55; color: #2A3350; margin-top: 6px;">{{ f.a }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <!-- FOOTER -->
+          <div style="background: #14224A; color: rgba(244,235,218,0.8); padding: 24px 20px 30px; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; line-height: 2;">
+            <div style="color: #F4EBDA; font-family: Yatra One, serif; font-size: 22px; line-height: 1.2;">महाराजा टोफ़ू</div>
+            <div style="margin-top: 10px;">CLASSIC · MASALA · 1 KG BLOCK<br />CALCULATOR · PLANS · RECIPES<br />KITCHEN · BULK · PRIVACY</div>
+            <div style="margin-top: 12px; color: rgba(244,235,218,0.6);">MAHARAJA FOODS · H-114, SECTOR 10, RAJENDRA NAGAR, GHAZIABAD 201005<br />FSSAI LIC. NO. 12722•••••••••<br />© 2026 · PILOT BATCH 01</div>
+          </div>
+
+          <!-- 11 STICKY BAR -->
+          <div style="position: sticky; bottom: 0; background: #F4EBDA; border-top: 3px solid #14224A; padding: 10px 14px; display: grid; grid-template-columns: 1fr 56px; gap: 10px;">
+            <button type="button" onClick="{{ goForm }}" style="height: 56px; background: #E1442A; color: #FBF7EE; border: 0; font-family: Mukta, sans-serif; font-weight: 800; font-size: 17px; cursor: pointer;">Early-bird coupon लें</button>
+            <a href="{{ waSite }}" style="height: 56px; background: #1E7B34; display: grid; place-items: center; color: #FBF7EE; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-align: center; line-height: 1.3;">WA</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANNOTATION COLUMN -->
+      <div style="width: 380px; display: grid; gap: 16px; align-content: start;">
+        <div style="background: #FBF7EE; border-left: 4px solid #E1442A; padding: 18px 20px;">
+          <div style="font-family: 'Archivo Black', sans-serif; font-size: 13px; color: #14224A;">WHY PRICE ARRIVES AT BLOCK 8</div>
+          <div style="font-size: 14.5px; line-height: 1.55; color: #2A3350; margin-top: 8px;">The hero sells the swap, not the rupee. By block 8 the visitor has seen the arithmetic, the three ingredients and their own pack count — so ₹395/kg lands against ₹475–500 paneer instead of against nothing. Prices are never hidden: they sit on both product cards and inside every calculator result.</div>
+        </div>
+        <div style="background: #FBF7EE; border-left: 4px solid #14224A; padding: 18px 20px;">
+          <div style="font-family: 'Archivo Black', sans-serif; font-size: 13px; color: #14224A;">KEYBOARD APPEARS TWICE</div>
+          <div style="font-size: 14.5px; line-height: 1.55; color: #2A3350; margin-top: 8px;">Phone and pincode only — <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12.5px;">inputmode="numeric"</span> on both. Everything else is a stepper, slider, chip or native select. Name is the one text field and it is first-name-only, four letters for most people.</div>
+        </div>
+        <div style="background: #FBF7EE; border-left: 4px solid #1E7B34; padding: 18px 20px;">
+          <div style="font-family: 'Archivo Black', sans-serif; font-size: 13px; color: #14224A;">HONEST SCARCITY, NOT A TIMER</div>
+          <div style="font-size: 14.5px; line-height: 1.55; color: #2A3350; margin-top: 8px;">The counter shows a whole number, the capacity behind it (60 kg a week), who last updated it and when. No seconds ticking, no midnight reset, no red flashing. It moves down only after a batch is counted — which is the one thing a fake counter never does.</div>
+        </div>
+        <div style="background: #FBF7EE; border-left: 4px solid #F2A118; padding: 18px 20px;">
+          <div style="font-family: 'Archivo Black', sans-serif; font-size: 13px; color: #14224A;">PERFORMANCE BUDGET</div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1.9; color: #2A3350; margin-top: 8px;">NO CAROUSEL LIBRARY<br />NO CHAT WIDGET<br />FONTS: 2 FAMILIES, DISPLAY=SWAP<br />HERO IMAGE ≤ 90 KB AVIF, PRELOADED<br />CALCULATOR = 4 KB OF JS<br />TARGET LCP &lt; 2.0 S ON 4G</div>
+        </div>
+        <div style="background: #14224A; color: #F4EBDA; padding: 18px 20px;">
+          <div style="font-family: 'Archivo Black', sans-serif; font-size: 13px; color: #F2A118;">DON'T ASK TWICE</div>
+          <div style="font-size: 14.5px; line-height: 1.55; margin-top: 8px; color: rgba(244,235,218,0.9);">Calculator inputs, pincode and plan persist to localStorage under one <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12.5px;">mt.*</span> key — drag the slider, reload this page, the numbers are still there. UTM and ad-id are read off the landing URL and ride into the hidden field. A returning signup sees their coupon, never the form.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 02 CALCULATOR MODES SIDE BY SIDE ===== -->
+  <div style="display: grid; gap: 20px;">
+    <div style="display: flex; align-items: baseline; gap: 18px;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.2em; color: #E1442A;">02</div>
+      <div style="font-family: 'Archivo Black', sans-serif; font-size: 26px;">CALCULATOR — THE MODEL BEHIND BOTH MODES</div>
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #6E6757;">THE LIVE ONE IS INSIDE THE PHONE ABOVE — TABS SWITCH IT</div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; width: 2200px;">
+      <div style="background: #FBF7EE; padding: 26px 28px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.2em; color: #E1442A;">MODE 1 — SWAP MY PANEER (DEFAULT)</div>
+        <div style="font-size: 15px; line-height: 1.6; color: #2A3350; margin-top: 12px;">Anchors to behaviour the household already has. Slider 250 g–3 kg, default 1 kg; swap 25 / 50 / 100%, default 50%.</div>
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; line-height: 2; color: #14224A; background: #F4EBDA; padding: 16px; margin-top: 14px;">TOFU_G = PANEER_G × SWAP%<br />IF MATCH_PROTEIN → × 1.8<br />PACKS = ROUND(TOFU_G / 200) &nbsp;← NEAREST<br />KCAL_SAVED = PANEER_G×2.65 − TOFU_G×0.76</div>
+        <div style="font-size: 14.5px; line-height: 1.55; color: #2A3350; margin-top: 14px;">Rounding to nearest, never up, is a trust decision: rounding up is how subscription boxes quietly inflate a basket, and a pilot cannot afford to be caught doing it.</div>
+      </div>
+      <div style="background: #FBF7EE; padding: 26px 28px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.2em; color: #E1442A;">MODE 2 — PLAN MY WEEK</div>
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; line-height: 2; color: #14224A; background: #F4EBDA; padding: 16px; margin-top: 14px;">EATER WEIGHTS · ADULT 1.0 · TEEN 0.85<br />CHILD 10–12 0.7 · CHILD 4–9 0.45<br /><br />PER PORTION · GRAVY 60 G (SHARED)<br />BHURJI 75 G · TIKKA PLATE 110 G<br />QUICK ADD-ON 50 G<br /><br />GYM 1.4× — PERSONAL PLATES ONLY<br />+12% PREP LOSS · ROUND TO NEAREST PACK<br />&gt;5 PACKS → SPLIT TUE / FRI</div>
+        <div style="font-size: 14.5px; line-height: 1.55; color: #2A3350; margin-top: 14px;">Portions come from the dish, not the head count, because that is how an Indian kitchen actually cooks: one gravy feeds six, one tikka plate feeds one.</div>
+      </div>
+      <div style="background: #14224A; color: #F4EBDA; padding: 26px 28px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.2em; color: #F2A118;">THE RESULT CARD IS THE GROWTH LOOP</div>
+        <div style="font-size: 15px; line-height: 1.6; margin-top: 12px; color: rgba(244,235,218,0.92);">Visual weight, in order: packs and their delivery days · calories saved (largest number, the screenshot) · the honest protein line with the trade-off · share to WhatsApp · the pre-filled plan flowing into four fields.</div>
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1.9; margin-top: 16px; border-top: 1px solid rgba(244,235,218,0.3); padding-top: 14px; color: rgba(244,235,218,0.85);">SHARE TEXT (PLAIN, NO IMAGE — SENDS IN 1 S ON 4G):<br /><br />“Ghar ke liye 4 packs/week — Tue 2, Fri 2. Wahi sabzi, 1,890 kcal kam. Maharaja Tofu, Ghaziabad. maharajatofu.com/r/ritu-62”</div>
+        <div style="font-size: 14.5px; line-height: 1.55; margin-top: 14px; color: rgba(244,235,218,0.9);">The link carries a token, so whoever taps it arrives recognised — greeted by name, area and plan pre-loaded, nothing to fill in.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 03 DESKTOP ===== -->
+  <div style="display: grid; gap: 20px;">
+    <div style="display: flex; align-items: baseline; gap: 18px;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.2em; color: #E1442A;">03</div>
+      <div style="font-family: 'Archivo Black', sans-serif; font-size: 26px;">HOME — LAPTOP 1440 PX, SAME DESIGN ON A WIDER GRID</div>
+    </div>
+
+    <div style="width: 1440px; background: #FBF7EE; border: 1px solid #C9C0AC;">
+      <div style="background: #14224A; color: #F4EBDA; padding: 14px 40px; display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 34px; height: 34px; border-radius: 50%; background: #F4EBDA; display: grid; place-items: center;"><span style="font-family: Yatra One, serif; font-size: 20px; color: #14224A; line-height: 1;">म</span></div>
+          <div style="font-family: Yatra One, serif; font-size: 20px;">महाराजा टोफ़ू</div>
+        </div>
+        <div style="display: flex; gap: 26px; font-family: Mukta, sans-serif; font-weight: 600; font-size: 15px;">
+          <div>Classic</div><div>Masala</div><div>Calculator</div><div>Plans</div><div>Recipes</div><div>Kitchen</div><div>Bulk</div>
+        </div>
+        <button type="button" onClick="{{ goForm }}" style="height: 44px; padding: 0 20px; background: #E1442A; color: #FBF7EE; border: 0; font-family: Mukta, sans-serif; font-weight: 800; font-size: 15px; cursor: pointer;">Early-bird coupon</button>
+      </div>
+
+      <div style="background: #14224A; color: #F4EBDA; padding: 56px 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;">
+        <div>
+          <div style="font-family: Mukta, sans-serif; font-weight: 800; font-size: 68px; line-height: 1.05;">वही सब्ज़ी।<br /><span style="color: #F2A118;">आधी कैलोरी।</span></div>
+          <div style="font-size: 18px; line-height: 1.6; margin-top: 18px; max-width: 520px; color: rgba(244,235,218,0.88);">Fresh soya tofu, made in a home kitchen in Ghaziabad. Three ingredients, a batch number on every tub, delivered Tuesday &amp; Friday in Sector 62 and Vasundhara.</div>
+          <div style="display: flex; gap: 12px; margin-top: 26px;">
+            <button type="button" onClick="{{ goCalc }}" style="height: 58px; padding: 0 26px; background: #E1442A; color: #FBF7EE; border: 0; font-family: Mukta, sans-serif; font-weight: 800; font-size: 19px; cursor: pointer;">कितना चाहिए? Calculate करें</button>
+            <div style="display: flex; gap: 0;">
+              <input value="{{ pin }}" onChange="{{ onPin }}" inputmode="numeric" maxlength="6" placeholder="Pincode" style="width: 150px; height: 58px; border: 2px solid rgba(244,235,218,0.6); background: transparent; color: #F4EBDA; padding: 0 14px; font-family: 'IBM Plex Mono', monospace; font-size: 17px; box-sizing: border-box;" />
+              <button type="button" onClick="{{ checkPin }}" style="height: 58px; padding: 0 20px; background: #F4EBDA; color: #14224A; border: 0; font-family: Mukta, sans-serif; font-weight: 800; font-size: 16px; cursor: pointer;">Check</button>
+            </div>
+          </div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: rgba(244,235,218,0.65); margin-top: 14px;">{{ pinDesktopNote }}</div>
+        </div>
+        <div style="height: 420px; background-image: repeating-linear-gradient(45deg, #1B2C58 0 8px, #22345F 8px 16px); display: grid; place-items: center; border: 1px solid rgba(242,161,24,0.4);">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; text-align: center; line-height: 1.8; color: rgba(244,235,218,0.75);">HERO PHOTO 4:3<br />cut tofu face, hard side light, steel plate<br />same asset as mobile, wider crop</div>
+        </div>
+      </div>
+
+      <div style="padding: 44px 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+        <div style="background: #14224A; color: #F4EBDA; display: grid; grid-template-columns: 200px 1fr;">
+          <div style="background-image: repeating-linear-gradient(45deg, #1B2C58 0 7px, #22345F 7px 14px); border-right: 8px solid #F2A118;"></div>
+          <div style="padding: 26px;">
+            <div style="font-family: 'Archivo Black', sans-serif; font-size: 22px; color: #F2A118;">CLASSIC FIRM</div>
+            <div style="font-size: 15px; color: rgba(244,235,218,0.85); margin-top: 8px;">Plain, pressed, 200 g. Swaps into any paneer recipe 1:1.</div>
+            <div style="font-family: 'Archivo Black', sans-serif; font-size: 26px; margin-top: 16px;">₹79 <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: rgba(244,235,218,0.7);">/ 200 G</span></div>
+          </div>
+        </div>
+        <div style="background: #14224A; color: #F4EBDA; display: grid; grid-template-columns: 200px 1fr;">
+          <div style="background-image: repeating-linear-gradient(45deg, #1B2C58 0 7px, #22345F 7px 14px); border-right: 8px solid #B4202A;"></div>
+          <div style="padding: 26px;">
+            <div style="font-family: 'Archivo Black', sans-serif; font-size: 22px; color: #E1442A;">MASALA</div>
+            <div style="font-size: 15px; color: rgba(244,235,218,0.85); margin-top: 8px;">Achaari-tandoori, ready to eat cold. Straight from the tub.</div>
+            <div style="font-family: 'Archivo Black', sans-serif; font-size: 26px; margin-top: 16px;">₹99 <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: rgba(244,235,218,0.7);">/ 200 G</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding: 0 40px 44px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 24px;">
+        <div style="background: #F4EBDA; padding: 32px;">
+          <div style="font-family: Mukta, sans-serif; font-weight: 800; font-size: 30px; color: #14224A; line-height: 1.25;">एक ही प्रोटीन, आधी कैलोरी। हिसाब देख लीजिए।</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 20px;">
+            <div style="background: #14224A; color: #F4EBDA; padding: 20px;">
+              <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: #F2A118;">180 G TOFU</div>
+              <div style="font-family: 'Archivo Black', sans-serif; font-size: 42px; margin-top: 8px;">137</div>
+              <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; line-height: 1.9; margin-top: 8px;">KCAL · PROTEIN 18 G<br />SAT FAT 1.1 G · CHOL 0 MG</div>
+            </div>
+            <div style="background: #FBF7EE; border: 2px solid #DCD3C0; padding: 20px;">
+              <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: #7E7768;">100 G PANEER</div>
+              <div style="font-family: 'Archivo Black', sans-serif; font-size: 42px; margin-top: 8px;">265</div>
+              <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; line-height: 1.9; margin-top: 8px; color: #2A3350;">KCAL · PROTEIN 18 G<br />SAT FAT 2.3 G · CHOL 72 MG</div>
+            </div>
+          </div>
+          <div style="font-size: 15px; line-height: 1.6; color: #2A3350; margin-top: 18px; border-left: 4px solid #14224A; padding-left: 14px;"><b>Where paneer wins:</b> per 100 g it has more protein — 18 g against our 10 g. So we compare per serving, and say so out loud.</div>
+        </div>
+        <div style="background: #14224A; color: #F4EBDA; padding: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center;">
+          <div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: #F2A118;">TEEN CHEEZEIN</div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 30px; line-height: 1.5; margin-top: 12px;">1 SOYBEAN<br />2 WATER<br />3 COAGULANT</div>
+            <div style="height: 2px; background: #E1442A; margin-top: 14px;"></div>
+            <div style="font-family: Mukta, sans-serif; font-weight: 700; font-size: 19px; margin-top: 12px;">बस इतना ही। पूरी लिस्ट।</div>
+          </div>
+          <div style="height: 100%; min-height: 220px; background-image: repeating-linear-gradient(45deg, #1B2C58 0 7px, #22345F 7px 14px); display: grid; place-items: center;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; text-align: center; color: rgba(244,235,218,0.7); line-height: 1.7;">PHOTO<br />soybeans, muslin,<br />the press</span></div>
+        </div>
+      </div>
+
+      <div style="background: #F4EBDA; padding: 44px 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start;">
+        <div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.2em; color: #E1442A;">PROTEIN CALCULATOR — {{ res.modeLabel }}</div>
+          <div style="font-family: Mukta, sans-serif; font-weight: 800; font-size: 32px; color: #14224A; margin-top: 8px; line-height: 1.2;">घर के हिसाब से बताइए, हम पैक गिन देंगे</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; margin-top: 20px; border: 2px solid #14224A;">
+            <button type="button" onClick="{{ setSwap }}" style="border: 0; cursor: pointer; height: 54px; font-family: Mukta, sans-serif; font-weight: 800; font-size: 16px; background: {{ swapTabBg }}; color: {{ swapTabFg }};">Paneer swap करें</button>
+            <button type="button" onClick="{{ setWeek }}" style="border: 0; cursor: pointer; height: 54px; font-family: Mukta, sans-serif; font-weight: 800; font-size: 16px; background: {{ weekTabBg }}; color: {{ weekTabFg }};">हफ़्ते का plan</button>
+          </div>
+          <div style="background: #FBF7EE; padding: 22px; margin-top: 16px;">
+            <div style="font-size: 15px; line-height: 1.6; color: #2A3350;">Inputs sit on the left, the result card stays pinned on the right — on a laptop the number updates in place while you drag, so nobody scrolls to find the payoff.</div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1.9; color: #14224A; margin-top: 12px;">CURRENT INPUT SET<br />{{ res.inputSummary }}</div>
+          </div>
+        </div>
+        <div style="background: #14224A; color: #F4EBDA; padding: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 26px; align-items: start;">
+          <div>
+            <div style="font-family: 'Archivo Black', sans-serif; font-size: 76px; line-height: 0.9;">{{ res.packs }}</div>
+            <div style="font-family: Mukta, sans-serif; font-weight: 800; font-size: 22px; margin-top: 6px;">पैक हफ़्ते में</div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: rgba(244,235,218,0.75); margin-top: 4px;">TUE {{ res.tue }} · FRI {{ res.fri }} · {{ res.gramsLabel }}</div>
+            <div style="font-size: 14px; line-height: 1.55; margin-top: 16px; color: rgba(244,235,218,0.9);">{{ res.proteinLine }}</div>
+          </div>
+          <div>
+            <div style="background: #F2A118; color: #14224A; padding: 20px;">
+              <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.14em;">CALORIES SAVED THIS WEEK</div>
+              <div style="font-family: 'Archivo Black', sans-serif; font-size: 56px; line-height: 1; margin-top: 4px;">{{ res.kcal }}</div>
+              <div style="font-family: Mukta, sans-serif; font-weight: 700; font-size: 15px;">kcal — वही सब्ज़ी खाकर</div>
+            </div>
+            <div style="display: grid; gap: 8px; margin-top: 12px;">
+              <a href="{{ res.waHref }}" style="height: 52px; background: #1E7B34; color: #FBF7EE; display: grid; place-items: center; font-family: Mukta, sans-serif; font-weight: 800; font-size: 16px;">WhatsApp पर भेजें</a>
+              <button type="button" onClick="{{ goForm }}" style="height: 52px; background: #E1442A; color: #FBF7EE; border: 0; font-family: Mukta, sans-serif; font-weight: 800; font-size: 16px; cursor: pointer;">यही plan चुनें — {{ res.planName }}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 04 STATES ===== -->
+  <div style="display: grid; gap: 20px;">
+    <div style="display: flex; align-items: baseline; gap: 18px;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.2em; color: #E1442A;">04</div>
+      <div style="font-family: 'Archivo Black', sans-serif; font-size: 26px;">ARRIVAL, EMPTY, LOADING, ERROR, ALREADY-SIGNED-UP, OUT-OF-ZONE</div>
+    </div>
+
+    <div style="display: flex; gap: 26px; flex-wrap: nowrap;">
+
+      <!-- /r/[token] -->
+      <div style="width: 390px; flex: none;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: #6E6757; margin-bottom: 10px;">/R/RITU-62 — RECOGNISED ARRIVAL</div>
+        <div style="background: #14224A; color: #F4EBDA; min-height: 700px; padding: 26px 22px; box-sizing: border-box;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: #F4EBDA; display: grid; place-items: center;"><span style="font-family: Yatra One, serif; font-size: 19px; color: #14224A; line-height: 1;">म</span></div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.16em; color: #F2A118;">RITU NE AAPKO BHEJA HAI</div>
+          </div>
+          <div style="font-family: Mukta, sans-serif; font-weight: 800; font-size: 34px; line-height: 1.15; margin-top: 20px;">नमस्ते Meenu.<br />सब भर दिया है।</div>
+          <div style="font-size: 14.5px; line-height: 1.6; color: rgba(244,235,218,0.88); margin-top: 12px;">Ritu from <b>Gaur Green Vista</b> sent you this. We already know where you are and what she thought you'd need — check it and tap once.</div>
+
+          <div style="background: #FBF7EE; color: #0E1526; padding: 18px; margin-top: 20px;">
+            <div style="display: grid; gap: 12px;">
+              <div style="display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; border-bottom: 1px solid #DCD3C0; padding-bottom: 10px;">
+                <div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.14em; color: #7E7768;">AREA</div><div style="font-family: Mukta, sans-serif; font-weight: 700; font-size: 16px; color: #14224A;">Vasundhara Sector 9</div></div>
+                <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #E1442A;">EDIT</div>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; border-bottom: 1px solid #DCD3C0; padding-bottom: 10px;">
+                <div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.14em; color: #7E7768;">PINCODE</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 16px;">201012</div></div>
+                <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #E1442A;">EDIT</div>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center;">
+                <div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.14em; color: #7E7768;">PLAN RITU PICKED FOR YOU</div><div style="font-family: Mukta, sans-serif; font-weight: 700; font-size: 16px; color: #14224A;">Ghar Plan · 4 packs · ₹305/wk</div></div>
+                <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #E1442A;">EDIT</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="border: 2px solid #F2A118; padding: 14px; margin-top: 16px;">
+            <div style="font-family: 'Archivo Black', sans-serif; font-size: 13px; color: #F2A118;">PADOSI BONUS ACTIVE</div>
+            <div style="font-size: 13.5px; line-height: 1.5; margin-top: 6px; color: rgba(244,235,218,0.9);">You are both in Gaur Green Vista, so you each get a free Masala pack on the first delivery.</div>
+          </div>
+
+          <div onClick="{{ toggleConsent }}" style="display: flex; gap: 12px; align-items: flex-start; margin-top: 18px; cursor: pointer;">
+            <div style="width: 26px; height: 26px; border: 2px solid #F4EBDA; flex: none; display: grid; place-items: center; background: {{ consentBg }};"><span style="color: #FBF7EE; font-size: 15px; font-weight: 700;">{{ consentTick }}</span></div>
+            <div style="font-family: Mukta, sans-serif; font-weight: 600; font-size: 14px; line-height: 1.45;">हाँ, WhatsApp पर launch update भेजिए।</div>
+          </div>
+
+          <button type="button" onClick="{{ submit }}" style="width: 100%; height: 58px; background: #E1442A; color: #FBF7EE; border: 0; font-family: Mukta, sans-serif; font-weight: 800; font-size: 19px; margin-top: 16px; cursor: pointer;">हाँ, मुझे जोड़ लीजिए</button>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.1em; color: rgba(244,235,218,0.6); margin-top: 12px; line-height: 1.7;">NOTHING TO TYPE · ONE TAP · TOKEN CARRIES NAME, AREA, PLAN AND RITU'S REFERRAL ID</div>
+        </div>
+      </div>
+
+      <!-- already signed up -->
+      <div style="width: 390px; flex: none;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: #6E6757; margin-bottom: 10px;">RETURNING VISITOR — ALREADY SIGNED UP</div>
+        <div style="background: #FBF7EE; min-height: 700px; padding: 26px 22px; box-sizing: border-box; border: 1px solid #C9C0AC;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.16em; color: #1E7B34;">CONFIRMED · FOUNDING MEMBER #64</div>
+          <div style="font-family: Mukta, sans-serif; font-weight: 800; font-size: 30px; color: #14224A; line-height: 1.2; margin-top: 10px;">Ritu ji, आप पहले से अंदर हैं।</div>
+          <div style="font-size: 14px; line-height: 1.55; color: #2A3350; margin-top: 8px;">No form again. Here is your code and your plan — change either on WhatsApp in one message.</div>
+
+          <div style="background: #14224A; color: #F4EBDA; padding: 20px; margin-top: 18px; border: 2px dashed #F2A118;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.16em; color: #F2A118;">YOUR CODE — 25% OFF FIRST ORDER</div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 30px; letter-spacing: 0.12em; margin-top: 8px;">MT-RITU-064</div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: rgba(244,235,218,0.7); margin-top: 6px;">+ FREE MASALA PACK · PRICE LOCKED TO 30 NOV 2026</div>
+          </div>
+
+          <div style="background: #F4EBDA; padding: 18px; margin-top: 14px;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.14em; color: #7E7768;">YOUR PLAN</div>
+            <div style="font-family: Mukta, sans-serif; font-weight: 800; font-size: 20px; color: #14224A; margin-top: 4px;">Ghar Plan · 4 packs / week</div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; line-height: 1.9; color: #2A3350; margin-top: 8px;">TUE 2 · FRI 2 · ₹305 / WEEK<br />VASUNDHARA SECTOR 9 · 201012<br />FIRST DELIVERY · TUE 15 SEP, 6–9 PM</div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px;">
+              <button type="button" onClick="{{ goCalc }}" style="height: 50px; border: 2px solid #14224A; background: #FBF7EE; color: #14224A; font-family: Mukta, sans-serif; font-weight: 700; font-size: 14.5px; cursor: pointer;">Plan बदलें</button>
+              <a href="{{ waSite }}" style="height: 50px; background: #1E7B34; color: #FBF7EE; display: grid; place-items: center; font-family: Mukta, sans-serif; font-weight: 700; font-size: 14.5px;">WhatsApp करें</a>
+            </div>
+          </div>
+
+          <div style="background: #14224A; color: #F4EBDA; padding: 18px; margin-top: 14px;">
+            <div style="font-family: 'Archivo Black', sans-serif; font-size: 13px; color: #F2A118;">PADOSI BONUS — 1 PACK PENDING</div>
+            <div style="font-size: 13.5px; line-height: 1.5; margin-top: 6px; color: rgba(244,235,218,0.9);">Meenu from your society opened your link but hasn't confirmed. One more tap from her and a free pack rides along on Tuesday.</div>
+            <a href="{{ waSite }}" style="display: inline-block; margin-top: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: #F2A118; border-bottom: 1px solid #F2A118;">FORWARD YOUR LINK →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- states stack -->
+      <div style="width: 390px; flex: none; display: grid; gap: 16px; align-content: start;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: #6E6757;">FORM &amp; CHECK STATES</div>
+
+        <div style="background: #FBF7EE; border: 1px solid #C9C0AC; padding: 18px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.16em; color: #7E7768;">EMPTY / FIRST VISIT</div>
+          <div style="font-family: Mukta, sans-serif; font-weight: 800; font-size: 18px; color: #14224A; margin-top: 6px;">चार चीज़ें, बस।</div>
+          <div style="display: grid; gap: 8px; margin-top: 10px;">
+            <div style="height: 46px; border: 2px solid #DCD3C0; display: flex; align-items: center; padding: 0 12px; color: #A8A08C; font-size: 15px;">Ritu</div>
+            <div style="height: 46px; border: 2px solid #DCD3C0; display: flex; align-items: center; padding: 0 12px; color: #A8A08C; font-family: 'IBM Plex Mono', monospace; font-size: 15px;">+91 · 98765 43210</div>
+          </div>
+          <div style="font-size: 12.5px; color: #6E6757; margin-top: 10px; line-height: 1.5;">Button stays live, never disabled — tapping it reveals which field needs help instead of doing nothing.</div>
+        </div>
+
+        <div style="background: #FBF7EE; border: 1px solid #C9C0AC; padding: 18px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.16em; color: #7E7768;">SUBMITTING — 4G, SLOW</div>
+          <div style="height: 56px; background: #E1442A; color: #FBF7EE; display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 10px; font-family: Mukta, sans-serif; font-weight: 800; font-size: 17px;">
+            <div style="width: 16px; height: 16px; border: 2px solid #FBF7EE; border-right-color: transparent; border-radius: 50%;"></div>
+            <span>भेज रहे हैं…</span>
+          </div>
+          <div style="font-size: 12.5px; color: #6E6757; margin-top: 10px; line-height: 1.5;">Inputs stay filled and editable; nothing is greyed out. If the request takes over 8 s we save it locally and retry in the background.</div>
+        </div>
+
+        <div style="background: #FBF7EE; border: 2px solid #B4202A; padding: 18px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.16em; color: #B4202A;">ERROR — REQUEST FAILED</div>
+          <div style="font-family: Mukta, sans-serif; font-weight: 800; font-size: 18px; color: #14224A; margin-top: 6px;">नहीं गया — पर आपका data सुरक्षित है</div>
+          <div style="font-size: 13px; line-height: 1.5; color: #2A3350; margin-top: 6px;">Network gave up. We kept everything you typed on this phone. Tap again, or just WhatsApp us — that reaches a human faster anyway.</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px;">
+            <button type="button" onClick="{{ submit }}" style="height: 50px; background: #14224A; color: #F4EBDA; border: 0; font-family: Mukta, sans-serif; font-weight: 700; font-size: 15px; cursor: pointer;">फिर भेजें</button>
+            <a href="{{ waSite }}" style="height: 50px; background: #1E7B34; color: #FBF7EE; display: grid; place-items: center; font-family: Mukta, sans-serif; font-weight: 700; font-size: 15px;">WhatsApp</a>
+          </div>
+        </div>
+
+        <div style="background: #14224A; color: #F4EBDA; padding: 18px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.16em; color: #F2A118;">/THANKS — CONFIRMED</div>
+          <div style="font-family: Mukta, sans-serif; font-weight: 800; font-size: 22px; margin-top: 6px; line-height: 1.25;">हो गया, Ritu ji.<br />हमारा number save कर लीजिए।</div>
+          <div style="font-size: 13.5px; line-height: 1.55; margin-top: 8px; color: rgba(244,235,218,0.88);">We'll WhatsApp you in about 2 minutes from <b>+91 98••••••••</b>. Save it now, or our message lands in Unknown.</div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 22px; letter-spacing: 0.1em; margin-top: 12px; border: 2px dashed #F2A118; padding: 12px; text-align: center;">MT-RITU-064</div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; line-height: 1.9; color: rgba(244,235,218,0.75); margin-top: 12px;">FOUNDING MEMBER #64 OF 100<br />GHAR PLAN · 4 PACKS · TUE 2 / FRI 2<br />FIRST DELIVERY TUE 15 SEP, 6–9 PM</div>
+          <div style="display: grid; gap: 8px; margin-top: 14px;">
+            <a href="{{ waSite }}" style="height: 52px; background: #1E7B34; color: #FBF7EE; display: grid; place-items: center; font-family: Mukta, sans-serif; font-weight: 800; font-size: 16px;">Number save करें</a>
+            <a href="{{ res.waHref }}" style="height: 52px; border: 1px solid rgba(244,235,218,0.5); color: #F4EBDA; display: grid; place-items: center; font-family: Mukta, sans-serif; font-weight: 700; font-size: 16px;">पड़ोसी को भेजें — free pack</a>
+          </div>
+        </div>
+
+        <div style="background: #FBF7EE; border: 2px solid #F2A118; padding: 18px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.16em; color: #E1442A;">OUT OF ZONE — CAPTURED ANYWAY</div>
+          <div style="font-family: Mukta, sans-serif; font-weight: 800; font-size: 18px; color: #14224A; margin-top: 6px;">Sector 137 अभी route में नहीं है</div>
+          <div style="font-size: 13px; line-height: 1.5; color: #2A3350; margin-top: 6px;">We still took the pincode. 25 requests from one pincode opens a route, and a Founding slot is held for everyone who asked first — so being early out of zone is worth more than being late inside it.</div>
+          <div style="height: 8px; background: #DCD3C0; margin-top: 12px;"><div style="height: 8px; background: #E1442A; width: 44%;"></div></div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #6E6757; margin-top: 6px;">11 / 25 IN 201304 · YOU ARE #11</div>
+        </div>
+      </div>
+
+      <!-- delivery-zone map / bulk desktop -->
+      <div style="width: 620px; flex: none; display: grid; gap: 16px; align-content: start;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: #6E6757;">/BULK — THE ONE PAGE THAT IS DESIGNED FOR A LAPTOP</div>
+        <div style="background: #FBF7EE; border: 1px solid #C9C0AC;">
+          <div style="background: #14224A; color: #F4EBDA; padding: 26px 28px;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: #F2A118;">FOR GYMS, CAFÉS &amp; CLOUD KITCHENS</div>
+            <div style="font-family: Mukta, sans-serif; font-weight: 800; font-size: 34px; margin-top: 10px; line-height: 1.2;">1 kg blocks, pressed to your delivery day.</div>
+            <div style="font-size: 15px; line-height: 1.6; margin-top: 10px; max-width: 460px; color: rgba(244,235,218,0.88);">Yield about 34 portions of 30 g. Cut-stable for tandoor and gravy. Two batch days a week, invoice monthly, FSSAI licence and lab report attached to every quote.</div>
+          </div>
+          <div style="padding: 26px 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 26px;">
+            <div style="display: grid; gap: 12px; align-content: start;">
+              <div style="font-family: 'Archivo Black', sans-serif; font-size: 13px; color: #14224A;">TRADE ENQUIRY</div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div style="height: 48px; border: 2px solid #14224A; background: #fff; display: flex; align-items: center; padding: 0 12px; color: #A8A08C; font-size: 14.5px;">Business name</div>
+                <div style="height: 48px; border: 2px solid #14224A; background: #fff; display: flex; align-items: center; padding: 0 12px; color: #A8A08C; font-size: 14.5px;">Your name</div>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div style="height: 48px; border: 2px solid #14224A; background: #fff; display: flex; align-items: center; padding: 0 12px; color: #A8A08C; font-family: 'IBM Plex Mono', monospace; font-size: 14px;">+91 phone</div>
+                <div style="height: 48px; border: 2px solid #14224A; background: #fff; display: flex; align-items: center; padding: 0 12px; color: #A8A08C; font-size: 14.5px;">Type ▾</div>
+              </div>
+              <div style="height: 48px; border: 2px solid #14224A; background: #fff; display: flex; align-items: center; padding: 0 12px; color: #A8A08C; font-size: 14.5px;">Kg per week ▾</div>
+              <div style="border: 2px solid #E1442A; background: #F4EBDA; padding: 12px 14px;">
+                <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: #E1442A;">THE QUESTION THAT PRICES THE DEAL</div>
+                <div style="font-family: Mukta, sans-serif; font-weight: 700; font-size: 16px; color: #14224A; margin-top: 4px;">What do you currently pay per kg for paneer?</div>
+                <div style="height: 44px; border: 2px solid #14224A; background: #fff; display: flex; align-items: center; padding: 0 12px; margin-top: 8px; color: #A8A08C; font-family: 'IBM Plex Mono', monospace; font-size: 14px;">₹ per kg</div>
+              </div>
+              <button type="button" onClick="{{ submit }}" style="height: 54px; background: #E1442A; color: #FBF7EE; border: 0; font-family: Mukta, sans-serif; font-weight: 800; font-size: 17px; cursor: pointer;">Quote भेजिए</button>
+            </div>
+            <div style="display: grid; gap: 14px; align-content: start;">
+              <div style="background: #F4EBDA; padding: 18px;">
+                <div style="font-family: 'Archivo Black', sans-serif; font-size: 12px; color: #14224A;">SLAB PRICING, PUBLISHED</div>
+                <div style="display: grid; gap: 6px; margin-top: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: #2A3350;">
+                  <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #DCD3C0; padding-bottom: 5px;"><span>5–10 KG / WEEK</span><span style="color: #14224A;">₹340 / KG</span></div>
+                  <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #DCD3C0; padding-bottom: 5px;"><span>10–25 KG / WEEK</span><span style="color: #14224A;">₹315 / KG</span></div>
+                  <div style="display: flex; justify-content: space-between;"><span>25 KG +</span><span style="color: #14224A;">TALK TO RITU</span></div>
+                </div>
+              </div>
+              <div style="height: 150px; background-image: repeating-linear-gradient(45deg, #E6DBC4 0 6px, #EFE6D2 6px 12px); display: grid; place-items: center;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #7E7768; text-align: center; line-height: 1.6;">PHOTO — 1 KG BLOCK<br />ON A COMMERCIAL BOARD,<br />CHEF'S HANDS CUTTING</span></div>
+              <div style="font-size: 13.5px; line-height: 1.55; color: #2A3350;">A gym owner reads this at a desk between classes, so it stays a single wide screen: form left, price and proof right, no scrolling to compare.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 05 REMAINING PAGES ===== -->
+  <div style="display: grid; gap: 20px;">
+    <div style="display: flex; align-items: baseline; gap: 18px;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.2em; color: #E1442A;">05</div>
+      <div style="font-family: 'Archivo Black', sans-serif; font-size: 26px;">REMAINING PAGES — MOBILE LAYOUTS</div>
+    </div>
+
+    <div style="display: flex; gap: 26px;">
+
+      <!-- /classic-tofu -->
+      <div style="width: 390px; flex: none;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: #6E6757; margin-bottom: 10px;">/CLASSIC-TOFU</div>
+        <div style="background: #FBF7EE; border: 1px solid #C9C0AC;">
+          <div style="background: #14224A; color: #F4EBDA; padding: 22px 20px;">
+            <div style="height: 8px; background: #F2A118; margin: -22px -20px 18px;"></div>
+            <div style="font-family: 'Archivo Black', sans-serif; font-size: 24px; color: #F2A118;">CLASSIC FIRM TOFU</div>
+            <div style="font-family: Mukta, sans-serif; font-weight: 700; font-size: 16px; margin-top: 4px;">Tofu (Soya Bean Curd) · 200 g</div>
+            <div style="display: flex; align-items: baseline; gap: 10px; margin-top: 12px;">
+              <div style="font-family: 'Archivo Black', sans-serif; font-size: 34px;">₹79</div>
+              <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: rgba(244,235,218,0.7);">₹395 / KG · PANEER ₹475–500</div>
+            </div>
+            <div style="margin-top: 16px; height: 200px; background-image: repeating-linear-gradient(45deg, #1B2C58 0 7px, #22345F 7px 14px); display: grid; place-items: center;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: rgba(244,235,218,0.7); text-align: center; line-height: 1.7;">PHOTO — TUB OPEN,<br />CUT FACE, SIDE LIGHT</span></div>
+          </div>
+          <div style="padding: 22px 20px;">
+            <div style="background: #F4EBDA; border-left: 4px solid #E1442A; padding: 18px;">
+              <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: #E1442A;">INGREDIENTS — ALL OF THEM</div>
+              <div style="font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 26px; line-height: 1.5; color: #14224A; margin-top: 10px;">1 SOYBEAN<br />2 WATER<br />3 COAGULANT</div>
+              <div style="height: 2px; background: #14224A; margin-top: 12px;"></div>
+              <div style="font-size: 13px; color: #2A3350; margin-top: 8px; line-height: 1.5;">The label panel, reproduced exactly as it appears on the tub. Batch <span style="font-family: 'IBM Plex Mono', monospace;">B-0412</span>, pressed 05:30 today.</div>
+            </div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; line-height: 2; color: #14224A; margin-top: 18px; border-top: 2px solid #DCD3C0; padding-top: 14px;">PER 100 G · 76 KCAL · PROTEIN 10 G<br />SAT FAT 0.6 G · CHOLESTEROL 0 MG<br />LACTOSE FREE · CONTAINS SOY<br />KEEP 0–4 °C · 5 DAYS FROM PACKING</div>
+            <div style="font-family: Mukta, sans-serif; font-weight: 800; font-size: 19px; color: #14224A; margin-top: 18px;">इसी से क्या बनेगा?</div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px;">
+              <div style="height: 74px; background-image: repeating-linear-gradient(45deg, #E6DBC4 0 6px, #EFE6D2 6px 12px);"></div>
+              <div style="height: 74px; background-image: repeating-linear-gradient(45deg, #E6DBC4 0 6px, #EFE6D2 6px 12px);"></div>
+            </div>
+            <button type="button" onClick="{{ goCalc }}" style="width: 100%; height: 56px; background: #E1442A; color: #FBF7EE; border: 0; font-family: Mukta, sans-serif; font-weight: 800; font-size: 17px; margin-top: 16px; cursor: pointer;">कितने पैक चाहिए? Calculate</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- /masala-tofu -->
+      <div style="width: 390px; flex: none;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: #6E6757; margin-bottom: 10px;">/MASALA-TOFU — VIDEO FIRST</div>
+        <div style="background: #FBF7EE; border: 1px solid #C9C0AC;">
+          <div style="background: #14224A; color: #F4EBDA; padding: 0 0 22px;">
+            <div style="height: 8px; background: #B4202A;"></div>
+            <div style="height: 300px; background-image: repeating-linear-gradient(45deg, #1B2C58 0 7px, #22345F 7px 14px); display: grid; place-items: center; position: relative;">
+              <div style="width: 66px; height: 66px; border-radius: 50%; background: #E1442A; display: grid; place-items: center;"><div style="width: 0; height: 0; border-left: 20px solid #FBF7EE; border-top: 12px solid transparent; border-bottom: 12px solid transparent; margin-left: 6px;"></div></div>
+              <div style="position: absolute; bottom: 14px; left: 16px; right: 16px; font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; color: rgba(244,235,218,0.8); line-height: 1.6;">VIDEO 9:16, 11 S, MUTED AUTOPLAY, 480 KB<br />LID OFF → FORK IN → BITE. NO MUSIC, NO TEXT OVERLAY.</div>
+            </div>
+            <div style="padding: 20px 20px 0;">
+              <div style="font-family: 'Archivo Black', sans-serif; font-size: 24px; color: #E1442A;">MASALA TOFU</div>
+              <div style="font-family: Mukta, sans-serif; font-weight: 800; font-size: 22px; margin-top: 6px;">सीधे डिब्बे से खाओ।</div>
+              <div style="font-size: 14px; line-height: 1.55; color: rgba(244,235,218,0.88); margin-top: 6px;">Achaari-tandoori marinated overnight. Cold, no cooking, no plate — 20 g protein a tub, for a hostel room or a desk at 4 pm.</div>
+              <div style="display: flex; align-items: baseline; gap: 10px; margin-top: 14px;">
+                <div style="font-family: 'Archivo Black', sans-serif; font-size: 34px;">₹99</div>
+                <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: rgba(244,235,218,0.7);">/ 200 G TUB</div>
+              </div>
+            </div>
+          </div>
+          <div style="padding: 22px 20px;">
+            <div style="background: #F4EBDA; border-left: 4px solid #E1442A; padding: 16px;">
+              <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: #E1442A;">INGREDIENTS — ALL OF THEM</div>
+              <div style="font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 17px; line-height: 1.6; color: #14224A; margin-top: 8px;">SOYBEAN · WATER · COAGULANT<br />MUSTARD OIL · CHILLI · TURMERIC<br />FENUGREEK · SALT</div>
+              <div style="font-size: 12.5px; color: #2A3350; margin-top: 8px;">Contains soy and mustard. Nothing else, still.</div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 16px;">
+              <div style="background: #14224A; color: #F4EBDA; padding: 14px;"><div style="font-family: 'Archivo Black', sans-serif; font-size: 22px;">20 g</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; color: rgba(244,235,218,0.75);">PROTEIN / TUB</div></div>
+              <div style="background: #14224A; color: #F4EBDA; padding: 14px;"><div style="font-family: 'Archivo Black', sans-serif; font-size: 22px;">224</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; color: rgba(244,235,218,0.75);">KCAL / TUB</div></div>
+            </div>
+            <button type="button" onClick="{{ goForm }}" style="width: 100%; height: 56px; background: #E1442A; color: #FBF7EE; border: 0; font-family: Mukta, sans-serif; font-weight: 800; font-size: 17px; margin-top: 16px; cursor: pointer;">Launch पर मुझे बताइए</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- /plans -->
+      <div style="width: 390px; flex: none;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: #6E6757; margin-bottom: 10px;">/PLANS — FOUR TIERS, NO PAYMENT</div>
+        <div style="background: #FBF7EE; border: 1px solid #C9C0AC; padding: 22px 20px;">
+          <div style="font-family: Mukta, sans-serif; font-weight: 800; font-size: 26px; color: #14224A; line-height: 1.2;">हफ़्ते का plan, जब भी बदल लीजिए</div>
+          <div style="font-size: 13.5px; line-height: 1.55; color: #2A3350; margin-top: 8px;">Nothing to pay now. The pilot takes a commitment, not a card — you confirm on WhatsApp the day before each delivery.</div>
+          <div style="display: grid; gap: 10px; margin-top: 16px;">
+            <sc-for list="{{ plans }}" as="p" hint-placeholder-count="4">
+              <div style="border: 2px solid {{ p.border }}; background: {{ p.bg }}; color: {{ p.fg }}; padding: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                  <div style="font-family: 'Archivo Black', sans-serif; font-size: 16px;">{{ p.name }}</div>
+                  <div style="font-family: 'Archivo Black', sans-serif; font-size: 22px;">{{ p.price }}</div>
+                </div>
+                <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.08em; margin-top: 6px; opacity: 0.85;">{{ p.detail }}</div>
+                <div style="font-size: 13px; line-height: 1.5; margin-top: 8px; opacity: 0.9;">{{ p.who }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="background: #F4EBDA; padding: 14px; margin-top: 14px; font-size: 13px; line-height: 1.55; color: #2A3350;">Not sure which? The calculator picks one for you from what your house already cooks — and it rounds <b>down</b>, not up.</div>
+          <button type="button" onClick="{{ goCalc }}" style="width: 100%; height: 56px; background: #14224A; color: #F4EBDA; border: 0; font-family: Mukta, sans-serif; font-weight: 800; font-size: 17px; margin-top: 14px; cursor: pointer;">Calculator चलाइए</button>
+        </div>
+      </div>
+
+      <!-- /recipes + slug -->
+      <div style="width: 390px; flex: none;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: #6E6757; margin-bottom: 10px;">/RECIPES &amp; /RECIPES/[SLUG]</div>
+        <div style="background: #FBF7EE; border: 1px solid #C9C0AC; padding: 20px;">
+          <div style="font-family: Mukta, sans-serif; font-weight: 800; font-size: 24px; color: #14224A;">16 recipes, कोई नया मसाला नहीं</div>
+          <div style="font-size: 13px; color: #2A3350; margin-top: 6px; line-height: 1.5;">Every one is a paneer recipe with the paneer swapped 1:1. Your masala dabba stays exactly as it is.</div>
+          <div style="display: flex; gap: 8px; margin-top: 12px;">
+            <div style="height: 42px; padding: 0 14px; background: #14224A; color: #F4EBDA; display: grid; place-items: center; font-family: Mukta, sans-serif; font-weight: 700; font-size: 14px;">Under 5 minutes</div>
+            <div style="height: 42px; padding: 0 14px; border: 2px solid #14224A; color: #14224A; display: grid; place-items: center; font-family: Mukta, sans-serif; font-weight: 700; font-size: 14px;">Family dinner</div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px;">
+            <div style="height: 96px; background-image: repeating-linear-gradient(45deg, #E6DBC4 0 6px, #EFE6D2 6px 12px);"></div>
+            <div style="height: 96px; background-image: repeating-linear-gradient(45deg, #E6DBC4 0 6px, #EFE6D2 6px 12px);"></div>
+            <div style="height: 96px; background-image: repeating-linear-gradient(45deg, #E6DBC4 0 6px, #EFE6D2 6px 12px);"></div>
+            <div style="height: 96px; background-image: repeating-linear-gradient(45deg, #E6DBC4 0 6px, #EFE6D2 6px 12px);"></div>
+          </div>
+        </div>
+        <div style="background: #14224A; color: #F4EBDA; padding: 20px; margin-top: 14px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.16em; color: #F2A118;">/RECIPES/TAWA-MASALA-TOFU</div>
+          <div style="font-family: Mukta, sans-serif; font-weight: 800; font-size: 26px; margin-top: 8px; line-height: 1.2;">तवा मसाला टोफ़ू, 6 मिनट</div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; line-height: 1.9; margin-top: 10px; color: rgba(244,235,218,0.8);">2 PACKS (400 G) · SERVES 4 · 6 MIN<br />18 G PROTEIN PER PORTION · 148 KCAL</div>
+          <div style="height: 170px; background-image: repeating-linear-gradient(45deg, #1B2C58 0 7px, #22345F 7px 14px); margin-top: 12px; display: grid; place-items: center;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; color: rgba(244,235,218,0.7);">PHOTO — CHARRED ON THE TAWA</span></div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; line-height: 2; margin-top: 12px;">1 PRESS 10 MIN, CUBE<br />2 TAWA HOT, 1 TSP OIL, 3 MIN<br />3 PYAAZ-TAMATAR MASALA, 2 MIN<br />4 KASURI METHI, TOSS, DONE</div>
+          <div style="border-top: 1px solid rgba(244,235,218,0.3); margin-top: 14px; padding-top: 12px; font-size: 13px; line-height: 1.5; color: rgba(244,235,218,0.85);"><b>Paneer version:</b> same recipe, 400 g paneer, 265 kcal per portion instead of 148.</div>
+        </div>
+      </div>
+
+      <!-- /kitchen + /privacy -->
+      <div style="width: 390px; flex: none;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: #6E6757; margin-bottom: 10px;">/KITCHEN &amp; /PRIVACY</div>
+        <div style="background: #14224A; color: #F4EBDA; padding: 22px 20px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.16em; color: #F2A118;">H-114, SECTOR 10, RAJENDRA NAGAR</div>
+          <div style="font-family: Mukta, sans-serif; font-weight: 800; font-size: 28px; margin-top: 8px; line-height: 1.2;">यह रसोई देख लीजिए, फिर तय कीजिए।</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px;">
+            <div style="height: 120px; background-image: repeating-linear-gradient(45deg, #1B2C58 0 7px, #22345F 7px 14px); display: grid; place-items: center;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: rgba(244,235,218,0.7); text-align: center; line-height: 1.6;">RITU<br />founder, press</span></div>
+            <div style="height: 120px; background-image: repeating-linear-gradient(45deg, #1B2C58 0 7px, #22345F 7px 14px); display: grid; place-items: center;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: rgba(244,235,218,0.7); text-align: center; line-height: 1.6;">ARJUN<br />founder, route</span></div>
+          </div>
+          <div style="font-size: 13.5px; line-height: 1.6; color: rgba(244,235,218,0.88); margin-top: 12px;">We are two people, not a factory. Ritu presses, Arjun drives. If something is wrong with a tub, one of us picks up the phone — there is nobody else to pass it to.</div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; line-height: 2; margin-top: 14px; border-top: 1px solid rgba(244,235,218,0.3); padding-top: 12px;">FSSAI LIC. NO. 12722•••••••••<br />BATCH DAYS · MON &amp; THU, 05:30<br />DELIVERY · TUE &amp; FRI, 6–9 PM<br />LAB REPORT · BATCH 0412 (PDF, 240 KB)</div>
+          <div style="border: 2px solid #F2A118; padding: 14px; margin-top: 14px;">
+            <div style="font-family: 'Archivo Black', sans-serif; font-size: 13px; color: #F2A118;">SATURDAY VISITS, 10–12</div>
+            <div style="font-size: 13px; line-height: 1.5; margin-top: 6px;">Book a slot, bring your kids, taste it warm off the press. Four households a Saturday, no more — it is a home.</div>
+          </div>
+        </div>
+        <div id="privacy" style="background: #FBF7EE; border: 1px solid #C9C0AC; padding: 20px; margin-top: 14px;">
+          <div style="font-family: Mukta, sans-serif; font-weight: 800; font-size: 22px; color: #14224A;">Privacy — छोटी सी बात</div>
+          <div style="font-size: 13.5px; line-height: 1.6; color: #2A3350; margin-top: 8px;">We keep four things: your first name, your number, your area and your pincode. We use them for exactly two messages — the launch date and your coupon — and to plan the delivery route.</div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; line-height: 2; color: #14224A; margin-top: 12px; border-top: 2px solid #DCD3C0; padding-top: 12px;">NO SELLING. NO SHARING. NO ADS.<br />REPLY STOP → DELETED SAME DAY<br />ASK FOR YOUR DATA → SENT IN 48 H<br />STORED IN INDIA · DPDP ACT 2023</div>
+          <div style="font-size: 13px; line-height: 1.55; color: #2A3350; margin-top: 12px;">Written by Ritu, not a lawyer. If any of it reads unclear, WhatsApp us and we will fix the wording.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:3400,&quot;height&quot;:2200},&quot;foundingSlots&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:37,&quot;min&quot;:0,&quot;max&quot;:100,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Pilot&quot;}}">
+const AREAS = ["Noida Sector 62","Noida Sector 63","Noida Sector 60","Noida Sector 61","Noida Sector 58","Nyay Khand 1","Nyay Khand 2","Indirapuram (Shakti Khand)","Vasundhara Sector 1–5","Vasundhara Sector 6–9","Vasundhara Sector 10–13","Vasundhara Sector 14–17","Vaishali Sector 1–4","Vaishali Sector 5–9","Kaushambi","Rajendra Nagar Sector 2","Rajendra Nagar Sector 5","Rajendra Nagar Sector 10","Shalimar Garden Extn 1","Shalimar Garden Extn 2","Crossings Republik","Ahinsa Khand 1","Ahinsa Khand 2","Vijay Nagar","Somewhere else"];
+const ZONE = { "201012": "Vasundhara", "201010": "Vaishali", "201014": "Indirapuram", "201005": "Rajendra Nagar", "201001": "Ghaziabad City", "201309": "Noida Sector 62", "201301": "Noida Sector 60", "201019": "Kaushambi", "201016": "Shalimar Garden" };
+const PLANS = [
+  { packs: 2, name: "Chhota Plan", price: "₹155" },
+  { packs: 4, name: "Ghar Plan", price: "₹305" },
+  { packs: 6, name: "Bada Plan", price: "₹455" },
+  { packs: 10, name: "Gym / Cloud Kitchen", price: "₹765" },
+];
+const KEY = "mt.pilot.v1";
+
+class Component extends DCLogic {
+  state = {
+    mode: "swap", paneerG: 1000, pct: 50, match: false,
+    eaters: { adult: 2, teen: 0, c1012: 1, c49: 0 },
+    dishes: { gravy: 2, bhurji: 1, tikka: 1, addon: 1 },
+    trains: false,
+    pin: "", pinState: "idle",
+    fName: "", fPhone: "", fArea: "", fPin: "", intent: "", consent: false,
+    phoneErr: false, consentErr: false, submitState: "idle",
+    filter: "all",
+  };
+
+  componentDidMount() {
+    try {
+      const raw = window.localStorage.getItem(KEY);
+      if (raw) {
+        const s = JSON.parse(raw);
+        this.setState({
+          mode: s.mode ?? "swap", paneerG: s.paneerG ?? 1000, pct: s.pct ?? 50,
+          match: !!s.match, trains: !!s.trains,
+          eaters: s.eaters ?? this.state.eaters, dishes: s.dishes ?? this.state.dishes,
+          pin: s.pin ?? "", fPin: s.pin ?? "", fArea: s.fArea ?? "",
+        });
+      }
+    } catch (e) { /* private mode — inputs simply don't persist */ }
+  }
+
+  persist(patch) {
+    this.setState(patch, () => {
+      try {
+        const s = this.state;
+        window.localStorage.setItem(KEY, JSON.stringify({
+          mode: s.mode, paneerG: s.paneerG, pct: s.pct, match: s.match,
+          eaters: s.eaters, dishes: s.dishes, trains: s.trains, pin: s.pin, fArea: s.fArea,
+        }));
+      } catch (e) { /* ignore */ }
+    });
+  }
+
+  scrollTo(id) {
+    const el = document.getElementById(id);
+    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 60, behavior: "smooth" });
+  }
+
+  compute() {
+    const s = this.state;
+    const isSwap = s.mode === "swap";
+    let tofuG, paneerEquivG, notes = {};
+
+    if (isSwap) {
+      paneerEquivG = s.paneerG * (s.pct / 100);
+      tofuG = s.match ? paneerEquivG * 1.8 : paneerEquivG;
+    } else {
+      const w = s.eaters.adult * 1.0 + s.eaters.teen * 0.85 + s.eaters.c1012 * 0.7 + s.eaters.c49 * 0.45;
+      const shared = 60 * w * s.dishes.gravy;
+      const gym = s.trains ? 1.4 : 1;
+      const personal = (75 * s.dishes.bhurji + 110 * s.dishes.tikka + 50 * s.dishes.addon) * w * gym;
+      tofuG = (shared + personal) * 1.12;
+      paneerEquivG = (shared + personal) / 1.0;
+      notes.weighted = Math.round(w * 100) / 100;
+    }
+
+    const packs = Math.max(1, Math.round(tofuG / 200));
+    const actualG = packs * 200;
+    const kcalSaved = Math.max(0, Math.round(paneerEquivG * 2.65 - actualG * 0.76));
+    const tofuProtein = Math.round(actualG * 0.10);
+    const paneerProtein = Math.round(paneerEquivG * 0.18);
+    const split = packs > 5;
+    const tue = split ? Math.ceil(packs / 2) : packs;
+    const fri = split ? packs - tue : 0;
+
+    let plan = PLANS[0];
+    for (const p of PLANS) if (packs >= p.packs) plan = p;
+
+    let proteinLine;
+    if (isSwap && !s.match) {
+      proteinLine = "Straight 1:1 swap: " + actualG + " g of tofu gives about " + tofuProtein + " g protein against " + paneerProtein + " g from the paneer it replaces — that is less, and we would rather say it than hide it. Turn on “match my protein” and we send 1.8× the weight to make it level.";
+    } else if (isSwap) {
+      proteinLine = "Matched: " + actualG + " g of tofu ≈ " + tofuProtein + " g protein, level with the " + paneerProtein + " g the paneer was giving you — and still " + kcalSaved + " kcal lighter this week.";
+    } else {
+      proteinLine = "This basket carries about " + tofuProtein + " g of protein across the week. The same dishes made with paneer would give roughly " + paneerProtein + " g — a little more, at more than double the calories. Add one tikka plate to close the gap.";
+    }
+
+    const kcalStr = kcalSaved.toLocaleString("en-IN");
+    const shareText = "Ghar ke liye " + packs + " packs/week" + (split ? " — Tue " + tue + ", Fri " + fri : "") + ". Wahi sabzi, " + kcalStr + " kcal kam. Maharaja Tofu, Ghaziabad — maharajatofu.com";
+
+    return {
+      isSwap,
+      modeLabel: isSwap ? "SWAP MY PANEER" : "PLAN MY WEEK",
+      stamp: "BATCH 0412 · TUE + FRI ROUTE",
+      packs,
+      gramsLabel: (actualG >= 1000 ? (actualG / 1000).toFixed(1) + " KG" : actualG + " G"),
+      paneerLabel: s.paneerG >= 1000 ? (s.paneerG / 1000).toFixed(s.paneerG % 1000 === 0 ? 0 : 2) + " kg" : s.paneerG + " g",
+      tue, fri, showSplit: split,
+      kcal: kcalStr,
+      kcalMonth: (kcalSaved * 4).toLocaleString("en-IN"),
+      proteinLine,
+      showNudge: packs > 4,
+      nudgePacks: Math.max(2, packs - 2),
+      planName: plan.name, planPrice: plan.price,
+      waHref: "https://wa.me/?text=" + encodeURIComponent(shareText),
+      inputSummary: isSwap
+        ? (this.state.paneerG + " G PANEER / WEEK · SWAP " + s.pct + "% · MATCH PROTEIN " + (s.match ? "ON" : "OFF"))
+        : ("EATERS " + notes.weighted + " WEIGHTED · GRAVY " + s.dishes.gravy + " · BHURJI " + s.dishes.bhurji + " · TIKKA " + s.dishes.tikka + " · ADD-ON " + s.dishes.addon + " · GYM " + (s.trains ? "1.4×" : "OFF")),
+    };
+  }
+
+  step(group, key, delta) {
+    const g = Object.assign({}, this.state[group]);
+    g[key] = Math.max(0, Math.min(12, (g[key] || 0) + delta));
+    this.persist({ [group]: g });
+  }
+
+  renderVals() {
+    const s = this.state;
+    const res = this.compute();
+    const on = "#14224A", off = "#FBF7EE", onFg = "#F4EBDA", offFg = "#14224A";
+    const utmFrom = (k, fallback) => {
+      try { return new URLSearchParams(window.location.search).get(k) || fallback; } catch (e) { return fallback; }
+    };
+    const waSite = "https://wa.me/919800000000?text=" + encodeURIComponent("Namaste! Maharaja Tofu ke baare mein poochhna hai.");
+    const pinDigits = s.pin.replace(/\D/g, "");
+
+    return {
+      res,
+      isSwap: res.isSwap, isWeek: !res.isSwap,
+      setSwap: () => this.persist({ mode: "swap" }),
+      setWeek: () => this.persist({ mode: "week" }),
+      swapTabBg: res.isSwap ? on : off, swapTabFg: res.isSwap ? onFg : offFg,
+      weekTabBg: res.isSwap ? off : on, weekTabFg: res.isSwap ? offFg : onFg,
+
+      paneerG: s.paneerG,
+      onPaneer: (e) => this.persist({ paneerG: Number(e.target.value) }),
+      pct25: () => this.persist({ pct: 25 }), pct50: () => this.persist({ pct: 50 }), pct100: () => this.persist({ pct: 100 }),
+      pct25Bg: s.pct === 25 ? on : off, pct25Fg: s.pct === 25 ? onFg : offFg,
+      pct50Bg: s.pct === 50 ? on : off, pct50Fg: s.pct === 50 ? onFg : offFg,
+      pct100Bg: s.pct === 100 ? on : off, pct100Fg: s.pct === 100 ? onFg : offFg,
+      toggleMatch: () => this.persist({ match: !s.match }),
+      matchTrack: s.match ? "#1E7B34" : "#B9B09C", matchKnob: s.match ? "25px" : "3px",
+      toggleTrains: () => this.persist({ trains: !s.trains }),
+      trainsTrack: s.trains ? "#1E7B34" : "#B9B09C", trainsKnob: s.trains ? "25px" : "3px",
+
+      eaters: [
+        { label: "बड़े (adult)", note: "WEIGHT 1.0", count: s.eaters.adult, inc: () => this.step("eaters", "adult", 1), dec: () => this.step("eaters", "adult", -1) },
+        { label: "Teen 13–19", note: "WEIGHT 0.85", count: s.eaters.teen, inc: () => this.step("eaters", "teen", 1), dec: () => this.step("eaters", "teen", -1) },
+        { label: "बच्चा 10–12", note: "WEIGHT 0.7", count: s.eaters.c1012, inc: () => this.step("eaters", "c1012", 1), dec: () => this.step("eaters", "c1012", -1) },
+        { label: "बच्चा 4–9", note: "WEIGHT 0.45", count: s.eaters.c49, inc: () => this.step("eaters", "c49", 1), dec: () => this.step("eaters", "c49", -1) },
+      ],
+      dishes: [
+        { label: "Gravy sabzi (शेयर)", note: "60 G PER PORTION · SHARED", meals: s.dishes.gravy, inc: () => this.step("dishes", "gravy", 1), dec: () => this.step("dishes", "gravy", -1) },
+        { label: "Bhurji", note: "75 G PER PORTION", meals: s.dishes.bhurji, inc: () => this.step("dishes", "bhurji", 1), dec: () => this.step("dishes", "bhurji", -1) },
+        { label: "Tikka / grill plate", note: "110 G PER PLATE · PERSONAL", meals: s.dishes.tikka, inc: () => this.step("dishes", "tikka", 1), dec: () => this.step("dishes", "tikka", -1) },
+        { label: "Maggi / roll / sandwich", note: "50 G ADD-ON", meals: s.dishes.addon, inc: () => this.step("dishes", "addon", 1), dec: () => this.step("dishes", "addon", -1) },
+      ],
+
+      pin: s.pin,
+      onPin: (e) => this.persist({ pin: e.target.value.replace(/\D/g, "").slice(0, 6), pinState: "idle" }),
+      checkPin: () => {
+        const d = pinDigits;
+        if (d.length < 6) { this.setState({ pinState: "short" }); return; }
+        this.setState({ pinState: "loading" });
+        window.setTimeout(() => this.setState({ pinState: ZONE[d] ? "ok" : "out" }), 700);
+      },
+      pinIdle: s.pinState === "idle", pinLoading: s.pinState === "loading",
+      pinShort: s.pinState === "short", pinOk: s.pinState === "ok", pinOut: s.pinState === "out",
+      pinArea: ZONE[pinDigits] || "Aapka area",
+      pinDesktopNote: s.pinState === "ok" ? ("IN ZONE — " + (ZONE[pinDigits] || "") + " · TUE & FRI, 6–9 PM") : (s.pinState === "out" ? "OUT OF ZONE — PINCODE NOTED, YOU ARE #11 OF 25" : "PILOT ZONE — VASUNDHARA · VAISHALI · INDIRAPURAM · NOIDA 60/62/63"),
+      waitCount: 11, waitPct: "44%",
+      slotsLeft: this.props.foundingSlots ?? 37,
+      slotsTaken: 100 - (this.props.foundingSlots ?? 37),
+      slotsPct: (100 - (this.props.foundingSlots ?? 37)) + "%",
+
+      areas: AREAS.map((v) => ({ v })),
+      fName: s.fName, onName: (e) => this.setState({ fName: e.target.value }),
+      fPhone: s.fPhone, onPhone: (e) => this.setState({ fPhone: e.target.value.replace(/\D/g, "").slice(0, 10), phoneErr: false }),
+      fArea: s.fArea, onArea: (e) => this.persist({ fArea: e.target.value }),
+      fPin: s.fPin, onFPin: (e) => this.setState({ fPin: e.target.value.replace(/\D/g, "").slice(0, 6) }),
+      phoneErr: s.phoneErr, consentErr: s.consentErr,
+      intents: [
+        { label: "Launch week — पहले हफ़्ते", key: "launch" },
+        { label: "Within a month", key: "month" },
+        { label: "Just exploring", key: "explore" },
+      ].map((i) => ({
+        label: i.label,
+        pick: () => this.setState({ intent: i.key }),
+        bg: s.intent === i.key ? on : off,
+        fg: s.intent === i.key ? onFg : offFg,
+      })),
+      toggleConsent: () => this.setState({ consent: !s.consent, consentErr: false }),
+      consentBg: s.consent ? "#1E7B34" : "transparent",
+      consentTick: s.consent ? "✓" : "",
+      submitLabel: s.submitState === "loading" ? "भेज रहे हैं…" : (s.submitState === "done" ? "हो गया ✓" : "Coupon भेज दीजिए"),
+      submit: () => {
+        if (s.fPhone.replace(/\D/g, "").length !== 10) { this.setState({ phoneErr: true }); return; }
+        if (!s.consent) { this.setState({ consentErr: true }); return; }
+        this.setState({ submitState: "loading" });
+        window.setTimeout(() => this.setState({ submitState: "done" }), 900);
+      },
+
+      filter: s.filter,
+      filAll: () => this.setState({ filter: "all" }), filQuick: () => this.setState({ filter: "quick" }), filFamily: () => this.setState({ filter: "family" }),
+      filAllBg: s.filter === "all" ? on : off, filAllFg: s.filter === "all" ? onFg : offFg,
+      filQuickBg: s.filter === "quick" ? on : off, filQuickFg: s.filter === "quick" ? onFg : offFg,
+      filFamilyBg: s.filter === "family" ? on : off, filFamilyFg: s.filter === "family" ? onFg : offFg,
+      recipes: [
+        { name: "तवा मसाला टोफ़ू", meta: "6 MIN · 2 PACKS", tag: "quick" },
+        { name: "टोफ़ू भुर्जी", meta: "8 MIN · 1 PACK", tag: "quick" },
+        { name: "पालक टोफ़ू", meta: "25 MIN · 2 PACKS", tag: "family" },
+        { name: "शाही टोफ़ू", meta: "30 MIN · 3 PACKS", tag: "family" },
+        { name: "अचारी टोफ़ू रोल", meta: "4 MIN · 1 PACK", tag: "quick" },
+        { name: "टोफ़ू टिक्का", meta: "20 MIN · 2 PACKS", tag: "family" },
+      ].filter((r) => s.filter === "all" || r.tag === s.filter),
+
+      faqs: [
+        { q: "Paneer जैसा लगेगा?", a: "Texture is close to firm paneer, taste is milder — which is why the masala goes in as usual. Nine out of ten people in our test kitchen could not tell in a gravy; in a plain cube, they could." },
+        { q: "कितने दिन चलेगा?", a: "5 days from the date of packing, refrigerated at 0–4 °C. Change the water daily and finish within 3 days of opening." },
+        { q: "Soy allergy?", a: "Then this is not for you — it is soybean, water and coagulant, and we say so on the front of the pack. Nothing else is made in the kitchen." },
+        { q: "Freezer में रख सकते हैं?", a: "You can, but the texture turns spongy. Better: tell us on WhatsApp and we shift your delivery day." },
+        { q: "इसमें क्या डला है?", a: "Soybean, water, coagulant. That is the complete list, printed at the same size as the brand name." },
+        { q: "Launch कब है?", a: "Deliveries begin Tuesday 15 September 2026 in Sector 62 and Vasundhara. Founding members get the date on WhatsApp a week earlier." },
+      ],
+
+      plans: PLANS.map((p, i) => ({
+        name: p.name, price: p.price + "/wk",
+        detail: p.packs + " PACKS · " + (p.packs > 5 ? "TUE " + Math.ceil(p.packs / 2) + " / FRI " + (p.packs - Math.ceil(p.packs / 2)) : "ONE DROP"),
+        who: [
+          "One person, two dinners a week.",
+          "A family of three to four, cooking tofu twice.",
+          "Bigger household or a serious gym week.",
+          "Cafés, cloud kitchens and PG messes — 1 kg blocks.",
+        ][i],
+        bg: i === 1 ? "#14224A" : "#FBF7EE",
+        fg: i === 1 ? "#F4EBDA" : "#14224A",
+        border: i === 1 ? "#F2A118" : "#DCD3C0",
+      })),
+
+      utm: {
+        source: utmFrom("utm_source", "ig"),
+        campaign: utmFrom("utm_campaign", "pilot_sec62_swap"),
+        ad: utmFrom("ad_id", "6412•••••"),
+        fbclid: utmFrom("fbclid", "IwAR•••••"),
+      },
+      waSite,
+      goCalc: () => this.scrollTo("calc"),
+      goForm: () => this.scrollTo("form"),
+    };
+  }
+}
+</script>
+</body>
+</html>
