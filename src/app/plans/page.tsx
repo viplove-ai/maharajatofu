@@ -1,93 +1,62 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { PLANS } from '@/lib/plans'
-import { COHORTS, FOUNDING_LIMIT } from '@/lib/coupon'
-import { StickyBar } from '@/components/StickyBar'
-import { Card, Eyebrow, H1, H2, Prose, Section, Wrap } from '@/components/ui'
-import { SITE } from '@/lib/site'
+import { plans } from '@/content'
+import { Ladder } from '@/components/Ladder'
+import { Body, Eyebrow, HeadingHi, Meta, Num, Section } from '@/components/ui'
 
 export const metadata: Metadata = {
-  title: 'Plans — pause any week, cancel any time',
-  description: 'Four weekly tofu plans from ₹155, delivered Tuesday and Friday in Noida 62 and Vasundhara. No lock-in.',
+  title: 'Plans — ₹155 to ₹765 a week',
+  description: 'Four weekly tofu plans, delivered Tuesday and Friday. No payment during the pilot, and no lock-in ever.',
 }
 
 export default function PlansPage() {
   return (
     <>
-      <Section className="pt-12">
-        <Wrap>
-          <Eyebrow>Plans</Eyebrow>
-          <H1>Pick a plan. Change it whenever.</H1>
-          <Prose>
-            <p className="mt-4 text-muted">
-              Every plan pauses any week, skips any delivery and cancels any time. There is no lock-in and no joining fee
-              — we&rsquo;re asking strangers to trust a brand that doesn&rsquo;t exist yet, so the least we can do is make
-              leaving easy.
-            </p>
-          </Prose>
-        </Wrap>
+      <Section ground="indigo" className="pt-8">
+        <Eyebrow tone="marigold">PLANS</Eyebrow>
+        <HeadingHi as="h1" size="lg" className="mt-2">
+          जितना चाहिए, उतना ही।
+        </HeadingHi>
+        <Body className="mt-3 text-cream/80">
+          Every plan pauses any week, skips any delivery and cancels any time. No joining fee and no lock-in — we are
+          asking strangers to trust a brand that does not exist yet, so the least we can do is make leaving easy.
+        </Body>
       </Section>
 
-      <Section>
-        <Wrap className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {PLANS.map((p) => (
-            <Card key={p.id} className={p.id === 'ghar' ? 'border-accent' : ''}>
-              <p className="font-mono text-[11px] uppercase tracking-[0.11em] text-muted">
-                {p.deliveriesPerWeek} {p.deliveriesPerWeek === 1 ? 'delivery' : 'deliveries'} a week
-                {p.id === 'ghar' && ' · most common'}
+      <Section ground="paper">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {plans.map((p) => (
+            <div key={p.name} className={`border-2 p-4 ${p.packs === 4 ? 'border-vermilion' : 'border-stone'}`}>
+              <Meta className="text-grey-warm">
+                {p.packs} PACKS / WEEK{p.packs === 4 ? ' · SABSE ZYADA' : ''}
+              </Meta>
+              <h2 className="mt-1 font-display text-sku uppercase text-ink">{p.name}</h2>
+              <p className="mt-3 font-display text-[26px] leading-none text-vermilion">
+                <Num>₹{p.price}</Num>
+                <span className="ml-1 font-mono text-[11px] text-grey-warm">/ WEEK</span>
               </p>
-              <h3 className="mt-1 font-display text-xl font-semibold">{p.name}</h3>
-              <p className="mt-3 font-mono text-2xl font-semibold">₹{p.pricePerWeek}</p>
-              <p className="font-mono text-xs text-muted">{p.packsPerWeek} packs a week</p>
-              <p className="mt-3 text-sm text-muted">{p.blurb}</p>
-            </Card>
+              <p className="mt-3 text-body-sm text-grey-warm-dark">{p.who}</p>
+            </div>
           ))}
-        </Wrap>
-        <Wrap>
-          <p className="mt-4 text-sm text-muted">
-            Mixed Classic and Masala basket, with the 10% subscriber discount already applied. Delivered every{' '}
-            {SITE.batchDays}.
-          </p>
-        </Wrap>
+        </div>
+        <Meta className="mt-4 text-grey-warm">
+          MIXED BASKET · 10% SUBSCRIBER DISCOUNT APPLIED · DELIVERED TUE &amp; FRI, 6–9 PM
+        </Meta>
       </Section>
 
-      <Section className="border-b-0">
-        <Wrap>
-          <Eyebrow>Before we launch</Eyebrow>
-          <H2>The early-bird ladder</H2>
-          <p className="mb-6 mt-2 max-w-measure text-muted">
-            We&rsquo;re not taking any money yet. Sign up now and we&rsquo;ll message you once, on launch day, with a
-            coupon. Our batch capacity really is limited, so the first {FOUNDING_LIMIT} places really do run out.
-          </p>
-          <div className="grid gap-4 sm:grid-cols-3">
-            <Card className="border-accent">
-              <p className="font-mono text-[11px] uppercase tracking-[0.11em] text-accent">Signups 1–{FOUNDING_LIMIT}</p>
-              <h3 className="mt-1 font-display text-lg font-semibold">Founding Member</h3>
-              <p className="mt-2 text-sm text-muted">
-                A coupon for your first order, a free Masala Tofu pack, and your subscription price locked for three
-                months.
-              </p>
-            </Card>
-            <Card>
-              <p className="font-mono text-[11px] uppercase tracking-[0.11em] text-muted">Signups {FOUNDING_LIMIT + 1}+</p>
-              <h3 className="mt-1 font-display text-lg font-semibold">Early Bird</h3>
-              <p className="mt-2 text-sm text-muted">{COHORTS.b.label}. Still worth having, and clearly second.</p>
-            </Card>
-            <Card>
-              <p className="font-mono text-[11px] uppercase tracking-[0.11em] text-muted">Anyone who refers</p>
-              <h3 className="mt-1 font-display text-lg font-semibold">Padosi Bonus</h3>
-              <p className="mt-2 text-sm text-muted">
-                A free pack when a neighbour from your society signs up too. Deliveries to one society cost us far less,
-                so we&rsquo;d rather share that than keep it.
-              </p>
-            </Card>
-          </div>
-          <Link href="/protein-calculator" className="mt-6 inline-block font-semibold underline">
-            Work out your plan and claim a coupon →
-          </Link>
-        </Wrap>
+      <Section ground="indigo">
+        <Eyebrow tone="marigold">BEFORE WE LAUNCH</Eyebrow>
+        <HeadingHi size="md" className="mt-2">
+          पहले 100 लोग Founding Members हैं
+        </HeadingHi>
+        <Body className="mb-5 mt-2 text-cream/75">
+          We are not taking any money yet. Sign up now and we message you once, on launch day, with your coupon.
+        </Body>
+        <Ladder />
+        <Link href="/#form" className="mt-6 inline-block font-mono text-[12px] uppercase tracking-[0.12em] text-marigold underline">
+          Coupon le lijiye →
+        </Link>
       </Section>
-      <StickyBar href="/protein-calculator" label="Get early-bird coupon" />
     </>
   )
 }

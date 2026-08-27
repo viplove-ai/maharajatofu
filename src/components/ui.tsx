@@ -1,126 +1,202 @@
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 
-export function Section({ children, className = '', id }: { children: ReactNode; className?: string; id?: string }) {
+/**
+ * Primitives for the enamel-board system. Section padding, rules, eyebrows and
+ * type roles live here so a page composes blocks rather than re-deriving the
+ * scale each time.
+ */
+
+type Ground = 'indigo' | 'cream' | 'paper'
+
+const GROUND: Record<Ground, string> = {
+  indigo: 'bg-indigo text-cream',
+  cream: 'bg-cream text-ink',
+  paper: 'bg-paper text-ink',
+}
+
+export function Section({
+  children,
+  ground = 'paper',
+  rule = false,
+  id,
+  className = '',
+}: {
+  children: ReactNode
+  ground?: Ground
+  /** 3px vermilion bottom rule — the section divider from the handoff. */
+  rule?: boolean
+  id?: string
+  className?: string
+}) {
   return (
-    <section id={id} className={`border-b border-line py-12 md:py-16 ${className}`}>
-      {children}
+    <section
+      id={id}
+      className={`${GROUND[ground]} ${rule ? 'border-b-[3px] border-vermilion' : ''} px-5 py-[26px] md:px-10 md:py-11 ${className}`}
+    >
+      <div className="mx-auto w-full max-w-shell">{children}</div>
     </section>
   )
 }
 
-export function Wrap({ children, className = '' }: { children: ReactNode; className?: string }) {
-  return <div className={`mx-auto w-full max-w-5xl px-5 ${className}`}>{children}</div>
+/** Mono, 10px, 0.20em, uppercase. Numbered blocks are numbered in the content. */
+export function Eyebrow({ children, tone = 'grey' }: { children: ReactNode; tone?: 'grey' | 'marigold' | 'vermilion' | 'cream' }) {
+  const colour = {
+    grey: 'text-grey-warm',
+    marigold: 'text-marigold',
+    vermilion: 'text-vermilion',
+    cream: 'text-cream/70',
+  }[tone]
+  return <p className={`font-mono text-eyebrow uppercase ${colour}`}>{children}</p>
 }
 
-export function Eyebrow({ children }: { children: ReactNode }) {
+/**
+ * Devanagari headline. Always Mukta 800, and always tagged lang="hi" so a screen
+ * reader switches voice rather than spelling Latin letters at the listener.
+ */
+export function HeadingHi({
+  children,
+  size = 'md',
+  className = '',
+  as: Tag = 'h2',
+}: {
+  children: ReactNode
+  size?: 'sm' | 'md' | 'lg' | 'hero'
+  className?: string
+  as?: 'h1' | 'h2' | 'h3'
+}) {
+  const scale = {
+    sm: 'text-headline-sm',
+    md: 'text-headline md:text-[30px]',
+    lg: 'text-headline-lg md:text-[34px]',
+    hero: 'text-hero md:text-hero-lg',
+  }[size]
   return (
-    <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.14em] text-accent">{children}</p>
-  )
-}
-
-export function H1({ children }: { children: ReactNode }) {
-  return (
-    <h1 className="font-display text-4xl font-semibold leading-[1.05] tracking-tight text-balance md:text-6xl">
+    <Tag lang="hi" className={`font-headline font-extrabold ${scale} text-balance ${className}`}>
       {children}
-    </h1>
+    </Tag>
   )
 }
 
-export function H2({ children }: { children: ReactNode }) {
-  return (
-    <h2 className="font-display text-2xl font-semibold leading-tight tracking-tight text-balance md:text-3xl">
-      {children}
-    </h2>
-  )
+/** Latin display — numbers, SKU names. Archivo Black. */
+export function Num({ children, className = '' }: { children: ReactNode; className?: string }) {
+  return <span className={`font-display tabular-nums ${className}`}>{children}</span>
 }
 
-export function Prose({ children }: { children: ReactNode }) {
-  return <div className="max-w-measure space-y-4 text-[17px] leading-relaxed">{children}</div>
+export function Body({ children, className = '' }: { children: ReactNode; className?: string }) {
+  return <p className={`max-w-measure text-body md:text-[15px] ${className}`}>{children}</p>
 }
 
-export function Card({ children, className = '' }: { children: ReactNode; className?: string }) {
-  return (
-    <div className={`rounded border border-line bg-surface p-5 ${className}`}>{children}</div>
-  )
+/** Mono meta line — batch codes, dates, delivery windows, nutrition. */
+export function Meta({ children, className = '' }: { children: ReactNode; className?: string }) {
+  return <p className={`font-mono text-meta uppercase ${className}`}>{children}</p>
 }
+
+export function Rule({ className = '' }: { className?: string }) {
+  return <hr className={`h-[3px] w-full border-0 bg-vermilion ${className}`} />
+}
+
+const BUTTON_BASE =
+  'inline-flex min-h-button w-full items-center justify-center gap-2 px-6 font-headline text-[19px] font-extrabold'
 
 export function Button({
   children,
   href,
   type = 'button',
   variant = 'primary',
-  disabled,
   onClick,
+  disabled,
   className = '',
+  arrow = false,
 }: {
   children: ReactNode
   href?: string
   type?: 'button' | 'submit'
-  variant?: 'primary' | 'ghost'
-  disabled?: boolean
+  variant?: 'primary' | 'indigo' | 'green' | 'outline' | 'outline-cream'
   onClick?: () => void
+  disabled?: boolean
   className?: string
+  arrow?: boolean
 }) {
-  const base =
-    'inline-flex min-h-[48px] items-center justify-center rounded px-6 text-base font-semibold transition-opacity disabled:opacity-50'
-  const style =
-    variant === 'primary'
-      ? 'bg-accent text-white hover:opacity-90'
-      : 'border border-line bg-surface text-ink hover:bg-surface-2'
-  const cls = `${base} ${style} ${className}`
+  const style = {
+    primary: 'bg-vermilion text-white',
+    indigo: 'bg-indigo text-cream',
+    green: 'bg-green text-white',
+    outline: 'border-2 border-indigo bg-transparent text-indigo',
+    'outline-cream': 'border-2 border-cream/40 bg-transparent text-cream',
+  }[variant]
+  const cls = `${BUTTON_BASE} ${style} ${className}`
+
+  const inner = (
+    <>
+      <span>{children}</span>
+      {arrow && <span aria-hidden>→</span>}
+    </>
+  )
 
   if (href) {
     return (
       <Link href={href} className={cls}>
-        {children}
+        {inner}
       </Link>
     )
   }
+  // Never disabled by design: tapping reveals which field needs help rather
+  // than doing nothing, which is indistinguishable from a broken button.
   return (
-    <button type={type} disabled={disabled} onClick={onClick} className={cls}>
-      {children}
+    <button type={type} onClick={onClick} aria-disabled={disabled} className={cls}>
+      {inner}
     </button>
   )
 }
 
-export function Stat({ value, label }: { value: string; label: string }) {
-  return (
-    <div>
-      <div className="font-mono text-2xl font-semibold tabular-nums text-accent">{value}</div>
-      <div className="mt-1 text-sm text-muted">{label}</div>
-    </div>
-  )
-}
-
-export function Field({
-  label,
-  hint,
-  error,
+export function Card({
   children,
-  htmlFor,
+  ground = 'paper',
+  border,
+  className = '',
 }: {
-  label: string
-  hint?: string
-  error?: string
   children: ReactNode
-  htmlFor: string
+  ground?: Ground | 'indigo-raise'
+  border?: string
+  className?: string
 }) {
+  const g = ground === 'indigo-raise' ? 'bg-indigo-raise text-cream' : GROUND[ground]
+  return <div className={`${g} ${border ?? 'border border-stone'} p-4 ${className}`}>{children}</div>
+}
+
+/** 4px left border pull-quote — used for the "where paneer wins" admission. */
+export function PullQuote({ heading, children }: { heading: string; children: ReactNode }) {
   return (
-    <div className="space-y-1.5">
-      <label htmlFor={htmlFor} className="block text-sm font-semibold">
-        {label}
-      </label>
-      {hint && <p className="text-sm text-muted">{hint}</p>}
-      {children}
-      {error && (
-        <p role="alert" className="text-sm text-accent">
-          {error}
-        </p>
-      )}
-    </div>
+    <blockquote className="border-l-4 border-indigo pl-4">
+      <p className="font-mono text-eyebrow uppercase text-vermilion">{heading}</p>
+      <div className="mt-2 text-body-sm text-slate">{children}</div>
+    </blockquote>
   )
 }
 
-export const inputClass =
-  'w-full min-h-[48px] rounded border border-line bg-surface px-3 text-base text-ink placeholder:text-muted'
+export const INPUT =
+  'h-input w-full border-2 border-indigo bg-white px-3 font-body text-[17px] text-ink outline-none'
+
+export const INPUT_MONO =
+  'h-input w-full border-2 border-indigo bg-white px-3 font-mono text-[18px] text-ink outline-none'
+
+export function Spinner({ className = '' }: { className?: string }) {
+  return <span className={`spinner inline-block h-[14px] w-[14px] ${className}`} aria-hidden />
+}
+
+export function FieldLabel({ htmlFor, children }: { htmlFor: string; children: ReactNode }) {
+  return (
+    <label htmlFor={htmlFor} className="mb-1.5 block font-mono text-eyebrow uppercase text-grey-warm">
+      {children}
+    </label>
+  )
+}
+
+export function ErrorText({ children }: { children: ReactNode }) {
+  return (
+    <p role="alert" className="mt-1.5 text-[12.5px] font-semibold text-chilli">
+      {children}
+    </p>
+  )
+}

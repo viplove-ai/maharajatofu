@@ -1,61 +1,68 @@
 import type { Metadata } from 'next'
+import { FSSAI, brand } from '@/content'
 import { BulkForm } from '@/components/BulkForm'
-import { Card, Eyebrow, H1, H2, Prose, Section, Wrap } from '@/components/ui'
-import { SITE } from '@/lib/site'
+import { Photo } from '@/components/Photo'
+import { Body, Eyebrow, HeadingHi, Meta, Num, Section } from '@/components/ui'
 
 export const metadata: Metadata = {
-  title: 'Bulk tofu for gyms, cafés and cloud kitchens',
-  description: 'One kilo blocks of fresh tofu, delivered twice a week on a standing order in Noida and Ghaziabad.',
+  title: 'Bulk tofu for gyms, cafés & cloud kitchens',
+  description: '1 kg blocks pressed to your delivery day. Slab pricing from ₹340/kg, monthly invoicing, lab report with every quote.',
 }
 
+const SLABS = [
+  { range: '5–10 kg', price: '₹340 / kg' },
+  { range: '10–25 kg', price: '₹315 / kg' },
+  { range: '25 kg +', price: 'Talk to Ritu' },
+]
+
+/** The only page authored laptop-first: form left, proof right, no scrolling to compare. */
 export default function BulkPage() {
   return (
     <>
-      <Section className="pt-12">
-        <Wrap>
-          <Eyebrow>For gyms, cafés and cloud kitchens</Eyebrow>
-          <H1>One kilo blocks. Standing order. Twice a week.</H1>
-          <Prose>
-            <p className="mt-4 text-muted">
-              Fresh tofu delivered every {SITE.batchDays} morning, made the same day. No cold-chain gap, no packaging you
-              have to unwrap forty times, and a batch code on every block so your own food-safety records stay clean.
-            </p>
-          </Prose>
-        </Wrap>
+      <Section ground="indigo" className="pt-8">
+        <Eyebrow tone="marigold">FOR GYMS, CAFÉS &amp; CLOUD KITCHENS</Eyebrow>
+        <HeadingHi as="h1" size="lg" className="mt-2">
+          1 kg blocks, pressed to your delivery day.
+        </HeadingHi>
+        <Body className="mt-3 text-cream/80">
+          One kilo yields about 34 portions of 30 g. It holds its cut in a gravy and on a griddle, arrives on two fixed
+          batch days, and invoices monthly. The FSSAI licence and our lab report go out attached to every quote.
+        </Body>
+        <Meta className="mt-4 text-cream/50">FSSAI LIC. NO. {FSSAI} · {brand.batchDays.toUpperCase()}</Meta>
       </Section>
 
-      <Section>
-        <Wrap className="grid gap-4 sm:grid-cols-3">
-          <Card>
-            <h2 className="font-display text-lg font-semibold">₹240–260 a kilo</h2>
-            <p className="mt-2 text-sm text-muted">
-              Depending on volume and how often. Tell us what you pay for paneer today and we&rsquo;ll be straight with
-              you about whether we can beat it.
-            </p>
-          </Card>
-          <Card>
-            <h2 className="font-display text-lg font-semibold">Taste it first</h2>
-            <p className="mt-2 text-sm text-muted">
-              We bring a sample block to every first meeting. Nobody should sign a standing order for something they have
-              not cooked with.
-            </p>
-          </Card>
-          <Card>
-            <h2 className="font-display text-lg font-semibold">A high-protein menu line</h2>
-            <p className="mt-2 text-sm text-muted">
-              For a gym café, tofu is the item members ask for and nobody local stocks fresh. We&rsquo;ll share the
-              recipes that sell.
-            </p>
-          </Card>
-        </Wrap>
-      </Section>
+      <Section ground="paper">
+        <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr]">
+          <div>
+            <HeadingHi size="md" className="text-ink">
+              बता दीजिए क्या चाहिए।
+            </HeadingHi>
+            <p className="mb-5 mt-1.5 text-body-sm text-grey-warm-dark">We call back within a day, usually the same one.</p>
+            <BulkForm />
+          </div>
 
-      <Section className="border-b-0">
-        <Wrap className="max-w-2xl">
-          <H2>Tell us what you need</H2>
-          <p className="mb-6 mt-2 text-muted">We call back within a day, usually the same one.</p>
-          <BulkForm />
-        </Wrap>
+          <aside className="space-y-5">
+            <div className="border-2 border-indigo">
+              <div className="bg-indigo px-4 py-2">
+                <Meta className="text-marigold">PUBLISHED SLAB PRICING</Meta>
+              </div>
+              <dl className="divide-y divide-stone">
+                {SLABS.map((s) => (
+                  <div key={s.range} className="flex items-center justify-between px-4 py-3">
+                    <dt className="font-mono text-[13px] uppercase text-grey-warm-dark">{s.range}</dt>
+                    <dd className="font-display text-[17px] text-ink">
+                      <Num>{s.price}</Num>
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+            <Photo caption="1 KG BLOCK ON A COMMERCIAL BOARD, CHEF'S HANDS CUTTING" on="cream" />
+            <Meta className="text-grey-warm">
+              YIELD · ~34 PORTIONS OF 30 G PER KG · MONTHLY INVOICING · SAMPLE BLOCK AT EVERY FIRST MEETING
+            </Meta>
+          </aside>
+        </div>
       </Section>
     </>
   )

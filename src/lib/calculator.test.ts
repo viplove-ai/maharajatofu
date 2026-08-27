@@ -1,160 +1,133 @@
 import { describe, expect, it } from 'vitest'
-import { calculatePlan, calculateSwap, householdDailyProtein, proteinSharePct } from './calculator'
-import { packsFromGrams, deliverySplit, planForPacks } from './plans'
+import { calcSwap, calcWeek, noEaters, PACK_G } from './calculator'
+import { planByPacks } from '@/content'
 
-describe('swap mode', () => {
-  // A household buying 1 kg of paneer a week swaps half of it.
-  const half = calculateSwap({ paneerGramsPerWeek: 1000, swapShare: 0.5, matchProtein: false })
-
-  it('turns 500 g into 3 packs, one delivery', () => {
-    expect(half.tofuGrams).toBe(500)
-    expect(half.packsPerWeek).toBe(3)
-    expect(half.actualGrams).toBe(600)
-    expect(half.deliveries).toBe(1)
+/**
+ * The test table from design_handoff_maharaja_tofu/CALCULATOR_SPEC.md, case for
+ * case. The maths is the product — these are the cases the spec asks be covered
+ * at minimum, so a change that breaks one is a change to the product.
+ */
+describe('CALCULATOR_SPEC test table', () => {
+  it('default swap: 1000 g, 50%, match off', () => {
+    const r = calcSwap(1000, 50, false)
+    expect(r.packs).toBe(3)
+    expect(r.kcalSaved).toBe(869)
+    expect(r.tofuProt).toBe(60)
+    expect(r.paneerProt).toBe(90)
+    expect(r.split).toBe(false)
+    expect(r.plan.name).toBe('Chhota Plan')
   })
 
-  it('offers the largest plan already covered, not the next one up', () => {
-    // Three packs gets Chhota (two), not Ghar (four). A plan is a floor people
-    // top up from — selling more perishable food than asked for ends in waste.
-    expect(half.plan.id).toBe('chhota')
+  it('rounds down, never up: 1000 g, 25%, match off', () => {
+    // 250 g is 1.25 packs, which rounds to 1 rather than being pushed to 2.
+    expect(calcSwap(1000, 25, false).packs).toBe(1)
   })
 
-  it('computes savings from what actually lands in the fridge', () => {
-    // 500 g paneer at 2.65 kcal/g, less the 600 g of tofu actually delivered.
-    expect(half.kcalSaved).toBe(869)
-    expect(half.kcalSavedFourWeeks).toBe(3476)
-    expect(half.satFatSavedGrams).toBe(18.5)
+  it('matched protein: 1000 g, 50%, match on', () => {
+    const r = calcSwap(1000, 50, true)
+    expect(r.actualG).toBe(1000)
+    expect(r.packs).toBe(5)
+    expect(r.tofuProt).toBe(100)
+    expect(r.paneerProt).toBe(90)
+    expect(r.split).toBe(false) // 5 is not > 5
   })
 
-  it('states the protein trade-off rather than hiding it', () => {
-    expect(half.tofuProtein).toBe(60)
-    expect(half.paneerProtein).toBe(90)
-    expect(half.tofuProtein).toBeLessThan(half.paneerProtein)
+  it('full swap, matched: 2000 g, 100%, match on', () => {
+    const r = calcSwap(2000, 100, true)
+    expect(r.packs).toBe(18)
+    expect(r.split).toBe(true)
+    expect(r.tue).toBe(9)
+    expect(r.fri).toBe(9)
   })
 
-  it('matches the protein when asked, and still saves calories', () => {
-    const matched = calculateSwap({ paneerGramsPerWeek: 1000, swapShare: 0.5, matchProtein: true })
-    expect(matched.tofuGrams).toBe(900)
-    expect(matched.packsPerWeek).toBe(5)
-    expect(matched.tofuProtein).toBeGreaterThanOrEqual(matched.paneerProtein)
-    expect(matched.kcalSaved).toBeGreaterThan(0)
-    // More tofu means a smaller calorie saving than the 1:1 swap, not a larger one.
-    expect(matched.kcalSaved).toBeLessThan(half.kcalSaved)
+  it('minimum: 250 g, 25%, match off floors at one pack', () => {
+    expect(calcSwap(250, 25, false).packs).toBe(1)
   })
 
-  it('never quotes a negative saving', () => {
-    const all = calculateSwap({ paneerGramsPerWeek: 250, swapShare: 0.25, matchProtein: true })
-    expect(all.kcalSaved).toBeGreaterThanOrEqual(0)
-    expect(all.satFatSavedGrams).toBeGreaterThanOrEqual(0)
+  it('week, default household', () => {
+    // w = 2.7; shared 324; personal 634.5; x1.12 = 1073.6 -> 5 packs
+    const r = calcWeek({ adult: 2, teen: 0, c1012: 1, c49: 0 }, { gravy: 2, bhurji: 1, tikka: 1, addon: 1 }, false)
+    expect(r.packs).toBe(5)
+    expect(r.nudge).toBe(true)
+    expect(r.split).toBe(false)
   })
 
-  it('never returns zero packs for a household that wants any tofu', () => {
-    expect(calculateSwap({ paneerGramsPerWeek: 250, swapShare: 0.25, matchProtein: false }).packsPerWeek).toBe(1)
+  it('gym bonus is personal-only', () => {
+    const r = calcWeek({ adult: 2, teen: 0, c1012: 1, c49: 0 }, { gravy: 2, bhurji: 1, tikka: 1, addon: 1 }, true)
+    expect(r.packs).toBe(7)
+    expect(r.split).toBe(true)
+    expect(r.tue).toBe(4)
+    expect(r.fri).toBe(3)
+  })
+
+  it('nobody eats it: floors at one pack, and the UI is told to ask first', () => {
+    const eaters = { adult: 0, teen: 0, c1012: 0, c49: 0 }
+    expect(calcWeek(eaters, { gravy: 2, bhurji: 1, tikka: 1, addon: 1 }, false).packs).toBe(1)
+    expect(noEaters(eaters)).toBe(true)
   })
 })
 
-describe('plan mode', () => {
-  // Two adults, a 14-year-old and an 8-year-old, all four of whom eat tofu:
-  // gravy twice a week, bhurji once, quick add-ons twice.
-  const family = calculatePlan({
-    adults: 2,
-    teens: 1,
-    kids10to12: 0,
-    kids4to9: 1,
-    trains: false,
-    meals: { gravy: 2, bhurji: 1, tikka: 0, addon: 2 },
+describe('the invariants the spec asks be covered', () => {
+  it('rounds to nearest in both directions', () => {
+    expect(calcSwap(1000, 50, false).packs).toBe(3) // 2.5 -> 3
+    expect(calcSwap(960, 50, false).packs).toBe(2) // 2.4 -> 2
   })
 
-  it('weights eaters instead of counting heads', () => {
-    // 1.0 + 1.0 + 0.85 + 0.45 = 3.3 adult-equivalents, not 4 people.
-    // shared 60*3.3*2 = 396; personal (75*1 + 50*2)*3.3 = 577.5; x1.12 = 1090 g.
-    expect(family.tofuGrams).toBe(1090)
-    expect(family.packsPerWeek).toBe(5)
+  it('never returns zero packs', () => {
+    expect(calcSwap(250, 25, false).packs).toBeGreaterThanOrEqual(1)
+    expect(calcWeek({ adult: 0, teen: 0, c1012: 0, c49: 0 }, { gravy: 0, bhurji: 0, tikka: 0, addon: 0 }, false).packs).toBe(1)
   })
 
-  it('splits anything over five packs across two deliveries', () => {
-    expect(family.deliveries).toBe(1)
-    const big = calculatePlan({
-      adults: 4, teens: 0, kids10to12: 0, kids4to9: 0, trains: false,
-      meals: { gravy: 4, bhurji: 1, tikka: 1, addon: 2 },
-    })
-    expect(big.split).toBe(true)
-    expect(big.tue + big.fri).toBe(big.packsPerWeek)
-    expect(big.tue).toBeGreaterThanOrEqual(big.fri)
+  it('splits above five packs and the halves always sum back', () => {
+    for (let packs = 1; packs <= 20; packs++) {
+      const r = calcSwap(packs * PACK_G, 100, false)
+      expect(r.split).toBe(r.packs > 5)
+      expect(r.tue + r.fri).toBe(r.packs)
+      expect(r.tue).toBeGreaterThanOrEqual(r.fri)
+    }
   })
 
-  it('nudges a first-timer two packs lower once the basket is large', () => {
-    // Nudges above four packs, so this five-pack basket gets one.
-    expect(family.packsPerWeek).toBe(5)
-    expect(family.nudgePacks).toBe(3)
+  it('the gym bonus never touches the shared gravy', () => {
+    const eaters = { adult: 2, teen: 0, c1012: 0, c49: 0 }
+    const gravyOnly = { gravy: 3, bhurji: 0, tikka: 0, addon: 0 }
+    expect(calcWeek(eaters, gravyOnly, true).actualG).toBe(calcWeek(eaters, gravyOnly, false).actualG)
 
-    const small = calculatePlan({
-      adults: 2, teens: 0, kids10to12: 0, kids4to9: 0, trains: false,
-      meals: { gravy: 2, bhurji: 0, tikka: 0, addon: 0 },
-    })
-    expect(small.packsPerWeek).toBeLessThanOrEqual(4)
-    expect(small.nudgePacks).toBeNull()
+    const tikkaOnly = { gravy: 0, bhurji: 0, tikka: 3, addon: 0 }
+    expect(calcWeek(eaters, tikkaOnly, true).actualG).toBeGreaterThan(calcWeek(eaters, tikkaOnly, false).actualG)
   })
 
-  it('gives the gym bonus on personal plates only, never on a shared gravy', () => {
-    const base = { adults: 2, teens: 0, kids10to12: 0, kids4to9: 0 }
-    const gravyTrains = calculatePlan({ ...base, trains: true, meals: { gravy: 3, bhurji: 0, tikka: 0, addon: 0 } })
-    const gravyPlain = calculatePlan({ ...base, trains: false, meals: { gravy: 3, bhurji: 0, tikka: 0, addon: 0 } })
-    expect(gravyTrains.tofuGrams).toBe(gravyPlain.tofuGrams)
-
-    const tikkaTrains = calculatePlan({ ...base, trains: true, meals: { gravy: 0, bhurji: 0, tikka: 3, addon: 0 } })
-    const tikkaPlain = calculatePlan({ ...base, trains: false, meals: { gravy: 0, bhurji: 0, tikka: 3, addon: 0 } })
-    expect(tikkaTrains.tofuGrams).toBeGreaterThan(tikkaPlain.tofuGrams)
+  it('kcalSaved never goes negative', () => {
+    // Matching protein on a tiny basket buys more tofu than the paneer it
+    // replaces — the saving floors at zero rather than reading as a penalty.
+    for (const pct of [25, 50, 100] as const) {
+      for (const g of [250, 500, 1000, 3000]) {
+        expect(calcSwap(g, pct, true).kcalSaved).toBeGreaterThanOrEqual(0)
+        expect(calcSwap(g, pct, false).kcalSaved).toBeGreaterThanOrEqual(0)
+      }
+    }
   })
 
   it('a child is not a small adult', () => {
-    const twoAdults = calculatePlan({ adults: 2, teens: 0, kids10to12: 0, kids4to9: 0, trains: false, meals: { gravy: 3, bhurji: 0, tikka: 0, addon: 0 } })
-    const adultPlusChild = calculatePlan({ adults: 1, teens: 0, kids10to12: 0, kids4to9: 1, trains: false, meals: { gravy: 3, bhurji: 0, tikka: 0, addon: 0 } })
-    expect(adultPlusChild.tofuGrams).toBeLessThan(twoAdults.tofuGrams)
+    const dishes = { gravy: 3, bhurji: 0, tikka: 0, addon: 0 }
+    const twoAdults = calcWeek({ adult: 2, teen: 0, c1012: 0, c49: 0 }, dishes, false)
+    const adultAndChild = calcWeek({ adult: 1, teen: 0, c1012: 0, c49: 1 }, dishes, false)
+    expect(adultAndChild.actualG).toBeLessThan(twoAdults.actualG)
   })
 
-  it('compares against the same dishes cooked with paneer', () => {
-    // Paneer is not pressed, so the comparison is taken before prep loss.
-    expect(family.paneerProtein).toBe(Math.round(((396 + 577.5) * 18) / 100))
-  })
-})
-
-describe('household protein context', () => {
-  it('reports tofu as a modest share of the household need, not the whole of it', () => {
-    const daily = householdDailyProtein({
-      adults: 2, avgAdultWeightKg: 64, activity: 'desk', kids4to9: 1, kids10to12: 0, teens: 1,
-    })
-    expect(daily).toBe(174)
-
-    const family = calculatePlan({
-      adults: 2, teens: 1, kids10to12: 0, kids4to9: 1, trains: false,
-      meals: { gravy: 2, bhurji: 1, tikka: 0, addon: 2 },
-    })
-    // Dal, roti and curd are the backbone of an Indian household's protein and
-    // tofu never will be. The UI prints this number as-is.
-    expect(proteinSharePct(family, daily)).toBeLessThan(15)
+  it('the nudge floors at two packs so it can never suggest less than a plan', () => {
+    expect(calcSwap(1000, 50, false).nudgePacks).toBeGreaterThanOrEqual(2)
+    expect(calcSwap(2000, 100, true).nudgePacks).toBe(16)
   })
 })
 
-describe('pack and delivery rules', () => {
-  it('rounds to the nearest pack rather than up', () => {
-    expect(packsFromGrams(500)).toBe(3) // 2.5 -> 3
-    expect(packsFromGrams(480)).toBe(2) // 2.4 -> 2, not 3
-    expect(packsFromGrams(10)).toBe(1) // never zero
-  })
-
-  it('keeps a single drop inside the five-day shelf life', () => {
-    expect(deliverySplit(5)).toEqual({ deliveries: 1, tue: 5, fri: 0 })
-    expect(deliverySplit(6)).toEqual({ deliveries: 2, tue: 3, fri: 3 })
-    expect(deliverySplit(7)).toEqual({ deliveries: 2, tue: 4, fri: 3 })
-    expect(deliverySplit(10)).toEqual({ deliveries: 2, tue: 5, fri: 5 })
-  })
-
-  it('picks the largest plan already covered', () => {
-    expect(planForPacks(1).id).toBe('chhota')
-    expect(planForPacks(3).id).toBe('chhota')
-    expect(planForPacks(4).id).toBe('ghar')
-    expect(planForPacks(9).id).toBe('bada')
-    expect(planForPacks(99).id).toBe('gym')
+describe('plan tiers', () => {
+  it('offers the largest tier already covered, not the next one up', () => {
+    // Three packs gets Chhota (two), not Ghar (four). A plan is a floor people
+    // top up from — selling more perishable food than asked ends in waste.
+    expect(planByPacks(1).name).toBe('Chhota Plan')
+    expect(planByPacks(3).name).toBe('Chhota Plan')
+    expect(planByPacks(4).name).toBe('Ghar Plan')
+    expect(planByPacks(9).name).toBe('Bada Plan')
+    expect(planByPacks(99).name).toBe('Gym / Cloud Kitchen')
   })
 })

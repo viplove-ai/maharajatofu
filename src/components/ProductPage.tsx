@@ -1,106 +1,107 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { productBySlug } from '@/content/products'
-import { recipeBySlug } from '@/content/recipes'
-import { StickyBar } from '@/components/StickyBar'
-import { Card, Eyebrow, H1, H2, Prose, Section, Wrap } from '@/components/ui'
-import { SITE } from '@/lib/site'
-import { TOFU_PROTEIN_PER_100G, TOFU_KCAL_PER_G } from '@/lib/nutrition'
+import { brand, productBySlug, recipes } from '@/content'
+import { Photo } from './Photo'
+import { Body, Eyebrow, Meta, Num, Section } from './ui'
 
-export function ProductPage({ slug }: { slug: 'classic-tofu' | 'masala-tofu' }) {
-  const product = productBySlug(slug)
-  if (!product) notFound()
-  const recipes = product.recipes.map(recipeBySlug).filter((r) => r !== undefined)
+const SKU_TEXT: Record<string, string> = { classic: 'text-marigold', masala: 'text-vermilion' }
+
+export function ProductPage({ slug }: { slug: string }) {
+  const p = productBySlug(slug)
+  if (!p) notFound()
+  const related = recipes.slice(0, 4)
 
   return (
     <>
-      <Section className="pt-12">
-        <Wrap>
-          <Eyebrow>
-            {product.grams} g · ₹{product.pricePerKg}/kg
-          </Eyebrow>
-          <H1>{product.name}</H1>
-          <p className="mt-4 max-w-measure text-lg text-muted">{product.tagline}</p>
-          <p className="mt-5 font-mono text-4xl font-semibold text-accent">₹{product.price}</p>
-        </Wrap>
+      <Section ground="indigo" className="pt-8">
+        <Eyebrow tone="marigold">
+          {p.netQty.toUpperCase()} · ₹{p.perKg}/KG
+        </Eyebrow>
+        <h1 className={`mt-2 font-display text-[30px] uppercase leading-[1.05] ${SKU_TEXT[p.sku] ?? 'text-cream'}`}>
+          {p.name}
+        </h1>
+        <Body className="mt-3 text-cream/80">{p.line}</Body>
+        <p className="mt-5 font-display text-[44px] leading-none text-cream">
+          <Num>₹{p.price}</Num>
+        </p>
+        <Photo
+          caption={p.sku === 'masala' ? 'MASALA ON THE TAWA, CHARRED, HAND IN FRAME' : 'TUB IN A HOME FRIDGE, DOOR LIGHT ONLY'}
+          className="mt-6"
+        />
       </Section>
 
-      <Section>
-        <Wrap className="grid gap-8 md:grid-cols-2">
-          <div>
-            <H2>What&rsquo;s in it</H2>
-            <ul className="mt-4 space-y-2">
-              {product.ingredients.map((i) => (
-                <li key={i} className="border-b border-line pb-2 text-[17px]">
-                  {i}
-                </li>
-              ))}
-            </ul>
-            <p className="mt-4 text-sm text-muted">
-              Allergen: contains soy. Keep refrigerated at 0–4 °C. Best within five days of the make date printed on the
-              tub.
-            </p>
-          </div>
-          <div>
-            <H2>Per 100 g</H2>
-            <Card className="mt-4">
-              <dl className="space-y-2 text-[15px]">
-                <div className="flex justify-between border-b border-line pb-2">
-                  <dt>Protein</dt>
-                  <dd className="font-mono tabular-nums">{TOFU_PROTEIN_PER_100G} g</dd>
-                </div>
-                <div className="flex justify-between border-b border-line pb-2">
-                  <dt>Energy</dt>
-                  <dd className="font-mono tabular-nums">{Math.round(TOFU_KCAL_PER_G * 100)} kcal</dd>
-                </div>
-                <div className="flex justify-between border-b border-line pb-2">
-                  <dt>Cholesterol</dt>
-                  <dd className="font-mono tabular-nums">0 mg</dd>
-                </div>
-                <div className="flex justify-between">
-                  <dt>Lactose</dt>
-                  <dd className="font-mono tabular-nums">None</dd>
-                </div>
-              </dl>
-              <p className="mt-3 text-xs text-muted">
-                Placeholder values pending our NABL lab analysis. The panel on the pack and the calculator will both
-                quote that report, not these.
-              </p>
-            </Card>
-          </div>
-        </Wrap>
+      {/* The three-ingredient panel is the hero element on Classic. */}
+      <Section ground="paper">
+        <Eyebrow tone="vermilion">ISMEIN KYA HAI</Eyebrow>
+        <ol className="mt-3 font-mono text-[24px] font-semibold leading-[1.5] text-ink">
+          {p.ingredients.map((ing, i) => (
+            <li key={ing}>
+              {i + 1} {ing.toUpperCase()}
+            </li>
+          ))}
+        </ol>
+        <hr className="mt-4 h-[2px] w-full border-0 bg-vermilion" />
+        <div className="mt-4 flex items-center gap-3">
+          <span
+            className="flex h-5 w-5 items-center justify-center border-2 border-green"
+            aria-label="Vegetarian"
+            title="Vegetarian"
+          >
+            <span className="is-round block h-2.5 w-2.5 bg-green" />
+          </span>
+          <Meta className="text-grey-warm">{p.allergen.toUpperCase()}</Meta>
+        </div>
       </Section>
 
-      <Section>
-        <Wrap>
-          <Prose>
-            <p className="text-muted">{product.description}</p>
-            <p className="text-muted">
-              Made in our Sector 10 kitchen every {SITE.batchDays} morning and delivered the same afternoon. We never
-              carry stock, which is why the shelf life is short and why we print the make date as prominently as the
-              best-before.
-            </p>
-          </Prose>
-        </Wrap>
+      <Section ground="cream">
+        <Eyebrow tone="vermilion">PER 100 G</Eyebrow>
+        <dl className="mt-3 divide-y divide-stone font-mono text-[13px]">
+          {[
+            ['ENERGY', `${p.per100g.kcal} KCAL`],
+            ['PROTEIN', `${p.per100g.protein} G`],
+            ['TOTAL FAT', `${p.per100g.fat} G`],
+            ['SATURATED FAT', `${p.per100g.satFat} G`],
+            ['TRANS FAT', `${p.per100g.transFat} G`],
+            ['CHOLESTEROL', `${p.per100g.cholesterol} MG`],
+            ['CARBOHYDRATE', `${p.per100g.carb} G`],
+            ['TOTAL SUGARS', `${p.per100g.sugars} G`],
+            ['SODIUM', `${p.per100g.sodium} MG`],
+          ].map(([k, v]) => (
+            <div key={k} className="flex justify-between py-2">
+              <dt className="text-grey-warm-dark">{k}</dt>
+              <dd className="tabular-nums text-ink">{v}</dd>
+            </div>
+          ))}
+        </dl>
+        <div className="mt-5 space-y-0.5">
+          <Meta className="text-grey-warm">DATE OF PACKING &amp; BEST BEFORE PRINTED AT THE SAME SIZE</Meta>
+          <Meta className="text-grey-warm">KEEP REFRIGERATED 0–4 °C · BEST WITHIN 5 DAYS</Meta>
+          <Meta className="text-grey-warm">BATCH CODE ON EVERY TUB</Meta>
+          <Meta className="text-grey-warm">{brand.address.toUpperCase()}</Meta>
+        </div>
       </Section>
 
-      <Section className="border-b-0">
-        <Wrap>
-          <H2>Cook it like this</H2>
-          <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {recipes.map((r) => (
-              <Link key={r.slug} href={`/recipes/${r.slug}`} className="rounded border border-line bg-surface p-4 hover:border-accent">
-                <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-plant">{r.time}</p>
-                <h3 className="mt-1 font-display text-base font-semibold">{r.title}</h3>
-              </Link>
-            ))}
-          </div>
-          <Link href="/protein-calculator" className="mt-6 inline-block font-semibold underline">
-            Work out how much you need →
-          </Link>
-        </Wrap>
+      <Section ground="paper">
+        <Eyebrow tone="vermilion">ISSE BANAAIYE</Eyebrow>
+        <div className="mt-4 grid grid-cols-2 gap-3">
+          {related.map((r) => (
+            <Link key={r.slug} href={`/recipes/${r.slug}`} className="bg-cream">
+              <Photo caption={r.name} on="cream" ratio="aspect-[4/3]" />
+              <div className="p-3">
+                <h3 lang="hi" className="font-headline text-[14.5px] font-bold text-ink">
+                  {r.name}
+                </h3>
+                <Meta className="mt-1 text-grey-warm">
+                  {r.minutes} MIN · {r.packs} {r.packs === 1 ? 'PACK' : 'PACKS'}
+                </Meta>
+              </div>
+            </Link>
+          ))}
+        </div>
+        <Link href="/protein-calculator" className="mt-5 inline-block font-mono text-[12px] uppercase tracking-[0.12em] text-indigo underline">
+          Kitna chahiye? Calculate kariye →
+        </Link>
       </Section>
-      <StickyBar />
     </>
   )
 }

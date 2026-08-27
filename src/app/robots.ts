@@ -1,9 +1,10 @@
 import type { MetadataRoute } from 'next'
-import { SITE } from '@/lib/site'
+
+const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://maharajatofu.com'
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: { userAgent: '*', allow: '/', disallow: ['/api/', '/thanks', '/r/'] },
-    sitemap: `${SITE.url}/sitemap.xml`,
+    sitemap: `${SITE}/sitemap.xml`,
   }
 }

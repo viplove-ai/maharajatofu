@@ -1,133 +1,125 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { MAHARAJA_METHOD, RECIPES, recipeBySlug } from '@/content/recipes'
-import { productBySlug } from '@/content/products'
-import { StickyBar } from '@/components/StickyBar'
-import { Card, Eyebrow, H1, Section, Wrap } from '@/components/ui'
-import { SITE } from '@/lib/site'
+import { brand, recipeBySlug, recipes } from '@/content'
+import { Photo } from '@/components/Photo'
+import { Body, Eyebrow, HeadingHi, Meta, Num, Section } from '@/components/ui'
 
-/** Statically generated, one URL each — these pages are the long-tail search
- *  entry points, and the asset that keeps working after the ad budget stops. */
+/** Statically generated — these pages are the long-tail search entry points and
+ *  the asset that keeps working after the ad budget stops. */
 export function generateStaticParams() {
-  return RECIPES.map((r) => ({ slug: r.slug }))
+  return recipes.map((r) => ({ slug: r.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const recipe = recipeBySlug((await params).slug)
-  if (!recipe) return {}
+  const r = recipeBySlug((await params).slug)
+  if (!r) return {}
   return {
-    title: `${recipe.title} — ${recipe.time}`,
-    description: recipe.hook,
-    alternates: { canonical: `/recipes/${recipe.slug}` },
+    title: `${r.name} — ${r.minutes} min`,
+    description: `${r.name}: a paneer recipe with the paneer swapped 1:1 for tofu. ${r.minutes} minutes, ${r.packs} ${r.packs === 1 ? 'pack' : 'packs'}.`,
+    alternates: { canonical: `/recipes/${r.slug}` },
   }
 }
 
 export default async function RecipePage({ params }: { params: Promise<{ slug: string }> }) {
-  const recipe = recipeBySlug((await params).slug)
-  if (!recipe) notFound()
+  const r = recipeBySlug((await params).slug)
+  if (!r) notFound()
+  const others = recipes.filter((o) => o.slug !== r.slug).slice(0, 3)
 
-  const product = productBySlug(recipe.sku)
-  const related = RECIPES.filter((r) => r.lane === recipe.lane && r.slug !== recipe.slug).slice(0, 3)
-
-  // Recipe structured data: these pages exist to be found, and rich results are
-  // most of the reason a recipe URL outranks a blog post.
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Recipe',
-    name: recipe.title,
-    description: recipe.hook,
-    recipeYield: `${recipe.serves} servings`,
-    totalTime: `PT${recipe.minutes}M`,
+    name: r.name,
+    recipeYield: r.serves ? `${r.serves} servings` : undefined,
+    totalTime: `PT${r.minutes}M`,
     recipeCuisine: 'Indian',
-    recipeIngredient: recipe.ingredients,
-    recipeInstructions: recipe.steps.map((text) => ({ '@type': 'HowToStep', text })),
-    author: { '@type': 'Organization', name: SITE.name },
+    recipeInstructions: (r.steps ?? []).map((text) => ({ '@type': 'HowToStep', text })),
+    author: { '@type': 'Organization', name: brand.name },
   }
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <Section className="pt-12">
-        <Wrap>
-          <Eyebrow>
-            {recipe.time} · serves {recipe.serves} · {recipe.tofuGrams} g tofu
-          </Eyebrow>
-          <H1>{recipe.title}</H1>
-          <p className="mt-4 max-w-measure text-lg text-muted">{recipe.hook}</p>
-          {product && (
-            <p className="mt-4 text-sm">
-              Uses{' '}
-              <Link href={`/${product.slug}`} className="font-semibold underline">
-                {product.name}
-              </Link>{' '}
-              — ₹{product.price} for {product.grams} g.
-            </p>
-          )}
-        </Wrap>
+      <Section ground="indigo" className="pt-8">
+        <Eyebrow tone="marigold">
+          {r.minutes} MIN · {r.packs} {r.packs === 1 ? 'PACK' : 'PACKS'}
+          {r.serves ? ` · SERVES ${r.serves}` : ''}
+        </Eyebrow>
+        <HeadingHi as="h1" size="lg" className="mt-2">
+          {r.name}
+        </HeadingHi>
+        <Photo caption={`${r.name} — HARD SIDE LIGHT, HANDS IN FRAME`} className="mt-5" />
       </Section>
 
-      <Section>
-        <Wrap className="grid gap-8 md:grid-cols-[1fr_1.4fr]">
-          <div>
-            <h2 className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">Ingredients</h2>
-            <ul className="mt-3 space-y-2 text-[15px]">
-              {recipe.ingredients.map((i) => (
-                <li key={i} className="border-b border-line pb-2">
-                  {i}
-                </li>
-              ))}
-            </ul>
+      {/* Every recipe shows the paneer version's calories for contrast — the
+          whole point is that the dish is unchanged and the number is not. */}
+      {r.kcalPerPortion && r.paneerKcalPerPortion && (
+        <Section ground="cream">
+          <Eyebrow tone="vermilion">PER PORTION</Eyebrow>
+          <div className="mt-3 grid grid-cols-2 gap-3">
+            <div className="bg-indigo p-4 text-cream">
+              <Meta className="text-marigold">WITH TOFU</Meta>
+              <p className="mt-1 font-display text-[34px] leading-none">
+                <Num>{r.kcalPerPortion}</Num>
+                <span className="ml-1 font-mono text-[12px]">KCAL</span>
+              </p>
+              {r.proteinPerPortion && <Meta className="mt-1 text-cream/60">{r.proteinPerPortion} G PROTEIN</Meta>}
+            </div>
+            <div className="border-2 border-stone bg-paper p-4">
+              <Meta className="text-grey-warm">WITH PANEER</Meta>
+              <p className="mt-1 font-display text-[34px] leading-none text-ink">
+                <Num>{r.paneerKcalPerPortion}</Num>
+                <span className="ml-1 font-mono text-[12px]">KCAL</span>
+              </p>
+              <Meta className="mt-1 text-grey-warm">SAME MASALA, SAME PAN</Meta>
+            </div>
           </div>
-          <div>
-            <h2 className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">Method</h2>
-            <ol className="mt-3 space-y-4">
-              {recipe.steps.map((s, i) => (
-                <li key={s} className="flex gap-3">
-                  <span className="font-mono text-sm text-accent">{String(i + 1).padStart(2, '0')}</span>
-                  <span className="text-[17px] leading-relaxed">{s}</span>
-                </li>
-              ))}
-            </ol>
-            {recipe.note && (
-              <Card className="mt-6 border-l-4 border-l-accent">
-                <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-accent">Worth knowing</p>
-                <p className="mt-1 text-[15px]">{recipe.note}</p>
-              </Card>
-            )}
-          </div>
-        </Wrap>
-      </Section>
+        </Section>
+      )}
 
-      <Section>
-        <Wrap>
-          <h2 className="font-display text-xl font-semibold">The Maharaja Method</h2>
-          <p className="mt-1 text-sm text-muted">Five techniques that fix tofu&rsquo;s texture in an Indian kitchen.</p>
-          <ul className="mt-4 space-y-2 text-[15px]">
-            {MAHARAJA_METHOD.map((m) => (
-              <li key={m.title} className="border-b border-line pb-2">
-                <strong>{m.title}.</strong> <span className="text-muted">{m.body}</span>
+      <Section ground="paper">
+        <Eyebrow tone="vermilion">TAREEKA</Eyebrow>
+        {r.steps?.length ? (
+          <ol className="mt-4 space-y-4">
+            {r.steps.map((s, i) => (
+              <li key={s} className="flex gap-3">
+                <span className="font-mono text-[13px] text-vermilion">{String(i + 1).padStart(2, '0')}</span>
+                <span className="text-[16px] leading-[1.55] text-ink">{s}</span>
               </li>
             ))}
-          </ul>
-        </Wrap>
+          </ol>
+        ) : (
+          <Body className="mt-3 text-grey-warm-dark">
+            Cook it exactly the way you cook this dish with paneer — same masala, same pan, same timing. Add the tofu in
+            the last three or four minutes rather than boiling it in the gravy, and press it for ten minutes first if you
+            want a firmer bite. Full method lands here before launch.
+          </Body>
+        )}
+
+        <div className="mt-6 border-l-4 border-indigo pl-4">
+          <Meta className="text-vermilion">MAHARAJA METHOD</Meta>
+          <p className="mt-2 text-body-sm text-slate">
+            Press 10–20 minutes under something heavy. Blanch two minutes in hot salted water for a softer, paneer-like
+            bite. Marinate fifteen minutes — tofu is porous and takes flavour faster than paneer. Add it in the last
+            three minutes; it does not need longer and it will crumble.
+          </p>
+        </div>
       </Section>
 
-      <Section className="border-b-0">
-        <Wrap>
-          <h2 className="font-display text-xl font-semibold">Try next</h2>
-          <div className="mt-4 grid gap-3 sm:grid-cols-3">
-            {related.map((r) => (
-              <Link key={r.slug} href={`/recipes/${r.slug}`} className="rounded border border-line bg-surface p-4 hover:border-accent">
-                <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-muted">{r.time}</p>
-                <h3 className="mt-1 font-display text-base font-semibold">{r.title}</h3>
-              </Link>
-            ))}
-          </div>
-        </Wrap>
+      <Section ground="cream">
+        <Eyebrow tone="vermilion">AUR BHI</Eyebrow>
+        <div className="mt-4 grid grid-cols-3 gap-3">
+          {others.map((o) => (
+            <Link key={o.slug} href={`/recipes/${o.slug}`} className="bg-paper p-3">
+              <Meta className="text-grey-warm">{o.minutes} MIN</Meta>
+              <h3 lang="hi" className="mt-1 font-headline text-[14px] font-bold text-ink">
+                {o.name}
+              </h3>
+            </Link>
+          ))}
+        </div>
       </Section>
-      <StickyBar />
     </>
   )
 }

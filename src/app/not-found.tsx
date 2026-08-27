@@ -1,25 +1,24 @@
 import Link from 'next/link'
-import { H1, Prose, Section, Wrap } from '@/components/ui'
+import { Body, Eyebrow, HeadingHi, Section } from '@/components/ui'
 
 export default function NotFound() {
   return (
-    <Section className="border-b-0 pt-16">
-      <Wrap className="max-w-2xl">
-        <H1>Yeh page nahi mila.</H1>
-        <Prose>
-          <p className="mt-4 text-muted">
-            The link is wrong, or we moved something. The{' '}
-            <Link href="/recipes" className="underline">
-              recipes
-            </Link>{' '}
-            and the{' '}
-            <Link href="/protein-calculator" className="underline">
-              calculator
-            </Link>{' '}
-            are the two things most people are looking for.
-          </p>
-        </Prose>
-      </Wrap>
+    <Section ground="paper" className="pt-12">
+      <Eyebrow tone="vermilion">404</Eyebrow>
+      <HeadingHi as="h1" size="lg" className="mt-2 text-ink">
+        यह page नहीं मिला।
+      </HeadingHi>
+      <Body className="mt-3 text-grey-warm-dark">
+        The link is wrong, or we moved something. Most people are looking for{' '}
+        <Link href="/protein-calculator" className="underline">
+          the calculator
+        </Link>{' '}
+        or{' '}
+        <Link href="/recipes" className="underline">
+          the recipes
+        </Link>
+        .
+      </Body>
     </Section>
   )
 }

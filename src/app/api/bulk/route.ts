@@ -31,7 +31,7 @@ export async function POST(request: Request) {
       area: parsed.data.area ?? null,
       pincode: parsed.data.pincode ?? null,
       notes: parsed.data.notes ?? null,
-      utm: parsed.data.utm ?? null,
+      attribution: parsed.data.attribution ?? null,
     })
     return NextResponse.json({ ok: true }, { status: 201 })
   } catch (error) {

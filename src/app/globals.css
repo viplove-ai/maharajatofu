@@ -1,79 +1,72 @@
-@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=Mukta:wght@400;600;800&family=Yatra+One&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /*
- * "Enamel Board" — the approved brand direction, from
- * design_handoff_maharaja_tofu/tokens.json. Every colour, typeface and control
- * size on the site resolves through these variables; no component holds a hex.
+ * "Enamel Board" — the approved direction, from
+ * design_handoff_maharaja_tofu/tokens.json. Every colour and control size on
+ * the site resolves through these variables; no component holds a hex.
+ *
+ * The font variables are injected by next/font (src/lib/fonts.ts), not declared
+ * here — that is what keeps them self-hosted and free of a blocking round trip.
  *
  * Single theme on purpose. An enamel sign is a printed object with one set of
- * colours — it has no dark mode, and the handoff defines no dark palette. This
- * is a commitment, not an omission, so every surface below paints itself
- * explicitly rather than inheriting anything from the viewer.
+ * colours; the handoff defines no dark palette. A commitment, not an omission,
+ * so every surface paints itself explicitly rather than inheriting.
  */
 :root {
   color-scheme: light;
 
-  /* ground and ink */
-  --c-bg: #fbf7ee; /* paper */
-  --c-surface: #f4ebda; /* cream */
-  --c-surface-2: #dcd3c0; /* stone */
-  --c-ink: #14224a; /* indigo */
-  --c-ink-deep: #0e1526;
+  --c-indigo: #14224a;
   --c-indigo-raise: #1b2c58;
+  --c-ink: #0e1526;
+  --c-cream: #f4ebda;
+  --c-paper: #fbf7ee;
+  --c-stone: #dcd3c0;
+  --c-stone-edge: #c9c0ac;
+  --c-grey-warm: #7e7768;
+  --c-grey-warm-dark: #6e6757;
   --c-slate: #2a3350;
-  --c-muted: #7e7768; /* warm grey */
-  --c-muted-dark: #6e6757;
-  --c-line: #dcd3c0;
-  --c-line-strong: #c9c0ac;
-  --c-placeholder: #a8a08c;
-
-  /* accents */
-  --c-accent: #e1442a; /* vermilion */
-  --c-gold: #f2a118; /* marigold */
+  --c-vermilion: #e1442a;
+  --c-marigold: #f2a118;
   --c-chilli: #b4202a;
-  --c-plant: #1e7b34; /* green */
+  --c-green: #1e7b34;
+  --c-placeholder: #a8a08c;
+  --c-track-off: #b9b09c;
 
-  /* SKU identity — must read from three metres inside a fridge */
-  --c-sku-classic: #f2a118;
-  --c-sku-masala: #b4202a;
-
-  /* type */
-  --f-display: 'Archivo Black', Archivo, Helvetica, sans-serif;
-  --f-headline: Mukta, 'Segoe UI', sans-serif;
-  --f-devanagari: 'Yatra One', Mukta, serif;
-  --f-body: Archivo, Helvetica, Arial, sans-serif;
-  --f-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
-
-  /* controls — from tokens.control, all comfortably past the 44px minimum */
+  --h-target: 44px;
+  --h-chip: 52px;
   --h-input: 56px;
   --h-button: 58px;
-  --h-chip: 52px;
   --h-sticky: 56px;
-
-  --rule-section: 3px solid var(--c-accent);
 }
 
 body {
-  background: var(--c-bg);
+  background: var(--c-paper);
   color: var(--c-ink);
-  font-family: var(--f-body);
+  font-family: var(--f-body), Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Square corners are the system, and nothing casts a shadow. Enforced here
- * rather than left to each component, so a stray `rounded` cannot creep in. */
+/*
+ * Radius 0 everywhere — this is an enamel-signboard system and corners are
+ * square. The exceptions are enumerated rather than left to discipline: the
+ * circular म mark, toggle knobs, the video play button, spinners.
+ * Shadows are none; depth comes from colour blocks.
+ */
 *,
 *::before,
 *::after {
-  border-radius: 0 !important;
-  box-shadow: none !important;
+  border-radius: 0;
+  box-shadow: none;
 }
 
-/* Room for the sticky mobile action bar so it never covers the last element. */
+.is-round,
+.is-round::before,
+.is-round::after {
+  border-radius: 9999px;
+}
+
 main {
   padding-bottom: calc(var(--h-sticky) + 2rem);
 }
@@ -85,22 +78,34 @@ main {
 }
 
 :focus-visible {
-  outline: 3px solid var(--c-accent);
+  outline: 3px solid var(--c-vermilion);
   outline-offset: 2px;
 }
 
 ::placeholder {
   color: var(--c-placeholder);
+  opacity: 1;
 }
 
-/* Colour and opacity only. The handoff explicitly forbids count-up numbers,
- * parallax, reveal-on-scroll and countdown timers — an enamel board does not
- * animate, and a fake countdown would undercut a scarcity claim that is real. */
+/* Photo placeholders until real photography lands. Each carries a mono caption
+ * naming the shot required, so an empty frame reads as a brief, not a bug. */
+.ph-indigo {
+  background: repeating-linear-gradient(45deg, #1b2c58 0 7px, #22345f 7px 14px);
+}
+
+.ph-cream {
+  background: repeating-linear-gradient(45deg, #e6dbc4 0 6px, #efe6d2 6px 12px);
+}
+
+/* Restrained by design: colour and opacity only, 120–180ms. No parallax, no
+ * reveal-on-scroll, and no count-up on the calories figure — a number that
+ * animates upward would undercut the honesty that block is built on. */
 a,
 button,
 input,
 select,
-textarea {
+textarea,
+label {
   transition:
     color 140ms ease-out,
     background-color 140ms ease-out,
@@ -108,11 +113,25 @@ textarea {
     opacity 140ms ease-out;
 }
 
+@keyframes mt-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 9999px;
+  animation: mt-spin 0.8s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }
