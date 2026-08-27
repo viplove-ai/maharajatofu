@@ -1,0 +1,66 @@
+name: Deploy
+
+# Production deploys come off `release` only. `main` is the integration branch:
+# work lands there freely and CI proves it, but nothing ships until main is
+# merged into release. Same discipline as nirman.
+on:
+  push:
+    branches: [release]
+  workflow_dispatch:
+
+# One deploy at a time, and never cancelled mid-flight: a half-applied
+# migration is worse than a queued job.
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  migrate:
+    name: Apply migrations
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      # Migrations run here rather than at app startup. A bad one then fails a
+      # one-off job while the running machine keeps serving, instead of putting
+      # every boot into a crash loop.
+      - name: Migrate
+        run: npm run db:migrate
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+  deploy:
+    name: Deploy to Fly
+    needs: migrate
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+
+      - name: Deploy
+        run: flyctl deploy --remote-only --wait-timeout 600
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+      # Health first (is the machine up), then the home page (did the build
+      # actually render). The health route deliberately does not touch Postgres,
+      # so these two failing together means something different from either alone.
+      - name: Smoke test
+        run: |
+          for i in $(seq 1 20); do
+            code=$(curl -s -o /dev/null -w '%{http_code}' https://maharaja-tofu.fly.dev/api/health || true)
+            if [ "$code" = "200" ]; then echo "healthy"; break; fi
+            echo "attempt $i: got $code"; sleep 5
+            if [ "$i" = "20" ]; then echo "never became healthy"; exit 1; fi
+          done
+          home=$(curl -s -o /dev/null -w '%{http_code}' https://maharaja-tofu.fly.dev/ || true)
+          test "$home" = "200" || { echo "home page returned $home"; exit 1; }

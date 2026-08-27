@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * The entire visual identity lives in this block. The design work coming back
+ * from the brand session replaces these values and nothing else — no component
+ * hard-codes a colour, so a new palette is one edit in one file.
+ *
+ * PLACEHOLDER PALETTE. Swap for the approved brand direction.
+ */
+:root {
+  --c-bg: #f2f3ee;
+  --c-surface: #ffffff;
+  --c-surface-2: #eaece4;
+  --c-ink: #17203d;
+  --c-muted: #5c6478;
+  --c-line: #d8dbd1;
+  --c-accent: #c8452f;
+  --c-gold: #b5820f;
+  --c-plant: #3f7a4b;
+
+  --f-display: Georgia, 'Times New Roman', serif;
+  --f-body: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --f-mono: ui-monospace, 'SF Mono', Menlo, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --c-bg: #131725;
+    --c-surface: #1a1f30;
+    --c-surface-2: #222840;
+    --c-ink: #e9e8e1;
+    --c-muted: #9aa3b8;
+    --c-line: #2c3348;
+    --c-accent: #ec7458;
+    --c-gold: #e0ab3e;
+    --c-plant: #74b47f;
+  }
+}
+
+html {
+  color-scheme: light dark;
+}
+
+body {
+  background: var(--c-bg);
+  color: var(--c-ink);
+  font-family: var(--f-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Room for the sticky mobile action bar so it never covers the last element. */
+main {
+  padding-bottom: 5.5rem;
+}
+
+@media (min-width: 768px) {
+  main {
+    padding-bottom: 0;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

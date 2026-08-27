@@ -1,0 +1,1332 @@
+<title>Maharaja Tofu Pilot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Karla:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --bg:#F2F3EE;
+  --surface:#FFFFFF;
+  --surface-2:#EAECE4;
+  --ink:#17203D;
+  --muted:#5C6478;
+  --line:#D8DBD1;
+  --accent:#C8452F;
+  --gold:#B5820F;
+  --plant:#3F7A4B;
+  --shadow:0 1px 2px rgba(23,32,61,.06),0 8px 24px -12px rgba(23,32,61,.18);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#131725;
+    --surface:#1A1F30;
+    --surface-2:#222840;
+    --ink:#E9E8E1;
+    --muted:#9AA3B8;
+    --line:#2C3348;
+    --accent:#EC7458;
+    --gold:#E0AB3E;
+    --plant:#74B47F;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#131725;
+  --surface:#1A1F30;
+  --surface-2:#222840;
+  --ink:#E9E8E1;
+  --muted:#9AA3B8;
+  --line:#2C3348;
+  --accent:#EC7458;
+  --gold:#E0AB3E;
+  --plant:#74B47F;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:Karla,"Helvetica Neue",Arial,sans-serif;
+  font-size:17px;
+  line-height:1.62;
+  margin:0;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+.prose{max-width:70ch}
+p{margin:0 0 1em}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+strong{font-weight:700}
+code{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.88em;background:var(--surface-2);padding:.12em .38em;border-radius:3px}
+
+/* ---------- nav ---------- */
+nav.top{
+  position:sticky;top:0;z-index:50;
+  background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+nav.top .wrap{display:flex;align-items:center;gap:20px;height:52px;overflow-x:auto;scrollbar-width:none}
+nav.top .wrap::-webkit-scrollbar{display:none}
+nav.top .mark{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:16px;white-space:nowrap;letter-spacing:-.01em}
+nav.top .mark span{color:var(--accent)}
+nav.top a{
+  font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;white-space:nowrap;
+}
+nav.top a:hover{color:var(--ink)}
+
+/* ---------- hero ---------- */
+header.hero{padding:76px 0 60px;border-bottom:1px solid var(--line)}
+.eyebrow{
+  font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--accent);margin:0 0 18px;
+}
+h1{
+  font-family:Fraunces,Georgia,serif;
+  font-weight:600;font-size:clamp(40px,7vw,74px);line-height:1.02;letter-spacing:-.025em;
+  margin:0 0 22px;text-wrap:balance;
+  font-variation-settings:"SOFT" 40,"WONK" 1;
+}
+h1 em{font-style:normal;color:var(--accent)}
+.lede{font-size:clamp(18px,2.2vw,21px);color:var(--muted);max-width:62ch;margin:0 0 32px}
+.facts{display:flex;flex-wrap:wrap;gap:10px}
+.fact{
+  font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.03em;
+  border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 14px;color:var(--muted);
+}
+.fact b{color:var(--ink);font-weight:500}
+
+/* ---------- sections ---------- */
+section{padding:60px 0;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:none}
+.shead{margin-bottom:30px}
+.shead .num{
+  font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);display:block;margin-bottom:10px;
+}
+h2{
+  font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(27px,4vw,38px);
+  line-height:1.12;letter-spacing:-.02em;margin:0;text-wrap:balance;
+  font-variation-settings:"SOFT" 30;
+}
+.shead::after{content:"";display:block;width:52px;height:3px;background:var(--accent);margin-top:16px;border-radius:2px}
+h3{
+  font-family:Fraunces,Georgia,serif;font-weight:600;font-size:21px;letter-spacing:-.012em;
+  margin:34px 0 10px;line-height:1.25;
+}
+h4{
+  font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);margin:26px 0 10px;font-weight:600;
+}
+
+ul,ol{margin:0 0 1em;padding-left:1.15em}
+li{margin-bottom:.42em}
+li::marker{color:var(--accent)}
+ol li::marker{font-family:"IBM Plex Mono",monospace;font-size:.85em;color:var(--muted)}
+
+/* ---------- callout ---------- */
+.callout{
+  background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);
+  border-radius:4px;padding:22px 24px;margin:26px 0;box-shadow:var(--shadow);
+}
+.callout.good{border-left-color:var(--plant)}
+.callout.warn{border-left-color:var(--gold)}
+.callout .tag{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent);display:block;margin-bottom:8px;font-weight:600;
+}
+.callout.good .tag{color:var(--plant)}
+.callout.warn .tag{color:var(--gold)}
+.callout p:last-child{margin-bottom:0}
+
+/* ---------- tables ---------- */
+.tscroll{overflow-x:auto;margin:22px 0;border:1px solid var(--line);border-radius:5px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:15px}
+th,td{padding:11px 15px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);font-weight:600;background:var(--surface-2);white-space:nowrap;
+}
+tbody tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
+tfoot td{font-weight:700;background:var(--surface-2);border-top:2px solid var(--line)}
+
+/* ---------- cards ---------- */
+.grid{display:grid;gap:14px;margin:24px 0}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(232px,1fr))}
+.card{
+  background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:20px;box-shadow:var(--shadow);
+}
+.card h5{
+  font-family:Fraunces,Georgia,serif;font-size:17px;font-weight:600;margin:0 0 6px;letter-spacing:-.01em;
+}
+.card p{font-size:14.5px;color:var(--muted);margin:0}
+.card .time{
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--plant);display:block;margin-bottom:9px;font-weight:600;
+}
+.card .time.b{color:var(--gold)}
+
+/* SKU cards */
+.sku{background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:24px;box-shadow:var(--shadow)}
+.sku .kind{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.sku h5{font-family:Fraunces,Georgia,serif;font-size:24px;font-weight:600;margin:0 0 4px;letter-spacing:-.015em}
+.sku .price{font-family:"IBM Plex Mono",monospace;font-size:26px;font-weight:600;color:var(--accent);margin:12px 0 2px;font-variant-numeric:tabular-nums}
+.sku .per{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);margin-bottom:14px}
+.sku ul{font-size:14.5px;color:var(--muted);padding-left:1.1em;margin:0}
+
+/* ---------- prompt blocks ---------- */
+.prompt{
+  background:var(--surface);border:1px solid var(--line);border-radius:5px;margin:20px 0;overflow:hidden;box-shadow:var(--shadow);
+}
+.prompt .ph{
+  display:flex;align-items:center;gap:9px;padding:11px 16px;background:var(--surface-2);border-bottom:1px solid var(--line);
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;
+}
+.prompt .ph .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none}
+.prompt pre{
+  margin:0;padding:20px;overflow-x:auto;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12.7px;line-height:1.66;
+  white-space:pre-wrap;word-break:break-word;color:var(--ink);
+}
+
+/* ---------- timeline ---------- */
+.week{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:18px 0;border-bottom:1px solid var(--line)}
+.week:last-child{border-bottom:none}
+.week .wk{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--accent);font-weight:600;padding-top:3px;
+}
+.week h5{font-family:Fraunces,Georgia,serif;font-size:18px;font-weight:600;margin:0 0 6px}
+.week p{font-size:15px;color:var(--muted);margin:0}
+
+/* ---------- checklist ---------- */
+.check{list-style:none;padding:0;margin:20px 0}
+.check li{
+  padding:12px 0 12px 30px;border-bottom:1px solid var(--line);position:relative;font-size:15.5px;margin:0;
+}
+.check li:last-child{border-bottom:none}
+.check li::before{
+  content:"";position:absolute;left:2px;top:19px;width:11px;height:11px;
+  border:1.5px solid var(--accent);border-radius:2px;
+}
+.check li b{display:block;font-family:Karla,sans-serif;font-weight:700}
+.check li span{color:var(--muted);font-size:14.5px}
+
+footer{padding:44px 0 64px;color:var(--muted);font-size:14px}
+footer .wrap{border-top:1px solid var(--line);padding-top:26px}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (max-width:640px){
+  body{font-size:16.5px}
+  section{padding:46px 0}
+  header.hero{padding:52px 0 44px}
+  .week{grid-template-columns:1fr;gap:6px}
+}
+
+/* ---------- versus block ---------- */
+.vs{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:stretch;margin:24px 0;
+    border:1px solid var(--line);border-radius:5px;overflow:hidden;background:var(--surface);box-shadow:var(--shadow)}
+.vs .side{padding:22px}
+.vs .side.b{background:var(--surface-2)}
+.vs .mid{width:1px;background:var(--line)}
+.vs h6{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+       margin:0 0 12px;color:var(--muted);font-weight:600}
+.vs .big{font-family:"IBM Plex Mono",monospace;font-size:30px;font-weight:600;line-height:1.1;
+         font-variant-numeric:tabular-nums;letter-spacing:-.02em;margin-bottom:4px}
+.vs .side.a .big{color:var(--plant)}
+.vs .side.b .big{color:var(--muted)}
+.vs .sub{font-size:14px;color:var(--muted);margin:0}
+@media(max-width:560px){.vs{grid-template-columns:1fr}.vs .mid{width:auto;height:1px}}
+
+/* ---------- form field list ---------- */
+.fields{list-style:none;padding:0;margin:20px 0;display:grid;gap:0;
+        border:1px solid var(--line);border-radius:5px;overflow:hidden;background:var(--surface)}
+.fields li{padding:14px 18px;border-bottom:1px solid var(--line);margin:0;
+           display:grid;grid-template-columns:150px 1fr;gap:16px;font-size:15px}
+.fields li:last-child{border-bottom:none}
+.fields li b{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.03em;color:var(--accent);
+             font-weight:500;padding-top:3px}
+.fields li span{color:var(--muted)}
+.fields li span em{font-style:normal;color:var(--ink)}
+@media(max-width:560px){.fields li{grid-template-columns:1fr;gap:4px}}
+
+/* ---------- tier strip ---------- */
+.tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:22px 0}
+.tier{border:1px solid var(--line);border-radius:5px;padding:18px;background:var(--surface);box-shadow:var(--shadow)}
+.tier.hi{border-color:var(--accent);border-width:1.5px}
+.tier .n{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;
+         color:var(--muted);margin-bottom:8px}
+.tier.hi .n{color:var(--accent)}
+.tier h5{font-family:Fraunces,Georgia,serif;font-size:19px;font-weight:600;margin:0 0 3px}
+.tier .p{font-family:"IBM Plex Mono",monospace;font-size:19px;font-weight:600;color:var(--ink);
+         font-variant-numeric:tabular-nums;margin:8px 0 2px}
+.tier .d{font-size:13.5px;color:var(--muted);margin:0}
+</style>
+
+<nav class="top">
+  <div class="wrap">
+    <div class="mark">Maharaja <span>Tofu</span></div>
+    <a href="#truth">Positioning</a>
+    <a href="#plant">Why not dairy</a>
+    <a href="#product">Product</a>
+    <a href="#money">Economics</a>
+    <a href="#price">Show the price?</a>
+    <a href="#site">Website</a>
+    <a href="#capture">Getting the data</a>
+    <a href="#calc">Calculator</a>
+    <a href="#recipes">Recipes</a>
+    <a href="#ads">Ads</a>
+    <a href="#ops">Ops</a>
+    <a href="#legal">Legal &amp; data</a>
+    <a href="#gates">Go / No-go</a>
+    <a href="#prompts">Design prompts</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Validation pilot &middot; 6 weeks &middot; Noida 62 &amp; Ghaziabad</p>
+    <h1>Find the buyers before<br>you build the <em>kitchen.</em></h1>
+    <p class="lede">A no-payment validation pilot for Maharaja Tofu: two SKUs, one mobile-first website, a protein calculator that models a real Indian kitchen rather than multiplying heads, and ₹15,000 of Instagram spend aimed at two 5&nbsp;km circles. We collect <b>name, phone, area and pincode</b> &mdash; nothing more &mdash; and answer one question: <b>are there enough people here who genuinely want this?</b></p>
+    <div class="facts">
+      <span class="fact"><b>maharajatofu.com</b> &middot; buy today</span>
+      <span class="fact">Kitchen: <b>Ghaziabad Sec 10</b></span>
+      <span class="fact">Demand: <b>Noida Sec 62</b></span>
+      <span class="fact">Ad budget: <b>₹15,000</b></span>
+      <span class="fact">Target: <b>250 signups &middot; 130 confirmed</b></span>
+      <span class="fact">Money collected: <b>₹0</b></span>
+    </div>
+  </div>
+</header>
+
+<section id="truth">
+  <div class="wrap">
+    <div class="shead"><span class="num">Positioning</span><h2>The claim, stated so it survives a comment section</h2></div>
+    <div class="prose">
+      <p>You're right that the benefits over dairy are enormous &mdash; that's the case this brand should be built on. But the <em>protein</em> line specifically has to be phrased carefully, because gym-goers in Sector 62 do check. Per 100&nbsp;g, paneer has more protein. Here's the arithmetic that makes your tagline true anyway:</p>
+    </div>
+    <div class="vs">
+      <div class="side a">
+        <h6>To get 18 g of protein from tofu</h6>
+        <div class="big">180 g</div>
+        <p class="sub">= <b>137 kcal</b>, 0 mg cholesterol, ~2.7 g saturated fat</p>
+      </div>
+      <div class="mid"></div>
+      <div class="side b">
+        <h6>To get 18 g of protein from paneer</h6>
+        <div class="big">100 g</div>
+        <p class="sub">= <b>265 kcal</b>, cholesterol present, ~5&ndash;6 g saturated fat</p>
+      </div>
+    </div>
+    <div class="callout good">
+      <span class="tag">So the tagline is literally defensible</span>
+      <p><b>"Utna hi protein. Aadhi calories."</b> &mdash; matched on protein, tofu delivers it in roughly <b>half the calories and half the saturated fat, with zero cholesterol</b>. That sentence is arithmetic, not marketing, and you can put the working on the website. Do exactly that: publishing the calculation is what turns a sceptical gym-goer into an advocate.</p>
+      <p style="margin-top:.7em">What you must never write: <i>"more protein than paneer."</i> One screenshot of a nutrition label kills the brand's credibility in a 5&nbsp;km circle where everyone knows everyone.</p>
+    </div>
+    <div class="prose">
+      <h3>The category you're actually competing in</h3>
+      <p>India's paneer market was ~₹731&nbsp;billion in 2025, compounding ~12% a year. India's entire tofu market reaches ~$122&nbsp;million by 2033. Read those together: <b>tofu is not competing with tofu &mdash; it is competing with paneer</b>, and there is no meaningful incumbent to displace. Every line of copy on your site should reference paneer, never other tofu brands.</p>
+      <p>The documented reasons Indian tofu brands fail are short shelf life, inconsistent quality, fragmented supply and low awareness. A hyperlocal kitchen delivering twice a week inside a 5&nbsp;km circle structurally solves the first three. The fourth is what your ₹15,000 buys.</p>
+    </div>
+  </div>
+</section>
+
+<section id="plant">
+  <div class="wrap">
+    <div class="shead"><span class="num">The real case</span><h2>Six reasons plant beats dairy here &mdash; ranked by how well they sell</h2></div>
+    <div class="prose"><p>Protein is the weakest argument in your arsenal. These are stronger, and the first one is extraordinarily strong <em>in your exact pin codes</em>.</p></div>
+
+    <h3>1. Safety &mdash; and this is a Noida story, not a national one</h3>
+    <div class="callout">
+      <span class="tag">The single most powerful fact in this document</span>
+      <p>FSSAI testing in <b>Noida and Greater Noida</b> found <b>83% of paneer samples failed safety and quality standards</b>, with roughly <b>40% classed as outright unsafe</b> &mdash; adulterated with palm oil, detergents, urea and synthetic fats. The Noida food-safety department seized and destroyed <b>550&nbsp;kg of fake paneer</b> before the festive season. Separately, FSSAI is moving to force restaurants to declare when they serve "analogue paneer".</p>
+      <p style="margin-top:.7em">Your customer already half-knows this. Every family in Vasundhara has had the "yeh paneer sahi hai kya?" conversation. <b>Tofu doesn't have an adulteration problem, because there is no expensive fat to swap out</b> &mdash; the whole product is soybean, water and a coagulant, and you can hand someone the three-line ingredient list.</p>
+    </div>
+    <div class="callout warn">
+      <span class="tag">Handle this angle carefully</span>
+      <p>Do <b>not</b> build ads that attack paneer or name a competitor &mdash; disparagement is actionable under ASCI, and fear-based food advertising ages badly in a neighbourhood you have to keep delivering to. The right move is the positive inversion: <b>publish your own transparency</b>. Three ingredients on the pack. Batch number on every tub. A standing open invitation to visit the Ghaziabad kitchen. Then let the customer draw the comparison themselves. That is more persuasive and it can't backfire.</p>
+    </div>
+
+    <h3>2. Zero cholesterol, half the saturated fat</h3>
+    <p class="prose">Structural, not marginal: plant foods contain no cholesterol at all. Paneer at ~5&ndash;6&nbsp;g saturated fat per 100&nbsp;g is a genuine problem for the 35&ndash;55 household that eats it three times a week &mdash; and that household is over-represented in Noida's IT belt, where lipid-profile results circulate on WhatsApp. This is your strongest <em>health</em> claim and it needs no lab to defend.</p>
+
+    <h3>3. Lactose-free &mdash; an entirely unserved local segment</h3>
+    <p class="prose">Lactose intolerance is common across India and there is currently <b>no fresh, local, affordable paneer substitute</b> for these households in your circle. They are not price-sensitive, they are relief-sensitive, and they will become your most loyal subscribers and loudest referrers. Add one line to the FAQ &mdash; "no dairy, no lactose, no whey" &mdash; and one Reel aimed squarely at them.</p>
+
+    <h3>4. Calorie density &mdash; the everyday reason people switch</h3>
+    <p class="prose">76 kcal per 100&nbsp;g vs 265. A family eating paneer three times a week and swapping half of it to tofu removes roughly <b>2,800 kcal a week</b> from the household without changing a single recipe, a single masala, or a single habit. Frictionless change is the only change people sustain. This belongs in the calculator's headline output.</p>
+
+    <h3>5. Freshness you can actually verify</h3>
+    <p class="prose">Five-day shelf life sounds like a weakness. Sell it as the opposite: <b>"made Tuesday morning, in your fridge Tuesday evening."</b> Packaged paneer on a shelf can't say that, and loose paneer from a shop can't prove anything. Date-stamp every tub with the <em>make</em> date, not just the expiry.</p>
+
+    <h3>6. Soy vs other plant proteins &mdash; why not soya chunks</h3>
+    <p class="prose">Soya chunks are cheaper and higher in protein, and they are your real plant-side competitor. They also taste like soya chunks. <b>Tofu is the only plant protein that occupies paneer's exact slot in a recipe</b> &mdash; same cubes, same gravy, same cooking time, same look on the plate. That is the entire product thesis, and it's why the recipe pages matter more than the nutrition pages.</p>
+
+    <div class="callout warn">
+      <span class="tag">One claim to leave alone</span>
+      <p>Resist the isoflavone story. The FDA once permitted a soy-protein heart-health claim, but the American Heart Association later called the cardiovascular benefit of isoflavones "minimal at best", and measured LDL reduction from soy protein sits around 3%. Putting isoflavone health claims on a pack or in an ad invites an FSSAI claims problem for a benefit too small to sell anything. You have five better arguments above &mdash; use those.</p>
+    </div>
+  </div>
+</section>
+
+<section id="product">
+  <div class="wrap">
+    <div class="shead"><span class="num">The offer</span><h2>Two SKUs, and a subscription the calculator picks for you</h2></div>
+    <div class="grid g2">
+      <div class="sku">
+        <div class="kind">SKU 01 &middot; the workhorse</div>
+        <h5>Classic Firm Tofu</h5>
+        <p style="color:var(--muted);font-size:14.5px;margin:0">Plain, firm, pressed. Drops into any paneer recipe unchanged. Three ingredients: soybean, water, coagulant.</p>
+        <div class="price">₹79</div>
+        <div class="per">200 g pack &middot; ₹395/kg</div>
+        <ul>
+          <li>Sabzi, bhurji, tikka, paratha stuffing</li>
+          <li>~70% of expected volume</li>
+          <li>Also a 1 kg block for B2B</li>
+        </ul>
+      </div>
+      <div class="sku">
+        <div class="kind">SKU 02 &middot; the hook</div>
+        <h5>Masala Tofu</h5>
+        <p style="color:var(--muted);font-size:14.5px;margin:0">Pre-marinated, pressed harder, ready to eat cold or hot. Achaari-tandoori. The SKU that wins the youth segment.</p>
+        <div class="price">₹99</div>
+        <div class="per">200 g pack &middot; ₹495/kg</div>
+        <ul>
+          <li>Straight into Maggi, rolls, chaat, salad</li>
+          <li>Zero cooking skill required</li>
+          <li>Higher margin, far better Reels content</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout good">
+      <span class="tag">Two pricing facts worth noticing</span>
+      <p>Branded paneer in NCR runs roughly ₹475&ndash;500/kg. <b>Classic Tofu at ₹395/kg undercuts it</b> &mdash; so on a straight recipe swap you are cheaper, healthier and more transparent all at once. Verify current shelf prices at your local Big Bazaar and two kirana shops before you print this anywhere, and quote it as "typically cheaper than branded paneer", never as a fixed comparison.</p>
+    </div>
+    <div class="callout">
+      <span class="tag">Never let a first-timer meet plain tofu alone</span>
+      <p>People who taste unseasoned tofu once decide they hate tofu forever. <b>Every trial and every first delivery must include a Masala Tofu pack.</b> Classic asks the customer to learn something; Masala asks them to open a lid. For the PG and hostel segment, Masala Tofu <em>is</em> the entire product.</p>
+    </div>
+
+    <h3>Subscription tiers</h3>
+    <p class="prose" style="font-size:15px;color:var(--muted)">Mixed basket, 10% subscriber discount already applied. The calculator lands people on one of these &mdash; they never have to choose cold.</p>
+    <div class="tiers">
+      <div class="tier"><div class="n">1 delivery / week</div><h5>Weekender</h5><div class="p">₹155</div><p class="d">2 packs &middot; tofu on the weekend, a couple or a single</p></div>
+      <div class="tier hi"><div class="n">2 deliveries / week &middot; most common</div><h5>Thrice</h5><div class="p">₹305</div><p class="d">4 packs &middot; small family, ~3 tofu meals a week</p></div>
+      <div class="tier"><div class="n">2 deliveries / week</div><h5>Daily Protein</h5><div class="p">₹455</div><p class="d">6 packs &middot; family of four, or one serious gym-goer</p></div>
+      <div class="tier"><div class="n">2 deliveries / week</div><h5>Parivaar</h5><div class="p">₹765</div><p class="d">10 packs &middot; large family, tofu 5+ times a week</p></div>
+    </div>
+    <p class="prose" style="font-size:15px;color:var(--muted)">Every plan: pause any week, skip any delivery, cancel anytime, no lock-in. Say it loudly and repeatedly &mdash; subscription fear is the number-one objection in Indian D2C food, and you are asking strangers to trust a brand that doesn't exist yet.</p>
+
+    <h3>The four people you're selling to</h3>
+    <div class="grid g2">
+      <div class="card"><span class="time">Segment A &middot; highest intent</span><h5>The Sector 62 gym-goer</h5><p>22&ndash;35, IT/BPO belt, buys whey and paneer, tracks macros. Sells on: protein per calorie, zero cholesterol, ready-to-eat masala tofu. Reach via gym noticeboards, radius ads, trainer tie-ups.</p></div>
+      <div class="card"><span class="time">Segment B &middot; volume</span><h5>The Vasundhara family kitchen</h5><p>Feeding 3&ndash;5 people, buys paneer 3&times;/week, has already worried about adulteration. Sells on: same sabzi, half the calories, three-ingredient label. Reach via RWA WhatsApp groups and gate sampling.</p></div>
+      <div class="card"><span class="time">Segment C &middot; easiest to delight</span><h5>The bachelor / PG kid</h5><p>No kitchen, no time, no skill. Only ever buys Masala Tofu. Sells on "+10 g protein in your Maggi, 2 minutes." Reach via Reels and PG WhatsApp groups.</p></div>
+      <div class="card"><span class="time">Segment D &middot; the cash flow</span><h5>Gyms, cafés, cloud kitchens</h5><p>1&ndash;5 kg blocks at ₹240&ndash;260/kg on a standing order. One gym café equals ~20 households on a single delivery stop. <b>Two of these signed changes your economics completely.</b></p></div>
+    </div>
+  </div>
+</section>
+
+<section id="money">
+  <div class="wrap">
+    <div class="shead"><span class="num">Unit economics</span><h2>What a pack costs you, and where the margin leaks</h2></div>
+    <div class="prose"><p>Working assumptions for a small manual setup. Replace every line with real numbers after batch one &mdash; but build the model now, because pricing decided by feel is the fastest way to run a busy business at a loss.</p></div>
+    <h4>Cost to make 1 kg of tofu</h4>
+    <div class="tscroll">
+      <table>
+        <thead><tr><th>Line item</th><th>Basis</th><th class="num">₹ / kg</th></tr></thead>
+        <tbody>
+          <tr><td>Soybean</td><td>0.45 kg dry @ ₹70/kg (yield ~2.2 kg tofu per kg bean)</td><td class="num">32</td></tr>
+          <tr><td>Coagulant</td><td>Calcium sulphate / GDL</td><td class="num">4</td></tr>
+          <tr><td>Fuel, water, electricity</td><td>Boiling, grinding, chilling</td><td class="num">12</td></tr>
+          <tr><td>Masala</td><td>SKU 02 only, averaged across the mix</td><td class="num">5</td></tr>
+          <tr><td>Packaging</td><td>5 &times; 200 g tub + label + seal @ ₹9</td><td class="num">45</td></tr>
+          <tr><td>Labour</td><td>2 hands, ~40 kg/day batch</td><td class="num">25</td></tr>
+          <tr><td>Wastage &amp; QC rejects</td><td>8% allowance</td><td class="num">10</td></tr>
+        </tbody>
+        <tfoot><tr><td colspan="2">Landed COGS</td><td class="num">₹133 / kg &nbsp;&middot;&nbsp; ~₹27 per 200 g pack</td></tr></tfoot>
+      </table>
+    </div>
+
+    <h4>Contribution per order &mdash; and what clustering is worth</h4>
+    <div class="tscroll">
+      <table>
+        <thead><tr><th>Basket</th><th class="num">Revenue</th><th class="num">COGS</th><th class="num">Scattered drop ₹50</th><th class="num">Clustered drop ₹15</th></tr></thead>
+        <tbody>
+          <tr><td>Thrice, 4 packs</td><td class="num">₹305</td><td class="num">₹108</td><td class="num">₹147 &middot; 48%</td><td class="num">₹182 &middot; 60%</td></tr>
+          <tr><td>Daily Protein, 6 packs</td><td class="num">₹455</td><td class="num">₹162</td><td class="num">₹243 &middot; 53%</td><td class="num">₹278 &middot; 61%</td></tr>
+          <tr><td>Parivaar, 10 packs</td><td class="num">₹765</td><td class="num">₹270</td><td class="num">₹395 &middot; 52%</td><td class="num">₹465 &middot; 61%</td></tr>
+          <tr><td>B2B gym, 5 kg @ ₹250</td><td class="num">₹1,250</td><td class="num">₹530</td><td class="num">₹670 &middot; 54%</td><td class="num">₹705 &middot; 56%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout warn">
+      <span class="tag">The decision that decides the business</span>
+      <p>Ten drops inside one Vasundhara society cost ~₹15 each. Ten scattered drops across two cities cost ~₹50 each. That single operational choice moves you from 48% to 60% contribution &mdash; it is worth more than any price increase you could get away with. <b>Design the whole pilot around clustering: sell society by society, not customer by customer.</b> It is also why fixed twice-weekly delivery days are non-negotiable.</p>
+    </div>
+
+    <h4>Pilot capex &amp; monthly fixed cost</h4>
+    <div class="grid g2">
+      <div class="card"><span class="time b">One-time &middot; ~₹85,000</span><h5>Capex</h5><p>Soy grinder + boiler ₹35k &middot; pressing frames and moulds ₹8k &middot; 250 L deep fridge ₹25k &middot; steel tables, vessels, thermometer, pH strips ₹9k &middot; insulated bags and ice packs ₹4k &middot; domain, site, FSSAI, first label print run ₹4k</p></div>
+      <div class="card"><span class="time b">Monthly &middot; ~₹35,000</span><h5>Fixed cost</h5><p>Two part-time hands ₹15k &middot; utilities ₹4k &middot; delivery fuel ₹4k &middot; Instagram ads ₹15k (pilot only) &middot; misc ₹2k. Space is free &mdash; which understates your true cost. Rebuild this model before you outgrow your friend's house.</p></div>
+    </div>
+    <div class="callout good">
+      <span class="tag">Breakeven</span>
+      <p>Against ₹35,000 of monthly fixed cost: <b>~6 orders a day if you cluster deliveries, ~8 if you don't.</b> Two B2B gym accounts alone cover roughly a third of it. Six clustered orders a day inside a 5&nbsp;km radius is a realistic target &mdash; and it is the entire thesis this pilot is testing.</p>
+    </div>
+    <p class="prose" style="font-size:15px;color:var(--muted)"><b>Budget for the early-bird discount:</b> 100 founding coupons at 25% off a first order plus a free Masala pack costs roughly ₹175 each in foregone margin &mdash; about <b>₹17,500</b> if every single one redeems. Treat it as acquisition spend sitting alongside the ₹15,000 of ads, not as a discount. Realistic redemption is 40&ndash;60%, so plan for ₹8&ndash;10k.</p>
+  </div>
+</section>
+
+<section id="price">
+  <div class="wrap">
+    <div class="shead"><span class="num">Pricing</span><h2>Should the site hide the price and ask instead?</h2></div>
+    <div class="prose">
+      <p><b>Lead with quality &mdash; yes. Hide the price &mdash; no.</b> Those are two different decisions and it's worth separating them, because the first one is right and the second one would quietly break the thing your pilot exists to measure.</p>
+    </div>
+
+    <h3>Why hiding it costs more than it gains</h3>
+    <ol class="prose">
+      <li><b>You already removed the payment.</b> Price is the only friction left in the funnel. Take that out too and a signup stops meaning "I'd buy this at ₹79" and starts meaning "tofu sounds interesting." You'd push the number up and the meaning down &mdash; the exact trade you rejected when you kept the WhatsApp confirmation step.</li>
+      <li><b>The calculator stops working.</b> Its entire payoff is <i>"6 packs a week &rarr; Thrice plan &rarr; ₹305/week."</i> Strip the rupees out and the best screen on your site outputs "you need six packs of an unpriced thing," which nobody forwards to a family group.</li>
+      <li><b>In consumer food, no price reads as evasive.</b> "Price on request" is a B2B pattern. On a ₹79 tub it signals either expensive or not-real-yet, and both cost you signups from exactly the people you want.</li>
+      <li><b>You don't have a pricing question big enough to justify it.</b> Your COGS is ₹133/kg &mdash; a hard floor. Branded paneer at ₹475&ndash;500/kg is a natural ceiling. Indian tofu retails between ₹99 and ₹395/kg. The genuinely viable band is roughly ₹350&ndash;450/kg. That's not enough ambiguity to be worth blinding your primary metric for six weeks.</li>
+    </ol>
+
+    <h3>And what the research says about just asking</h3>
+    <div class="prose">
+      <p>Stated willingness-to-pay does run above real willingness-to-pay, though the literature is more split than the folklore suggests: older contingent-valuation meta-analyses put the overstatement at anywhere from <b>35% to 200%</b>, one widely cited meta-analysis found a <b>median hypothetical-to-actual ratio of just 1.35</b>, and a marketing-specific meta-analysis puts the average bias around <b>21%</b>. So the answer is directionally useful, not decision-grade &mdash; you can read the shape of it, but you can't set a price from it.</p>
+      <p>The bigger problems aren't the bias at all:</p>
+    </div>
+    <div class="grid g3">
+      <div class="card"><span class="time">Problem 1</span><h5>Anchoring</h5><p>Whatever reference you show dominates the answer. Randomising even the question order measurably changes results.</p></div>
+      <div class="card"><span class="time">Problem 2</span><h5>Strategic answering</h5><p>A customer who suspects their answer sets the price has every reason to name a low one.</p></div>
+      <div class="card"><span class="time">Problem 3</span><h5>Competitive vacuum</h5><p>People price badly in the abstract. Asked without alternatives on the table, they guess.</p></div>
+    </div>
+    <div class="callout warn">
+      <span class="tag">The specific idea to drop</span>
+      <p>Showing people what the market currently charges and <em>then</em> asking what they'd pay makes the anchoring problem worse, not better. You wouldn't be measuring their willingness &mdash; you'd be measuring your own anchor bounced back at you. Reference pricing is a real technique, but its job is to <b>justify your price</b>, never to elicit theirs.</p>
+    </div>
+
+    <h3>What to do instead &mdash; four moves</h3>
+
+    <h4>1. Show the price, but show it late</h4>
+    <p class="prose">Keep price out of the hero entirely. The home-page order already does the right thing: three ingredients, the kitchen, the calculator's calorie payoff &mdash; and price at block eight, after the person already wants it. That is 90% of what you were reaching for, with none of the cost. <b>One exception: keep the price in the ads.</b> "₹99" visible in the first three seconds filters unqualified clicks and protects a ₹500/day budget from people who were never going to buy.</p>
+
+    <h4>2. Frame it against paneer, not against nothing</h4>
+    <p class="prose">Reference pricing done properly: <i>branded paneer ₹475&ndash;500/kg &middot; Maharaja Classic ₹395/kg</i>. You're cheaper, fresher and fully declared, and saying so in one line does more work than any survey. Verify current shelf prices at two kirana shops and a supermarket before printing it, and phrase it as "typically cheaper than branded paneer" rather than as a fixed claim.</p>
+
+    <h4>3. Ask the sensitivity question after signup, in WhatsApp</h4>
+    <p class="prose">This is where your instinct is genuinely right &mdash; just moved to the correct moment. Once someone is a confirmed lead, ask the four Van Westendorp questions over WhatsApp. It costs nothing, it can't hurt conversion, and by then they've already committed, so lowballing buys them nothing.</p>
+    <div class="tscroll">
+      <table>
+        <thead><tr><th class="num">Q</th><th>Ask it like this &mdash; about a 200 g pack of fresh tofu</th><th>What it gives you</th></tr></thead>
+        <tbody>
+          <tr><td class="num">1</td><td>At what price would this be <b>so expensive</b> you wouldn't consider it?</td><td>Upper bound</td></tr>
+          <tr><td class="num">2</td><td>At what price would it feel <b>expensive, but still worth thinking about</b>?</td><td>Stretch price</td></tr>
+          <tr><td class="num">3</td><td>At what price would it feel like a <b>fair price</b>?</td><td>Expected price</td></tr>
+          <tr><td class="num">4</td><td>At what price would it be <b>so cheap you'd doubt the quality</b>?</td><td>Lower bound &mdash; and in food this one matters</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="prose" style="font-size:15px;color:var(--muted)"><b>Randomise the order</b> for each person &mdash; asked in a fixed sequence, each answer anchors the next. Run it on about 40 confirmed leads, plot where the curves cross, and you get an acceptable range rather than a single fictional number. Do <b>not</b> put this on the landing page; four price questions in front of a stranger will gut your conversion rate.</p>
+
+    <h4>4. The move that actually measures behaviour: vary the coupon, not the list price</h4>
+    <div class="callout good">
+      <span class="tag">Real elasticity, no survey, no fairness problem</span>
+      <p>List price stays ₹79 and ₹99 for everyone &mdash; consistent and defensible in a 5&nbsp;km circle where neighbours compare notes. But you're already issuing a <b>unique coupon code per person</b>. Randomise its depth at the moment you issue it, then read launch-week redemption by cohort. That's revealed preference: real money, real behaviour, and nobody can object, because promotional offers differing by cohort are entirely normal.</p>
+    </div>
+    <div class="tscroll">
+      <table>
+        <thead><tr><th>Cohort</th><th>Coupon</th><th>Effective first-order price</th><th>What its redemption rate tells you</th></tr></thead>
+        <tbody>
+          <tr><td>A &mdash; one third</td><td>25% off first order</td><td class="num">~₹59 / ₹74 a pack</td><td>Your planned Founding offer &mdash; the baseline</td></tr>
+          <tr><td>B &mdash; one third</td><td>15% off first order</td><td class="num">~₹67 / ₹84 a pack</td><td>If B converts nearly as well as A, your discount is too deep &mdash; keep the margin</td></tr>
+          <tr><td>C &mdash; one third</td><td>Free Masala pack, no discount</td><td class="num">₹79 / ₹99 a pack</td><td>If C holds up, they're buying the product, not the price &mdash; the best possible result</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="prose">A spread of more than ~15 percentage points in redemption between A and C means you are price-sensitive and should hold ₹79 carefully. A spread under ~5 points means price was never the barrier and you have room to raise it once the pilot ends.</p>
+    <p class="prose" style="font-size:15px;color:var(--muted)"><b>Why not simply A/B two prices on the landing page?</b> At this scale, don't. A 4&ndash;5&nbsp;km circle holds 35&ndash;50k reachable adults who talk to each other; two simultaneous prices will get screenshotted and read as bad faith in a neighbourhood you have to keep delivering to. Running them sequentially instead just confounds price with creative fatigue and novelty. Coupon-depth randomisation is the version of this test that's safe at your size.</p>
+
+    <h4>5. The one place to ask price outright: <code>/bulk</code></h4>
+    <p class="prose">Gym and café owners negotiate for a living, buy in real volumes, and know exactly what they pay per kilo today. Add one field to the B2B form: <b>"What do you currently pay per kg for paneer?"</b> That is a recall of a real transaction rather than a hypothetical, which makes it the lowest-bias pricing question you can ask anyone &mdash; and it hands you the exact number you need to price the 1 kg block.</p>
+  </div>
+</section>
+
+<section id="site">
+  <div class="wrap">
+    <div class="shead"><span class="num">The website</span><h2>A dry run that collects four fields and takes no money</h2></div>
+    <div class="prose">
+      <p>No cart, no payment gateway, no ₹49 gate. The site has one job: take a stranger who tapped an Instagram ad and turn them into a <b>named, reachable, located, ranked</b> person who wants tofu &mdash; in under 90 seconds, one-handed, on 4G.</p>
+    </div>
+
+    <h3>The only form on the site</h3>
+    <ul class="fields">
+      <li><b>Name</b><span><em>First name only.</em> "Aap ko kya bulayein?" One field, no surname, no title.</span></li>
+      <li><b>Phone</b><span><em>10 digits, +91 pre-filled, <code>inputmode="numeric"</code>.</em> This is the asset &mdash; launch notification and the early-bird coupon both go here.</span></li>
+      <li><b>Area</b><span><em>Searchable dropdown, not free text.</em> Pre-load ~25 known localities: Sector 62, 63, 60, Nyay Khand, Indirapuram, Vasundhara Sec 1&ndash;17, Vaishali, Kaushambi, Rajendra Nagar, Shalimar Garden, Crossings Republik &hellip; plus "Somewhere else". A dropdown gives you clean clusterable data; free text gives you 200 spellings of Vasundhara.</span></li>
+      <li><b>Pincode</b><span><em>6 digits.</em> Together with Area this is all you need to plan a delivery route. <b>No house number, no flat, no society, no full address</b> &mdash; asking for it now costs you signups and creates data you have no reason to hold.</span></li>
+      <li><b>Plan</b><span>Auto-filled from the calculator. Never re-ask something they already told you.</span></li>
+      <li><b>When would you order?</b><span>Three chips: <em>Launch week &middot; Within a month &middot; Just exploring.</em> Your intent ranking, in one tap. This is what replaces the payment signal.</span></li>
+      <li><b>Consent</b><span>Unticked checkbox, plain words: <em>"Haan, mujhe WhatsApp par launch update aur early-bird coupon bhejiye."</em> Legally required and worth doing properly &mdash; see the data section below.</span></li>
+    </ul>
+
+    <div class="callout warn">
+      <span class="tag">Free signals inflate &mdash; plan for it</span>
+      <p>Dropping the ₹49 payment makes the funnel far less painful, and you were right that it is the correct call for a brand nobody has heard of. But be clear-eyed: <b>a free waitlist typically produces 3&ndash;5&times; the numbers a paid one does, and a much softer number.</b> Three hundred signups is not three hundred customers. So you need a second gate that costs the person something other than money &mdash; a small action &mdash; and there is a good one available.</p>
+    </div>
+    <div class="callout good">
+      <span class="tag">The confirmation step is your new payment</span>
+      <p>Within an hour of signup, message them on WhatsApp from your business number and ask for two things: <b>save this number, and reply with your society name.</b> Both are tiny efforts, and tiny effort is exactly what separates real intent from an idle tap.</p>
+      <p style="margin-top:.7em">It also solves an operational problem: the free WhatsApp Business app can only broadcast to people who have <em>saved your number</em>. So the confirmation step is simultaneously your intent filter, your delivery-planning data, and the technical precondition for reaching them at launch. <b>Track "confirmed signups" as a separate metric from "signups" and never blend them in a report.</b></p>
+    </div>
+
+    <h3>The early-bird ladder</h3>
+    <div class="tiers">
+      <div class="tier hi"><div class="n">Confirmed signups 1&ndash;100</div><h5>Founding Member</h5><div class="p">25% off</div><p class="d">First order 25% off + a free Masala Tofu pack + subscription price locked for 3 months. Unique code, e.g. <code>MT-F-0042</code>.</p></div>
+      <div class="tier"><div class="n">Confirmed signups 101+</div><h5>Early Bird</h5><div class="p">15% off</div><p class="d">First order 15% off. Still meaningful, clearly second &mdash; which is what makes the first tier worth rushing for.</p></div>
+      <div class="tier"><div class="n">Any signup who refers</div><h5>Padosi Bonus</h5><div class="p">+1 pack</div><p class="d">A free pack when a neighbour from the same society signs up and confirms. This is how you cluster deliveries for free.</p></div>
+    </div>
+    <p class="prose" style="font-size:15px;color:var(--muted)"><b>Randomise the coupon depth</b> across three cohorts and read launch-week redemption &mdash; that's how you measure real price sensitivity without ever running a survey or showing two different prices. See the pricing section above.</p>
+    <p class="prose" style="font-size:15px;color:var(--muted)"><b>Issue a unique coupon code per person</b>, generated in your sheet at confirmation. It takes ten minutes to set up and it lets you trace every launch-week order back to the ad set and creative that produced it &mdash; which is the entire point of running a measured pilot. A single shared <code>EARLYBIRD</code> code tells you nothing and leaks to strangers.</p>
+    <p class="prose">Scarcity here is honest, which is rare and worth using: your batch capacity <em>is</em> genuinely limited to about 40 kg a day. "37 Founding slots left in Sector 62" is a true statement, so say it.</p>
+
+    <h3>Sitemap</h3>
+    <div class="tscroll">
+      <table>
+        <thead><tr><th>Page</th><th>Route</th><th>The one job it does</th></tr></thead>
+        <tbody>
+          <tr><td><b>Home</b></td><td><code>/</code></td><td>Hook &rarr; proof &rarr; calculator &rarr; signup, all inside one thumb-reach</td></tr>
+          <tr><td>Classic Tofu</td><td><code>/classic-tofu</code></td><td>Three-ingredient label, nutrition panel, four linked recipes</td></tr>
+          <tr><td>Masala Tofu</td><td><code>/masala-tofu</code></td><td>The 2-minute story. Video-first. Eat straight from the pack.</td></tr>
+          <tr><td><b>Protein calculator</b></td><td><code>/protein-calculator</code></td><td>Standalone and embedded. Ends on a pre-filled plan and the signup form.</td></tr>
+          <tr><td>Plans</td><td><code>/plans</code></td><td>Four tiers, the pause/skip/cancel promise, early-bird ladder</td></tr>
+          <tr><td>Recipes hub</td><td><code>/recipes</code></td><td>Two filters: <i>Under 5 minutes</i> / <i>Family dinner</i>. Your SEO engine.</td></tr>
+          <tr><td>Recipe detail &times;16</td><td><code>/recipes/tofu-bhurji</code></td><td>One recipe per URL &mdash; each a long-tail search entry point</td></tr>
+          <tr><td>For gyms &amp; kitchens</td><td><code>/bulk</code></td><td>B2B lead form: business name, kg/week, phone. Nothing else.</td></tr>
+          <tr><td>Our kitchen</td><td><code>/kitchen</code></td><td>Faces, the real kitchen, FSSAI number, batch days, open-visit invitation. <b>Trust is the whole conversion problem in local food.</b></td></tr>
+          <tr><td>Privacy</td><td><code>/privacy</code></td><td>Short and readable. Required once you hold phone numbers.</td></tr>
+          <tr><td>Personal link</td><td><code>/r/[token]</code></td><td>For people who came via WhatsApp or an Instant Form &mdash; greets them by name, pre-loads area and plan, asks for nothing</td></tr>
+          <tr><td>Thank you</td><td><code>/thanks</code></td><td>Signup event fires. "Save our number, we'll WhatsApp you in 2 minutes." Referral ask.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Home page, block by block</h3>
+    <ol class="prose">
+      <li><b>Hero</b> &mdash; one line, one image, one button. <i>"Wahi sabzi. Aadhi calories."</i> Sub: fresh soya tofu, made in Ghaziabad, delivered Tuesday &amp; Friday in Sector 62 and Vasundhara. Button: <b>Kitna chahiye? Calculate karein</b>.</li>
+      <li><b>Pincode check</b> &mdash; immediately under the hero. Qualifies traffic instantly and maps demand outside your circle for free. The out-of-zone state still captures the pincode: "Abhi nahi &mdash; but tell us where you are and we'll come there next."</li>
+      <li><b>The two products</b> &mdash; side by side, prices visible, no carousel.</li>
+      <li><b>The honest comparison</b> &mdash; 180 g tofu vs 100 g paneer, same protein, half the calories, with the arithmetic shown. Your credibility moment.</li>
+      <li><b>Three ingredients</b> &mdash; soybean, water, coagulant. A photograph of the ingredient list. This is where the safety argument lands, without a word about anybody else's paneer.</li>
+      <li><b>Calculator</b> &mdash; embedded. The centrepiece.</li>
+      <li><b>Recipes</b> &mdash; six cards, filter chips. Answers the objection that kills every tofu sale: <i>"main ise banaungi kaise?"</i></li>
+      <li><b>Kitchen &amp; trust</b> &mdash; real photos, batch days, FSSAI licence number, open invitation to visit.</li>
+      <li><b>Signup + early-bird ladder</b> &mdash; the four fields, the coupon promise, the honest scarcity count.</li>
+      <li><b>FAQ</b> &mdash; taste, shelf life, soy allergy, storage, can I pause, is it frozen, what exactly is in it.</li>
+      <li><b>Sticky bottom bar</b> on mobile: <b>Get early-bird coupon</b> + a WhatsApp icon.</li>
+    </ol>
+
+    <h3>Mobile-first, specifically</h3>
+    <div class="grid g3">
+      <div class="card"><span class="time">Layout</span><h5>Thumb zone rules</h5><p>Every primary CTA in the bottom third. A 56 px sticky action bar. Nothing critical in the top-right &mdash; nobody reaches it one-handed.</p></div>
+      <div class="card"><span class="time">Speed</span><h5>Under 2 s LCP on 4G</h5><p>WebP/AVIF, no carousel library, no chat widget, no font FOIT. Your buyer is on a metro platform with two bars.</p></div>
+      <div class="card"><span class="time">Input</span><h5>Taps, not typing</h5><p>The calculator uses steppers, sliders and chips only. The keyboard appears exactly twice: phone number and pincode.</p></div>
+      <div class="card"><span class="time">Language</span><h5>Hinglish headlines, English body</h5><p>That's how Sector 62 actually talks. Keep Devanagari for the pack, where it reads as heritage rather than as a language setting.</p></div>
+      <div class="card"><span class="time">Contact</span><h5>WhatsApp is the real channel</h5><p>A floating <code>wa.me</code> button with a pre-filled message on every page. Many people will skip the form entirely and message you. Design for that; don't fight it.</p></div>
+      <div class="card"><span class="time">Desktop</span><h5>Same design, wider grid</h5><p>Roughly 20% of traffic, mostly the B2B buyer. The only page that needs to feel like a laptop page is <code>/bulk</code>.</p></div>
+    </div>
+
+    <h3>Build it with</h3>
+    <div class="tscroll">
+      <table>
+        <thead><tr><th>Layer</th><th>Pick</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>Site</td><td>Next.js + Tailwind on Vercel</td><td>Free tier, fast, real recipe URLs for SEO, live in a weekend</td></tr>
+          <tr><td>Signups</td><td>Google Sheet via a form endpoint</td><td>No backend for a 6-week pilot. One row per person, one column for the coupon code.</td></tr>
+          <tr><td>Payments</td><td><b>None</b></td><td>Nothing to build, nothing to refund, nothing to explain</td></tr>
+          <tr><td>Messaging</td><td>Free WhatsApp Business app, manual + broadcast lists</td><td>Avoids DLT registration entirely at pilot scale. Move to the API only past a few hundred contacts.</td></tr>
+          <tr><td>Analytics</td><td>GA4 + Meta Pixel + Microsoft Clarity</td><td>Clarity's free session recordings will show you exactly where the calculator loses people</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h4>Events to fire &mdash; name them exactly this from day one</h4>
+    <p class="prose" style="font-size:15px;color:var(--muted)"><code>pincode_checked</code> &middot; <code>pincode_out_of_zone</code> &middot; <code>calculator_started</code> &middot; <code>calculator_completed</code> &middot; <code>plan_selected</code> &middot; <code>recipe_viewed</code> &middot; <code>whatsapp_clicked</code> &middot; <code>signup_submitted</code> &middot; <code>signup_confirmed</code> <i>(logged manually from WhatsApp)</i> &middot; <code>bulk_lead_submitted</code></p>
+  </div>
+</section>
+
+<section id="capture">
+  <div class="wrap">
+    <div class="shead"><span class="num">Getting the data</span><h2>Can Instagram just hand us the user's details?</h2></div>
+    <div class="prose">
+      <p><b>To your website: no.</b> When someone taps your ad and lands on maharajatofu.com, the browser receives no identity from Meta. What you do get is <em>attribution</em> &mdash; Meta appends its own <code>fbclid</code> click identifier, plus any URL parameters you configure: <code>&#123;&#123;campaign.name&#125;&#125;</code>, <code>&#123;&#123;adset.name&#125;&#125;</code>, <code>&#123;&#123;ad.id&#125;&#125;</code>, <code>&#123;&#123;placement&#125;&#125;</code>, <code>&#123;&#123;site_source_name&#125;&#125;</code>. Those tell you <b>which ad</b> brought the person. They never tell you <b>who</b> the person is, and that is deliberate.</p>
+      <p><b>But your instinct is right</b>, and there are two places where Meta genuinely does hand you the person's details. Both of them live <em>inside Instagram</em> rather than on your site &mdash; which means the real question isn't "can the site receive data", it's <b>"should the signup even happen on the site?"</b> For this business, probably not.</p>
+    </div>
+
+    <h3>Path 1 &mdash; Instant Forms (Lead Ads)</h3>
+    <p class="prose">The literal answer to your question. The form opens inside Instagram and <b>Meta pre-fills name, email and phone straight from the person's profile</b>. Most people never edit the prefilled values. You can add up to 15 custom questions, so your Area dropdown and Pincode go in as custom fields &mdash; the person taps twice and they're done, having typed nothing.</p>
+    <div class="tscroll">
+      <table>
+        <thead><tr><th>Decision</th><th>Options</th><th>What to pick, and why</th></tr></thead>
+        <tbody>
+          <tr><td>Form type</td><td><b>More Volume</b> vs <b>Higher Intent</b></td><td><b>Higher Intent.</b> It adds a review screen the person must confirm, costing 20&ndash;40% of your volume and buying a large lift in quality. Your pilot is measuring intent, not collecting names &mdash; and that review screen is the closest free equivalent to the ₹49 you dropped.</td></tr>
+          <tr><td>Custom questions</td><td>Up to 15</td><td>Exactly three: <b>Area</b> (multiple choice, your ~25 localities), <b>Pincode</b> (short answer), <b>When would you order?</b> (multiple choice). Stop there &mdash; every extra question costs completions.</td></tr>
+          <tr><td>Getting leads out</td><td>CSV download &middot; webhook/CRM &middot; Lead Ads API</td><td>For a 6-week pilot: <b>download the CSV from Ads Manager daily</b>, or wire a free Zapier/Make hook into your Google Sheet. Don't build against the API.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout warn">
+      <span class="tag">Two things that will bite you</span>
+      <p><b>Prefilled phone numbers are whatever Meta has on file</b> &mdash; sometimes years old, sometimes a number the person no longer uses. And because submitting is almost effortless, lead ads are notorious for junk. Both problems have the same fix, and it's already in your plan: <b>the WhatsApp confirmation step is what makes a lead real</b>. Treat an Instant Form submission as a raw lead, never as a confirmed one.</p>
+      <p style="margin-top:.7em">Also: <b>lead ads require a privacy policy URL</b> before Meta will run them. That's the second reason <code>/privacy</code> is on your sitemap. And note that Meta pre-filling a phone number is <em>not</em> consent to message it &mdash; your DPDP consent question still has to be in the form.</p>
+    </div>
+
+    <h3>Path 2 &mdash; Click-to-WhatsApp ads</h3>
+    <div class="callout good">
+      <span class="tag">Probably the best fit for this specific business</span>
+      <p>The ad's button opens a WhatsApp chat with your business number, carrying a pre-filled first message. The instant they send it, <b>you have their phone number and their WhatsApp display name</b> &mdash; no form, no landing page, nothing typed.</p>
+      <p style="margin-top:.7em">And it does something better than that: <b>it collapses signup and confirmation into one action.</b> In your funnel, "confirmed" means they saved your number and replied. Here, they messaged <em>you</em> first &mdash; a stronger signal than either half. Set a WhatsApp greeting message that asks for the only two things you still need &mdash; <i>"Aapka area aur pincode bata dijiye, hum aapko launch coupon bhej denge"</i> &mdash; and all four fields are captured inside a chat the customer started.</p>
+      <p style="margin-top:.7em">It also puts you in the cleanest possible consent position: you are replying to an inbound message, not cold-messaging a number you bought a click for.</p>
+    </div>
+    <p class="prose">The cost: click-to-WhatsApp usually carries a higher cost per lead than an Instant Form, and the person never sees your calculator or your recipes &mdash; which is where a lot of your persuasion lives. That is a real trade-off, not a footnote, and it's why you should test rather than assume.</p>
+
+    <h3>Path 3 &mdash; "Continue with Facebook" on your site</h3>
+    <p class="prose">Don't. Facebook Login can return name and email with consent, but <b>phone number access is tightly restricted and not available by default</b> &mdash; and phone is the one field you actually need. It also requires app review and puts a heavy permission dialog in front of a local brand nobody has heard of yet. Skip it entirely.</p>
+
+    <h3>So restructure the ads around this</h3>
+    <div class="tscroll">
+      <table>
+        <thead><tr><th>Lane</th><th>Where the signup happens</th><th>What Meta gives you</th><th>Friction</th><th>Best for</th></tr></thead>
+        <tbody>
+          <tr><td><b>Click-to-WhatsApp</b></td><td>In WhatsApp</td><td>Phone + display name, instantly, plus an inbound conversation</td><td class="num">Lowest</td><td>Segments B and C &mdash; highest intent per lead</td></tr>
+          <tr><td><b>Instant Form</b></td><td>In Instagram</td><td>Prefilled name, email, phone + your Area and Pincode questions</td><td class="num">Low</td><td>Volume and clean structured data</td></tr>
+          <tr><td><b>Website</b></td><td>On maharajatofu.com</td><td>Nothing but ad attribution &mdash; they fill all four fields</td><td class="num">Highest</td><td>Segment A &mdash; the people who want the calculator and recipes</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="prose">The website lane looks worst on friction and it is still worth running, because the calculator and the recipe pages do persuasion work that no ad can do in fifteen seconds &mdash; and because those pages are the asset that keeps working after the ₹15,000 runs out. <b>Test the lanes rather than guessing; the winner is whichever produces the lowest cost per <em>confirmed</em> lead, not the lowest cost per lead.</b></p>
+
+    <h3>What "don't ask twice" actually looks like on your own site</h3>
+    <ol class="prose">
+      <li><b>Tag every ad destination URL.</b> In the ad-level URL parameters field, without a leading question mark: <code>utm_source=ig&amp;utm_medium=paid&amp;utm_campaign=&#123;&#123;campaign.name&#125;&#125;&amp;utm_content=&#123;&#123;ad.name&#125;&#125;&amp;ad_id=&#123;&#123;ad.id&#125;&#125;&amp;placement=&#123;&#123;placement&#125;&#125;</code>. Meta substitutes the tokens at click time.</li>
+      <li><b>Join on the <code>.id</code> tokens, not the <code>.name</code> ones.</b> <code>&#123;&#123;campaign.name&#125;&#125;</code> returns whatever the campaign is called right now &mdash; rename it in week four and every historical row silently desyncs. Keep names for readable reports, ids for anything you compute with.</li>
+      <li><b>Put them in a hidden field on the form</b> so every row in your sheet knows which creative produced it. Without this, rotating six creatives teaches you nothing.</li>
+      <li><b>Persist to <code>localStorage</code>.</b> A returning visitor should never re-enter their household, their pincode, or their plan. This is the one genuine "don't ask again" win available on your own site, and it costs about ten lines of code.</li>
+      <li><b>Issue personal links after a lead comes in.</b> Once someone has come through an Instant Form or a WhatsApp chat, send them <code>maharajatofu.com/r/MT-F-0042</code>. The page reads the token, greets them by name, pre-loads their area and plan, and asks for nothing. <b>That is the version of your idea that actually works</b> &mdash; not Instagram pushing data to your site, but you carrying a token back to it.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="calc">
+  <div class="wrap">
+    <div class="shead"><span class="num">The centrepiece</span><h2>A calculator that models a kitchen, not a spreadsheet</h2></div>
+    <div class="prose">
+      <p>You were right to push back on the earlier version. <b>People &times; meals &times; 100 g is nonsense in an Indian kitchen.</b> Nobody serves 100 g of paneer per head &mdash; a shared sabzi for four uses 250&ndash;300 g total, roughly 60&nbsp;g a person. Children eat a fraction of an adult portion. A tikka plate is a completely different quantity from a gravy. And nobody in the house eats it every time.</p>
+      <p>So the calculator runs on <b>two realistic modes</b>, and the default one is anchored to a behaviour the customer already knows.</p>
+    </div>
+
+    <h3>Mode 1 &mdash; "Swap my paneer" (default)</h3>
+    <p class="prose">The most realistic input available is what they <em>already buy</em>. One slider, one toggle, done. This also frames tofu as a substitution rather than an addition, which is how the purchase actually happens.</p>
+    <div class="prompt">
+      <div class="ph"><span class="dot"></span>mode 1 &mdash; swap logic</div>
+<pre>INPUT
+  paneerPerWeek : slider 250 g – 3000 g, step 250   (default 1000 g)
+  swapShare     : chips 25% / 50% / 100%            (default 50% — realistic)
+  matchProtein  : toggle, default OFF
+
+// Recipe swap is 1:1 by weight — the gravy needs the same volume of cubes.
+tofuNeeded = paneerPerWeek * swapShare;
+if (matchProtein) tofuNeeded *= 1.8;   // 180 g tofu = 18 g protein = 100 g paneer
+
+packs      = Math.round(tofuNeeded / 200);          // round to NEAREST, never up
+kcalSaved  = paneerPerWeek * swapShare * (2.65 - 0.76);
+satFatCut  = paneerPerWeek * swapShare * (0.055 - 0.015);
+costTofu   = packs * 85;                            // mixed basket average
+costPaneer = (paneerPerWeek * swapShare / 1000) * 480;</pre>
+    </div>
+    <div class="callout good">
+      <span class="tag">Worked example &middot; buys 1 kg paneer a week, swaps half</span>
+      <p><b>500 g of tofu a week &mdash; that's 3 packs.</b><br>
+      You'd save about <b>945 calories and 20 g of saturated fat every week</b>, with zero cholesterol, and nothing about your cooking changes.<br>
+      Cost: <b>₹255 of tofu</b> instead of about ₹240 of paneer &mdash; near enough identical.<br>
+      Protein trade-off, stated plainly: this swap gives you 50 g of protein a week instead of 90 g. <i>Want to keep the protein identical? Turn on "match my protein" &mdash; that's 900 g of tofu, 5 packs, ₹425, and you still cut 945 calories.</i><br>
+      &rarr; <b>Recommended: Thrice plan &mdash; 4 packs, ₹305/week, Tuesday &amp; Friday.</b></p>
+    </div>
+    <div class="callout">
+      <span class="tag">Show the trade-off, don't bury it</span>
+      <p>A 1:1 recipe swap genuinely loses protein. Printing that costs you nothing &mdash; the calorie and cholesterol numbers are doing the selling &mdash; and it buys you the credibility to be believed about everything else. A calculator that only ever produces good news gets recognised as an advertisement in about four seconds.</p>
+    </div>
+
+    <h3>Mode 2 &mdash; "Plan my week" (for people who don't track paneer)</h3>
+    <p class="prose">Dish-aware, eater-aware, and it asks the right question about who is in the house.</p>
+    <div class="prompt">
+      <div class="ph"><span class="dot"></span>mode 2 &mdash; realistic household model</div>
+<pre>// ---- portions are set by the DISH, not by the person ----
+// grams of raw tofu per adult portion
+const PORTION = {
+  gravy   : 60,    // shared sabzi — matar / butter / palak tofu
+  bhurji  : 75,    // scramble, eaten as a main
+  grill   : 110,   // tikka, air-fryer bites — a personal plate
+  addon   : 50     // Maggi topper, roll, sandwich, chaat
+};
+
+// ---- not everyone eats an adult portion ----
+const EATER = {
+  adult: 1.0, teen13_17: 0.85, child10_12: 0.7, child4_9: 0.45
+};
+const TRAINING_BONUS = 1.4;   // applies to personal dishes only, never to a shared gravy
+
+INPUT
+  // Ask who EATS it, not who lives there. In most houses one person won't touch it.
+  adults, teens, kids10_12, kids4_9   : steppers
+  trainingAdults                      : stepper (subset of adults)
+  gravyMeals, bhurjiMeals,
+  grillMeals, addonMeals              : chips 0–7 per week
+
+sharedWeight   = adults + teens*0.85 + kids10_12*0.7 + kids4_9*0.45;
+personalWeight = sharedWeight + trainingAdults * (TRAINING_BONUS - 1);
+
+cookedGrams = gravyMeals  * PORTION.gravy  * sharedWeight
+            + bhurjiMeals * PORTION.bhurji * sharedWeight
+            + grillMeals  * PORTION.grill  * personalWeight
+            + addonMeals  * PORTION.addon  * personalWeight;
+
+rawGrams = cookedGrams / 0.88;        // ~12% lost to pressing and searing
+packs    = Math.round(rawGrams / 200);
+
+// ---- shelf life is a hard constraint, not a nice-to-have ----
+// fresh tofu keeps ~5 days; a household finishes ~1 kg comfortably in that window
+deliveries = packs <= 5 ? 1 : 2;
+perDrop    = Math.ceil(packs / deliveries);
+
+// ---- first-timers over-estimate. Always. ----
+if (isNewCustomer && packs > 4)
+  suggestedStart = Math.max(2, Math.round(packs * 0.6));</pre>
+    </div>
+    <div class="callout good">
+      <span class="tag">Worked example &middot; 2 adults + a 14-year-old + an 8-year-old, all four eat it</span>
+      <p>Cooking plan: gravy sabzi 2&times;, bhurji 1&times;, quick add-ons 2&times; a week.<br>
+      sharedWeight = 1.0 + 1.0 + 0.85 + 0.45 = <b>3.3 adult-equivalents</b><br>
+      cooked = (2&times;60 + 1&times;75 + 2&times;50) &times; 3.3 = <b>974 g</b> &rarr; raw = 974 / 0.88 = <b>1,106 g</b><br>
+      <b>&rarr; 6 packs a week, split 3 on Tuesday and 3 on Friday.</b><br>
+      Because you're new: <b>start with 4 packs for two weeks</b>, then move up. Almost everyone over-orders in week one and throws some away, and thrown-away tofu is why people quit tofu.<br>
+      &rarr; <b>Recommended: Thrice plan (4 packs, ₹305) &rarr; step up to Daily Protein (6 packs, ₹455).</b></p>
+    </div>
+
+    <h3>The seven realism rules, in one place</h3>
+    <ol class="prose">
+      <li><b>Portion follows the dish.</b> 60 g in a shared gravy, 110 g on a tikka plate. Never one flat number.</li>
+      <li><b>Ask who eats it, not who lives there.</b> In most households at least one person won't touch tofu in week one. Asking the honest question produces an honest basket.</li>
+      <li><b>Children are not small adults.</b> An eight-year-old eats under half a portion.</li>
+      <li><b>The training bonus applies to personal plates only.</b> Your gym-going son doesn't get 40% more of the shared sabzi.</li>
+      <li><b>Account for prep loss.</b> Pressing and searing take roughly 12% of the weight. Raw purchased grams always exceed cooked grams.</li>
+      <li><b>Round to the nearest pack, never up.</b> Over-buying perishable food creates waste, waste creates guilt, guilt cancels subscriptions.</li>
+      <li><b>Respect the five-day shelf life.</b> More than about 1 kg means two deliveries, not one big drop. Let the calculator say so &mdash; it explains your delivery days without a word of sales copy.</li>
+    </ol>
+
+    <h3>What the result screen must contain</h3>
+    <div class="grid g2">
+      <div class="card"><span class="time">Headline</span><h5>Packs per week + delivery split</h5><p>Not grams. Not servings. The number of tubs and which days they arrive &mdash; the two things a person can actually picture.</p></div>
+      <div class="card"><span class="time">The emotional payoff</span><h5>Calories saved this week</h5><p>Give it the largest type on the screen. It is the number people screenshot and forward.</p></div>
+      <div class="card"><span class="time">Credibility</span><h5>The honest protein line</h5><p>The real share, the real trade-off, and the "match my protein" option if they want it. Footnote: ICMR-NIN RDA 2020.</p></div>
+      <div class="card"><span class="time">The growth loop</span><h5>Share to WhatsApp</h5><p>Send the result as plain text to a family group. This is the cheapest distribution you will ever have &mdash; design the result to be worth forwarding.</p></div>
+      <div class="card"><span class="time">The conversion</span><h5>Pre-filled plan &rarr; the four fields</h5><p>Name, phone, area, pincode. Plan already selected. Nothing re-entered. One screen, one tap to submit.</p></div>
+      <div class="card"><span class="time">The reassurance</span><h5>"Start smaller" nudge</h5><p>For any result above four packs. It reduces week-one waste, reduces churn, and signals that you are not just trying to sell more.</p></div>
+    </div>
+    <div class="callout warn">
+      <span class="tag">Replace one number before launch</span>
+      <p>Everything above uses <b>10 g of protein per 100 g</b> as a placeholder. Get your NABL lab report first and hard-code your actual figure in exactly one constant, referenced everywhere. Do not let a guessed number end up on a pack, in a calculator and in an ad with three different values.</p>
+    </div>
+  </div>
+</section>
+
+<section id="recipes">
+  <div class="wrap">
+    <div class="shead"><span class="num">Content engine</span><h2>Sixteen recipes, two completely different customers</h2></div>
+    <div class="prose"><p>Recipes are not a blog. They are the answer to the objection that kills every tofu sale: <b>"main ise banaungi kaise?"</b> One URL each, one 15-second Reel each, and a QR code on the pack that opens the hub.</p></div>
+
+    <h3>Lane 1 &mdash; Under 5 minutes, no cooking skill</h3>
+    <p class="prose" style="font-size:15px;color:var(--muted)">Segment C. Every one uses <b>Masala Tofu</b> straight from the pack &mdash; no pressing, no marinating, no planning.</p>
+    <div class="grid g3">
+      <div class="card"><span class="time">2 min</span><h5>Protein Maggi</h5><p>Drop 100 g of masala tofu cubes in for the last 90 seconds. Same Maggi, +10 g protein. Your single best Reel.</p></div>
+      <div class="card"><span class="time">5 min</span><h5>Tofu Bhurji</h5><p>Crumble into hot oil with onion, tomato, haldi, garam masala. Tastes like anda bhurji and paneer bhurji had a baby &mdash; the highest-converting recipe in the whole category.</p></div>
+      <div class="card"><span class="time">0 min &middot; no cook</span><h5>Chatpata Tofu Chaat</h5><p>Cubes + chaat masala + nimbu + kacha pyaaz + sev. Eaten from the box at a desk. Zero equipment.</p></div>
+      <div class="card"><span class="time">3 min &middot; no cook</span><h5>Peanut Chilli Tofu</h5><p>Peanut butter, soy sauce, chilli flakes, lime, a splash of water, poured over cubes. Looks premium on camera.</p></div>
+      <div class="card"><span class="time">3 min</span><h5>Leftover Roti Roll</h5><p>Yesterday's roti + masala tofu + curd or mayo + onion + chutney. Twenty seconds on the tawa. Breakfast, solved.</p></div>
+      <div class="card"><span class="time">4 min</span><h5>Schezwan Chilli Tofu</h5><p>One pan, readymade schezwan, capsicum, spring onion. Restaurant chilli paneer without the effort.</p></div>
+      <div class="card"><span class="time">2 min &middot; no cook</span><h5>Tofu Sandwich Spread</h5><p>Mash with mayo, mustard, black pepper, coriander. Keeps three days. Five sandwiches from one pack.</p></div>
+      <div class="card"><span class="time">12 min &middot; batch</span><h5>Air-Fryer Tikka Bites</h5><p>Whole pack, 180 &deg;C, 12 minutes, shake once. A week of snacks. The gym segment makes this every Sunday.</p></div>
+    </div>
+
+    <h3>Lane 2 &mdash; The family dinner, where paneer gets replaced</h3>
+    <p class="prose" style="font-size:15px;color:var(--muted)">Segment B, using <b>Classic Firm Tofu</b>. The pitch on every page: same recipe, same masala, same taste &mdash; one ingredient swapped.</p>
+    <div class="grid g3">
+      <div class="card"><span class="time b">Flagship</span><h5>Tofu Butter Masala</h5><p>The makhani gravy carries everything. Marinate 15 min, sear, fold in at the end. The dish that converts a paneer household.</p></div>
+      <div class="card"><span class="time b">Family</span><h5>Palak Tofu</h5><p>Honestly better than palak paneer &mdash; tofu holds its shape in the spinach and doesn't go rubbery on reheating.</p></div>
+      <div class="card"><span class="time b">Everyday</span><h5>Matar Tofu</h5><p>The weeknight workhorse. Nobody at the table asks questions.</p></div>
+      <div class="card"><span class="time b">Restaurant style</span><h5>Kadai Tofu</h5><p>Big peppers, big onion, coarse masala. The chunky texture suits pressed tofu perfectly.</p></div>
+      <div class="card"><span class="time b">Party</span><h5>Tofu Tikka</h5><p>Dahi-besan marinade, tawa or oven. Photographs better than paneer tikka.</p></div>
+      <div class="card"><span class="time b">Breakfast</span><h5>Tofu Bhurji Pav</h5><p>The family-sized version of the five-minute bhurji, with pav and butter.</p></div>
+      <div class="card"><span class="time b">Tiffin</span><h5>Tofu Paratha</h5><p>Crumbled and spiced as stuffing. Goes into a school tiffin without anyone noticing the swap.</p></div>
+      <div class="card"><span class="time b">Occasion</span><h5>Shahi Tofu Korma</h5><p>Cashew-onion gravy for a festival meal. Proves tofu isn't only diet food &mdash; important if the name Maharaja is going to make sense.</p></div>
+    </div>
+
+    <div class="callout">
+      <span class="tag">The Maharaja Method &mdash; one page, linked from every recipe</span>
+      <p>Tofu fails in Indian kitchens for texture reasons, not taste reasons. Five techniques fix it, and owning this page is how you become the tofu authority in your pin codes:</p>
+      <ol style="margin-bottom:0">
+        <li><b>Press it 20 minutes</b> under a heavy patila. Firm tofu comes packed in water; pressed tofu has bite.</li>
+        <li><b>Blanch 2 minutes in hot salted water</b> before it goes into gravy &mdash; the single trick that gives it a soft, paneer-like mouthfeel.</li>
+        <li><b>Freeze overnight, then thaw</b> for a chewier, spongier bite that drinks up gravy. Sounds odd; works brilliantly.</li>
+        <li><b>Marinate 15 minutes minimum</b> in dahi, besan, ajwain, chilli, haldi. Tofu is porous &mdash; it takes flavour faster and deeper than paneer.</li>
+        <li><b>Add it in the last 3&ndash;4 minutes.</b> Never boil tofu in gravy for fifteen minutes. It doesn't need the time and it will crumble.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section id="ads">
+  <div class="wrap">
+    <div class="shead"><span class="num">Demand</span><h2>₹15,000 of Instagram, pointed at two circles</h2></div>
+    <div class="prose">
+      <p>Indian Instagram in 2026 runs roughly ₹45&ndash;350 CPM and ₹6&ndash;55 CPC depending on placement, with Reels 25&ndash;40% cheaper than feed. Hyperlocal food in a 4&nbsp;km radius sits at the cheap end. Meta needs about ₹300&ndash;500 a day to escape the learning phase, so <b>₹500/day for 30 days</b> is the right shape: enough to learn, small enough that a failed pilot costs one month's rent.</p>
+      <p><b>Two ad sets at a time, never five.</b> Splitting ₹500/day across many ad sets is the most common way small budgets fail &mdash; nothing accumulates enough events to optimise. And put <b>both pin drops inside one ad set</b> rather than splitting Noida from Ghaziabad: geography-splitting halves your learning signal, and you can read the geography off the Area field afterwards anyway.</p>
+      <p>Because the capture lanes above are genuinely uncertain, run the spend in two phases instead of committing on day one.</p>
+    </div>
+    <div class="tscroll">
+      <table>
+        <thead><tr><th>Phase</th><th>Ad set</th><th>Targeting &amp; objective</th><th class="num">₹/day</th></tr></thead>
+        <tbody>
+          <tr><td rowspan="2"><b>Weeks 3&ndash;4</b><br><i>test two lanes head to head</i></td><td><b>Lane W &mdash; Website</b></td><td>Both pins in one ad set: Sector 62 (4 km) + Vasundhara/Sec 10 (5 km). Age 22&ndash;48. Broad, no interest stacking. Traffic &rarr; site, then Conversions on <code>signup_submitted</code>.</td><td class="num">₹250</td></tr>
+          <tr><td><b>Lane C &mdash; Click-to-WhatsApp</b></td><td>Same two pins, same audience. Leads objective, WhatsApp destination, greeting message asking for area and pincode.</td><td class="num">₹250</td></tr>
+          <tr><td rowspan="2"><b>Weeks 5&ndash;6</b><br><i>back the winner</i></td><td><b>Winning lane</b></td><td>Whichever lane produced the lower <b>cost per confirmed lead</b> &mdash; not per lead. Add Lane F (Instant Form, Higher Intent) here instead if both lanes disappoint on volume.</td><td class="num">₹400</td></tr>
+          <tr><td><b>Retarget</b></td><td>Site visitors, IG engagers, calculator starters who didn't finish, 50% video viewers. Conversions &rarr; Founding 100 coupon.</td><td class="num">₹100</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout warn">
+      <span class="tag">A circle this small saturates</span>
+      <p>A 4&nbsp;km radius around Sector 62 holds maybe 35&ndash;50k reachable adults on Instagram. ₹15,000 hits each of them about three times. Frequency is how a local brand becomes familiar &mdash; but it means <b>you must rotate creative every 10 days</b> or your CPC climbs sharply in week three. Budget six creatives, not two.</p>
+    </div>
+
+    <h3>Six creatives, in priority order</h3>
+    <div class="grid g2">
+      <div class="card"><span class="time">Reel &middot; 15 s &middot; Segment C</span><h5>"Maggi mein protein"</h5><p>Hands only. Maggi boiling, masala tofu cubes go in, close-up of the pull. On screen: <b>+10g protein. 2 minutes. ₹99.</b> Highest expected CTR, lowest production effort.</p></div>
+      <div class="card"><span class="time">Reel &middot; 20 s &middot; Segment B</span><h5>"Family ko pata bhi nahi chala"</h5><p>Bhurji cooked, served, eaten, then the reveal. Shot on a phone, no polish. The most shareable format in Indian food marketing.</p></div>
+      <div class="card"><span class="time">Static / carousel &middot; Segment A</span><h5>The honest comparison</h5><p>180 g tofu vs 100 g paneer, same protein, half the calories, arithmetic shown. Headline: <b>"Utna hi protein. Aadhi calories."</b> Drives calculator clicks from the gym crowd.</p></div>
+      <div class="card"><span class="time">Reel &middot; 25 s &middot; Trust</span><h5>Teen cheezein</h5><p>Soybean, water, coagulant &mdash; on a table, then the block. <b>"Bas teen cheezein. Aur kuch nahi."</b> The safety argument made entirely positively, with nobody attacked.</p></div>
+      <div class="card"><span class="time">Static &middot; Segment D</span><h5>Bulk for gyms</h5><p>1 kg block, clean shot, price per kg, "standing order, twice a week, delivered." Low budget, but a B2B lead is worth 20&times; a household one.</p></div>
+      <div class="card"><span class="time">Story &middot; Retarget</span><h5>Founding 100 countdown</h5><p>"37 slots left in Sector 62." True scarcity &mdash; your batch capacity really is limited. Shown only to people who already visited.</p></div>
+    </div>
+    <p class="prose" style="font-size:15px;color:var(--muted)"><b>Non-negotiable:</b> burnt-in subtitles on every video &mdash; more than half of Indian Instagram watches with sound off. Also: Hinglish hook, price visible in the first three seconds, and the pin codes named on screen (<i>"Sector 62 &amp; Vasundhara only"</i>) so unqualified clicks don't eat the budget.</p>
+
+    <h3>The funnel you're betting on</h3>
+    <div class="tscroll">
+      <table>
+        <thead><tr><th>Stage</th><th>Assumption</th><th class="num">Number</th></tr></thead>
+        <tbody>
+          <tr><td>Spend</td><td>₹500/day &times; 30 days</td><td class="num">₹15,000</td></tr>
+          <tr><td>Impressions</td><td>Reels-heavy, local, ~₹120 CPM</td><td class="num">~125,000</td></tr>
+          <tr><td>Clicks</td><td>1.2% CTR &rarr; ~₹10 CPC</td><td class="num">~1,500</td></tr>
+          <tr><td>Signups</td><td>15% &mdash; realistic for a free form with a calculator in front of it</td><td class="num">~225</td></tr>
+          <tr><td><b>Confirmed on WhatsApp</b></td><td>55% save the number and reply</td><td class="num"><b>~124</b></td></tr>
+          <tr><td>Cost per confirmed signup</td><td>₹15,000 &divide; 124</td><td class="num">₹121</td></tr>
+          <tr><td>Launch-week first orders</td><td>30% of confirmed, coupon in hand</td><td class="num">~37</td></tr>
+          <tr><td><b>Effective CAC</b></td><td>₹15,000 &divide; 37</td><td class="num"><b>~₹405</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="prose" style="font-size:15px;color:var(--muted)"><b>This table models the website lane.</b> Click-to-WhatsApp collapses "signup" and "confirmed" into a single step, so it typically shows a higher cost per lead but a far higher confirmation rate &mdash; the two lanes are only comparable on the bottom two rows. Score both on <b>cost per confirmed lead</b> and nothing else.</p>
+    <div class="callout good">
+      <span class="tag">Read this honestly</span>
+      <p>A Thrice subscriber contributes ~₹790/month, so ₹405 pays back in about two weeks &mdash; comfortable. But ₹405 is a <em>pilot</em> number, bought in a small warm radius with novelty on your side; it will rise as the circle saturates. The pilot's job isn't to prove ₹405 forever. It's to prove that <b>people who try it, buy it again</b> &mdash; and that number only exists after launch, which is why the week-7 gate below matters more than anything in this table.</p>
+    </div>
+    <p class="prose">Two free channels that will likely beat the ads outright: <b>RWA and society WhatsApp groups</b> in Vasundhara &mdash; one admin's endorsement outperforms ₹5,000 of spend and delivers a pre-clustered set of neighbours &mdash; and <b>gate sampling</b>, a Saturday morning table with hot bhurji on toothpicks. Tofu's real problem is that almost nobody in your circle has ever tasted good tofu. A free bite solves in five seconds what five impressions can't.</p>
+  </div>
+</section>
+
+<section id="ops">
+  <div class="wrap">
+    <div class="shead"><span class="num">Operations</span><h2>Batch days, cold chain, and the shelf-life trap</h2></div>
+    <div class="prose"><p>Fresh water-packed tofu keeps about <b>five days refrigerated</b>; once opened, three to five days only if fully submerged in fresh water changed daily. That single fact should dictate your entire operation &mdash; and it is already built into the calculator.</p></div>
+    <div class="grid g2">
+      <div class="card"><span class="time">Rhythm</span><h5>Two batch days: Tuesday &amp; Friday</h5><p>Make in the morning, deliver the same afternoon. Never carry stock. Subscriptions are what make this possible &mdash; on Monday night you know exactly how much to soak.</p></div>
+      <div class="card"><span class="time">Cold chain</span><h5>0&ndash;4 &deg;C, always</h5><p>Deep fridge in the Ghaziabad house, insulated bags with ice packs on the run. Ghaziabad cluster first, Sector 62 second &mdash; shortest total time out of cold.</p></div>
+      <div class="card"><span class="time">Pack</span><h5>Date-stamp the make date</h5><p>Print <b>Made on</b> as prominently as <b>Best before</b>. Then say it in the ad: "made the morning we deliver it." Your shortest shelf life is your strongest trust signal.</p></div>
+      <div class="card"><span class="time">Waste</span><h5>Sunday leftovers become Masala Tofu</h5><p>Unsold Classic gets pressed harder and marinated into the higher-priced SKU. Build the wastage escape hatch in from day one.</p></div>
+      <div class="card"><span class="time">Quality</span><h5>Log every batch</h5><p>Soak time, soy milk temperature, coagulant quantity, press weight, yield, taste note. Six weeks of logs is how batch 40 tastes like batch 4 &mdash; inconsistency is the documented reason Indian tofu brands lose customers.</p></div>
+      <div class="card"><span class="time">Delivery</span><h5>Cluster by society, not by order</h5><p>Two runs, two clusters. Ten drops in one society cost ₹15 each; ten scattered cost ₹50. Worth 12 points of margin.</p></div>
+    </div>
+    <div class="callout">
+      <span class="tag">Partnership &mdash; settle it before revenue exists</span>
+      <p>Your friend contributes the house, which is real capital and currently invisible in the model because rent is ₹0. Write it down now: <b>equity split, who owns the brand and the domain, kitchen vs marketing responsibilities, what happens if one of you wants out, and a notional rent</b> that is either paid or accrued. Two-person food businesses rarely die from bad tofu. They die from an unwritten understanding about a house.</p>
+    </div>
+  </div>
+</section>
+
+<section id="legal">
+  <div class="wrap">
+    <div class="shead"><span class="num">Compliance</span><h2>Food licence, label claims, and the phone numbers you're collecting</h2></div>
+    <h3>Food &amp; labelling</h3>
+    <ul class="check">
+      <li><b>FSSAI Basic Registration &mdash; ₹100/year via the FoSCoS portal</b><span>Covers you under the small-business turnover threshold; move to a State Licence as volume grows. Print the number on every pack and in the site footer &mdash; it is a conversion asset, not just a legal box.</span></li>
+      <li><b>The pack must not say "paneer"</b><span>FSSAI restricts dairy terms for non-dairy analogues, and is actively tightening rules around analogue dairy. Product name on the label: <b>Tofu (Soya Bean Curd)</b>. Marketing copy may freely say "a plant-based alternative to paneer" &mdash; that's a comparison, not a product name.</span></li>
+      <li><b>NABL lab nutrition analysis before you print anything &mdash; ~₹3,000&ndash;6,000</b><span>You need real numbers for the panel <em>and</em> for the calculator constant. Guessing your own protein figure and printing it is the fastest route to a compliance problem.</span></li>
+      <li><b>Know which protein claim you're allowed</b><span>Under FSSAI claim rules, "source of protein" needs roughly 10% of the RDA per 100 g and "high in protein" needs about 20%. Tofu at ~10 g/100 g clears the first and misses the second. <b>"A source of protein" is fine. "High protein" on the Classic pack probably isn't.</b> Confirm against your own lab report.</span></li>
+      <li><b>No isoflavone or heart-health claims</b><span>The evidence is too weak to defend and the claim category is regulated. You have five stronger arguments that need no substantiation beyond a nutrition panel.</span></li>
+      <li><b>No comparative advertising against paneer sellers</b><span>Disparagement is actionable under ASCI. State your own three ingredients and your own batch transparency; let the customer complete the thought.</span></li>
+      <li><b>Label essentials</b><span>Green veg mark &middot; net quantity &middot; MRP inclusive of taxes &middot; <b>"Contains Soy"</b> allergen declaration &middot; date of packing &middot; best before &middot; batch code &middot; manufacturer name and full Ghaziabad address &middot; consumer care number &middot; FSSAI logo and number &middot; "Keep refrigerated 0&ndash;4 &deg;C".</span></li>
+      <li><b>Hygiene basics you'll be asked about</b><span>Medical fitness certificates for anyone handling food, a potable water test report, pest-control records, dedicated kitchen footwear. When a customer asks to see the kitchen &mdash; and a good one will &mdash; you want to say yes immediately.</span></li>
+    </ul>
+
+    <h3>Brand &amp; digital</h3>
+    <ul class="check">
+      <li><b>Buy maharajatofu.com today, plus maharajatofu.in defensively</b><span>And claim @maharajatofu on Instagram, Facebook and YouTube in the same sitting. Handles cost nothing and vanish fast once ads start running.</span></li>
+      <li><b>Trademark "Maharaja Tofu" &mdash; Class 29, via TM-A</b><span>Roughly ₹4,500 per class at the individual/startup/MSME rate. "Maharaja" is heavily used in Indian food &mdash; run a search first so you don't build six months of equity on a name you have to abandon.</span></li>
+    </ul>
+
+    <h3>The phone numbers &mdash; take this seriously</h3>
+    <div class="callout warn">
+      <span class="tag">You are now collecting personal data</span>
+      <p>Under India's DPDP Act 2023, consent for marketing must be <b>free, specific, informed and unambiguous</b> &mdash; burying an opt-in inside terms and conditions does not meet the standard, and penalties for processing without consent run to eye-watering numbers. For a four-field form this is easy to get right, and there is no excuse for getting it wrong.</p>
+    </div>
+    <ul class="check">
+      <li><b>An unticked checkbox with the purpose written in plain words</b><span>"Haan, mujhe WhatsApp par launch update aur early-bird coupon bhejiye." Not pre-ticked. Not bundled with anything else. Not a condition of using the calculator.</span></li>
+      <li><b>State the purpose, the retention and the exit &mdash; in one short line under the form</b><span>"We'll message you once at launch and send your coupon. Nothing else, no sharing with anyone, and 'STOP' removes you. Data deleted if we don't launch by [date]."</span></li>
+      <li><b>Use the free WhatsApp Business app, not promotional SMS</b><span>Promotional SMS in India requires TRAI DLT registration &mdash; principal entity plus header approval, with per-template scrubbing. WhatsApp Business sits outside that framework because Meta handles delivery. For a few hundred pilot contacts, the free app with broadcast lists is the right tool: no DLT, no cost, and the "save our number" step doubles as your intent filter.</span></li>
+      <li><b>One short privacy page, written like a human wrote it</b><span>What you collect, why, how long, who it's shared with (nobody), and how to be removed. Link it under the form. Six sentences is enough.</span></li>
+      <li><b>Delete the numbers of people who ask, and log that you did</b><span>One column in the sheet. It takes seconds and it's the difference between a policy and a promise.</span></li>
+      <li><b>Never buy or scrape a list</b><span>Tempting for a local launch, illegal under DPDP, and it poisons a neighbourhood brand permanently. Society WhatsApp groups where you ask the admin first are the legitimate version of the same idea.</span></li>
+      <li><b>GST &amp; invoicing &mdash; ask a CA, don't guess</b><span>Soya products sit in a rate band that depends on classification and packaging, and e-commerce sales carry their own registration rules. An hour with a local CA before you sell is cheaper than a correction after.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="gates">
+  <div class="wrap">
+    <div class="shead"><span class="num">Decision</span><h2>What "yes" looks like &mdash; when nobody has paid you</h2></div>
+    <div class="prose"><p>Set these thresholds <b>now</b>, while you're unattached to the outcome. And note the shape of the table: because no money changes hands during the pilot, the six-week gates measure <em>reach and confirmation</em>, and the one gate that actually decides the business sits in week seven.</p></div>
+    <div class="tscroll">
+      <table>
+        <thead><tr><th>Metric</th><th class="num">Go</th><th class="num">Rework</th><th class="num">Stop</th><th>Why it's here</th></tr></thead>
+        <tbody>
+          <tr><td>Signups (4 fields complete)</td><td class="num">250+</td><td class="num">100&ndash;249</td><td class="num">&lt; 100</td><td>Raw reach. Soft &mdash; never quote this number alone.</td></tr>
+          <tr><td><b>Confirmed on WhatsApp</b></td><td class="num">130+</td><td class="num">50&ndash;129</td><td class="num">&lt; 50</td><td><b>Your payment substitute.</b> They saved your number and replied.</td></tr>
+          <tr><td>Confirmation rate</td><td class="num">&gt; 50%</td><td class="num">30&ndash;50%</td><td class="num">&lt; 30%</td><td>Below 30% the signups are idle taps, not intent</td></tr>
+          <tr><td>Cost per confirmed signup</td><td class="num">&lt; ₹120</td><td class="num">₹120&ndash;250</td><td class="num">&gt; ₹250</td><td>Above ₹250 the launch CAC won't clear</td></tr>
+          <tr><td>Calculator completion</td><td class="num">&gt; 25% of visits</td><td class="num">15&ndash;25%</td><td class="num">&lt; 15%</td><td>Tests whether the calculator sells or is just a toy</td></tr>
+          <tr><td>"Launch week" intent share</td><td class="num">&gt; 35%</td><td class="num">20&ndash;35%</td><td class="num">&lt; 20%</td><td>Urgency, self-reported. Inflated, but comparable across weeks.</td></tr>
+          <tr><td>Clustering &mdash; top 3 societies</td><td class="num">&gt; 40% of signups</td><td class="num">25&ndash;40%</td><td class="num">&lt; 25%</td><td>Scattered demand means 48% margin, not 60%. This is an economics gate, not a marketing one.</td></tr>
+          <tr><td>Coupon redemption spread, A vs C</td><td class="num">&lt; 5 pts</td><td class="num">5&ndash;15 pts</td><td class="num">&gt; 15 pts</td><td>A small spread means they're buying the product, not the discount &mdash; and that you have pricing headroom</td></tr>
+          <tr><td>Van Westendorp range covers ₹79/pack</td><td class="num">Comfortably</td><td class="num">At the edge</td><td class="num">Above it</td><td>If ₹79 sits above the acceptable range for confirmed leads, the price is wrong, not the product</td></tr>
+          <tr><td>B2B conversations &rarr; verbal commitments</td><td class="num">5 &rarr; 2</td><td class="num">3 &rarr; 1</td><td class="num">0</td><td>One gym café equals ~20 households on one stop</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout">
+      <span class="tag">The gate that actually decides it &mdash; week 7</span>
+      <p><b>Of your confirmed signups, how many place a real first order in launch week?</b> Go: 30%+. Rework: 15&ndash;30%. Stop: under 15%. Everything above this line is a proxy; this is the thing itself. Run launch week as a hard deadline &mdash; a specific date, a coupon that expires, one batch capacity &mdash; so the number means something. A launch that drifts for three weeks produces a number you can't read.</p>
+      <p style="margin-top:.7em">And the number after that, which no pilot can give you: <b>repeat rate</b>. Above 40% of first-time buyers ordering again within 14 days, almost any sane CAC works. Below 25%, none does. Instrument for it from your very first delivery.</p>
+    </div>
+    <div class="callout warn">
+      <span class="tag">Read the failure correctly</span>
+      <p>If signups are low but confirmation is high, you have a <b>reach problem</b> &mdash; spend more, widen the radius, do more sampling. If signups are high but confirmation is low, you have a <b>desire problem</b> &mdash; the offer is interesting, not wanted, and more ad spend will simply buy more indifference. These two failures look identical on a signup chart and demand opposite responses. That is precisely why confirmation is tracked separately.</p>
+    </div>
+
+    <h3>Six weeks, then a launch</h3>
+    <div class="week"><div class="wk">Week 0</div><div><h5>Lock the foundations</h5><p>Buy maharajatofu.com and the social handles. File FSSAI Basic Registration. Write the partnership terms with your friend. Order equipment. Run five test batches and taste them blind against market paneer.</p></div></div>
+    <div class="week"><div class="wk">Week 1</div><div><h5>Product frozen, lab booked</h5><p>Final Classic recipe, final masala blend. Samples to a NABL lab. Shoot product photography and kitchen footage in one session &mdash; you need six creatives, get them all in a single day.</p></div></div>
+    <div class="week"><div class="wk">Week 2</div><div><h5>Site live</h5><p>Home, two product pages, both calculator modes, plans, /bulk, /kitchen, /privacy, and the first six recipe pages. Pixel and GA4 firing on all ten events. WhatsApp Business number set up with a greeting message and the confirmation template ready. Test the whole flow on a real phone on mobile data.</p></div></div>
+    <div class="week"><div class="wk">Week 3</div><div><h5>Ads on, samples out</h5><p>AS1 and AS2 live at ₹200/day. Saturday gate sampling at two Vasundhara societies with hot bhurji. Walk into every gym within 3 km with a 200 g pack and a price sheet. Publish the remaining ten recipe pages.</p></div></div>
+    <div class="week"><div class="wk">Week 4</div><div><h5>Confirm, confirm, confirm</h5><p>Retargeting on. Work the WhatsApp confirmation queue daily &mdash; this is the week's real job, not the ads. Founding 100 codes go out as people confirm. Watch which societies cluster.</p></div></div>
+    <div class="week"><div class="wk">Week 5</div><div><h5>Fix and rotate</h5><p>Three fresh creatives. Chase B2B leads to a verbal commitment. Call &mdash; actually call &mdash; twenty confirmed signups and ask what they'd cook, what worries them, and what would stop them ordering. This is the most valuable hour of the whole pilot.</p></div></div>
+    <div class="week"><div class="wk">Week 6</div><div><h5>Score it, then set the launch date</h5><p>Read the table above. No storytelling, no "it feels like it's working." Go, rework, or stop &mdash; and if it's rework, name the single variable you're changing before spending another rupee.</p></div></div>
+    <div class="week"><div class="wk">Week 7</div><div><h5>Launch week &mdash; the only number that matters</h5><p>One fixed date. Coupons expire at the end of the week. Deliver to the clustered societies first. Then measure: confirmed signups &rarr; first orders. That percentage is your actual answer.</p></div></div>
+  </div>
+</section>
+
+<section id="prompts">
+  <div class="wrap">
+    <div class="shead"><span class="num">Run these in parallel</span><h2>Two prompts for your design session</h2></div>
+    <div class="prose"><p>Open a separate Claude session and paste these in &mdash; Prompt A first, then Prompt B once you have a palette, so the site inherits the pack's identity instead of contradicting it. Both are self-contained; you shouldn't have to explain the business again.</p></div>
+
+    <h3>Prompt A &mdash; Brand identity &amp; packaging</h3>
+    <div class="prompt">
+      <div class="ph"><span class="dot"></span>Prompt A &middot; copy the whole block</div>
+<pre>You are the design lead for a new Indian food brand. Deliver a complete brand
+identity and packaging design system.
+
+THE BRAND
+Name: Maharaja Tofu. Domain: maharajatofu.com
+Product: fresh, locally made soya tofu — a plant-based alternative to paneer.
+Made twice a week in a home kitchen in Sector 10, Ghaziabad, delivered inside
+a 5 km radius covering Vasundhara and Noida Sector 62.
+Two SKUs, 200 g water-packed tubs:
+  1. Classic Firm Tofu — ₹79 — plain, pressed, swaps into any paneer recipe
+  2. Masala Tofu — ₹99 — pre-marinated achaari-tandoori, ready to eat cold
+Plus a 1 kg block for gyms, cafés and cloud kitchens.
+Ingredients, in full: soybean, water, coagulant. That is the entire list.
+
+POSITIONING — the whole brief in one line
+"Utna hi protein. Aadhi calories." (Same protein. Half the calories.)
+The arithmetic behind it: 180 g of tofu and 100 g of paneer both give 18 g of
+protein — but 137 kcal versus 265 kcal, half the saturated fat, and zero
+cholesterol. We never claim more protein per 100 g than paneer, because that
+would be false and our customers check.
+The brand replaces paneer in the Indian family kitchen. It is not a Western
+health-food brand and must not look like one.
+
+WHAT WE ACTUALLY SELL ON, in order of strength
+  1. Transparency — three ingredients, a batch number on every tub, and an
+     open invitation to visit the kitchen. (Context: FSSAI testing in Noida
+     found 83% of paneer samples failing safety standards. We never attack
+     paneer sellers — that is legally risky and ages badly in a neighbourhood
+     we deliver to. We simply publish our own three-line ingredient list and
+     let the customer draw the conclusion. Design must carry this: the
+     ingredient list is a hero element on the pack, not fine print.)
+  2. Zero cholesterol, half the saturated fat
+  3. Lactose-free — a completely unserved local segment
+  4. Half the calories of paneer, with no change to any recipe
+  5. Made-on date, not just a best-before date
+
+THE TENSION TO SOLVE
+"Maharaja" says royal, generous, Indian, celebratory — a name for a festival
+table. "Tofu" says clean, light, modern, everyday. The identity must hold both.
+Only royal and it looks like a sweet-shop brand; only modern and it becomes
+every white-and-green wellness startup, losing the warmth that makes the name
+work. Find the specific place those meet, and commit to it.
+
+AUDIENCE
+A. 22–35 gym-goers in the Noida 62 IT belt who track macros
+B. Mothers and household cooks in Vasundhara buying paneer 3× a week, who
+   have already had the "is this paneer real?" conversation
+C. PG and hostel students who will only ever eat it straight from the pack
+The pack must look trustworthy in a home fridge beside a Mother Dairy paneer
+packet, and appetising in a phone photo on Instagram.
+
+WHAT TO DELIVER
+1. Three genuinely distinct identity directions, not variations of one idea.
+   For each: the core idea in a sentence, the logo concept, a palette with hex
+   values, a type pairing (name real typefaces, at least one with a Devanagari
+   companion), and why it resolves the tension above.
+2. Recommend one and defend the choice.
+3. Build the chosen direction out:
+   - Primary logo, a compact mark for the tub lid, and a one-colour version
+     that survives a cheap two-colour label print
+   - Full palette: primary, secondary, two SKU-differentiating colours
+     (Classic vs Masala must be distinguishable from three metres inside a
+     fridge), neutrals, and a semantic green for the veg-mark area
+   - Type scale for packaging and for digital
+   - Complete 200 g tub label artwork with every FSSAI element in a real
+     position: product name "Tofu (Soya Bean Curd)", net quantity, MRP
+     inclusive of taxes, "Contains Soy" allergen line, nutrition panel,
+     DATE OF PACKING given equal prominence to BEST BEFORE, batch code,
+     manufacturer name and full address, FSSAI licence number, green veg mark,
+     "Keep refrigerated 0–4 °C", a QR code area linking to recipes, and the
+     three-ingredient list treated as a design feature rather than small print
+   - The 1 kg B2B block pack
+   - A delivery sticker for the insulated bag
+   - An Instagram profile picture and three feed-post templates
+4. A one-page brand rulebook: voice (Hinglish headlines, English body), three
+   things we always say, three things we never say — including "never claim
+   more protein than paneer" and "never attack another brand" — and photography
+   direction for shooting tofu so it looks appetising rather than pale.
+
+CONSTRAINTS
+- Must print legibly on a cheap sticker at small size. Nothing that depends on
+  foil, embossing, or perfect registration.
+- Devanagari for the brand name on-pack; Latin for everything else.
+- Avoid the plant-based defaults: leaf icons, sage green, kraft brown, minimal
+  sans on white. That is what every Indian D2C health brand already looks like,
+  and it actively undercuts "Maharaja".
+- Every colour must survive being photographed under a home fridge light and
+  posted to Instagram.
+
+Present the recommended direction as a rendered visual page I can look at, not
+only as a written description.</pre>
+    </div>
+
+    <h3>Prompt B &mdash; Website design</h3>
+    <div class="prompt">
+      <div class="ph"><span class="dot"></span>Prompt B &middot; paste after Prompt A, with the chosen palette</div>
+<pre>Design the website for Maharaja Tofu — mobile-first, laptop second. Use the
+brand identity, palette and type pairing already established; do not invent a
+new visual language.
+
+WHAT THIS SITE IS
+A 6-week validation pilot, not a store. NO CART, NO PAYMENTS, NO PRICES TO PAY
+— we are finding out who wants this before we build the kitchen at scale.
+Its one job: take a stranger who tapped an Instagram ad and turn them into a
+named, reachable, located, ranked person, in under 90 seconds, one-handed on 4G.
+
+THE ONLY FORM ON THE SITE — four fields, nothing more
+  Name      first name only
+  Phone     10 digits, +91 pre-filled, inputmode="numeric"
+  Area      searchable dropdown of ~25 known localities (Sector 62, 63, 60,
+            Nyay Khand, Indirapuram, Vasundhara Sec 1–17, Vaishali, Kaushambi,
+            Rajendra Nagar, Shalimar Garden, Crossings Republik…) + "Somewhere
+            else". A dropdown, never free text.
+  Pincode   6 digits
+Plus, auto-filled from the calculator: the chosen plan.
+Plus one intent chip row: "When would you order?" → Launch week / Within a
+month / Just exploring.
+Plus an UNTICKED consent checkbox in plain Hinglish:
+  "Haan, mujhe WhatsApp par launch update aur early-bird coupon bhejiye."
+We deliberately do NOT ask for house number, flat number or full address. Area
+plus pincode is enough to plan a route, and asking for more costs signups.
+India's DPDP Act requires consent that is free, specific, informed and
+unambiguous — design the consent line to be readable, not to be skipped.
+
+THE REWARD FOR SIGNING UP — an early-bird ladder, shown as real scarcity
+  Confirmed 1–100 → Founding Member: 25% off first order, a free Masala Tofu
+                    pack, subscription price locked 3 months, unique code
+  Confirmed 101+  → Early Bird: 15% off first order
+  Any referrer    → Padosi Bonus: a free pack when a neighbour from the same
+                    society signs up
+Batch capacity is genuinely limited, so a live "37 Founding slots left in
+Sector 62" counter is honest. Design it to look honest, not like a fake timer.
+
+PAGES
+/                    Home
+/classic-tofu        ₹79 / 200 g — three-ingredient label as a hero element
+/masala-tofu         ₹99 / 200 g — ready to eat, video-first
+/protein-calculator  The centrepiece (spec below)
+/plans               Four subscription tiers (₹155 / ₹305 / ₹455 / ₹765 a week)
+/recipes             Hub, two filters: "Under 5 minutes" / "Family dinner"
+/recipes/[slug]      16 individual recipe pages
+/bulk                B2B lead form for gyms, cafés, cloud kitchens
+/kitchen             The real kitchen, the two founders, FSSAI number, batch
+                     days, an open invitation to visit
+/privacy             Short, human, readable
+/thanks              "Save our number — we'll WhatsApp you in 2 minutes."
+
+HOME PAGE, IN ORDER
+1. Hero — one line, one image, one button. "Wahi sabzi. Aadhi calories."
+   Sub: fresh soya tofu, made in Ghaziabad, delivered Tuesday & Friday in
+   Sector 62 and Vasundhara. Button: "Kitna chahiye? Calculate karein".
+2. Pincode check — 6 digits, right under the hero. The out-of-zone state is a
+   conversion opportunity, not an error: capture the pincode anyway.
+3. The two products side by side. Prices visible. No carousel.
+PRICE PLACEMENT — a deliberate decision, not an oversight
+Keep price OUT of the hero. Lead with quality: three ingredients, the kitchen,
+the calculator's calorie payoff. Price appears at block 8, after the person
+already wants it, framed against paneer (branded paneer ₹475–500/kg vs
+Maharaja Classic ₹395/kg) rather than shown bare. Prices ARE shown — hiding
+them would break the calculator's output and read as evasive — but they arrive
+late and already justified. On /bulk, add one field: "What do you currently pay
+per kg for paneer?"
+
+HOME PAGE, CONTINUED
+4. The honest comparison — 180 g tofu vs 100 g paneer, same 18 g protein,
+   137 vs 265 kcal, with the arithmetic actually shown. We admit paneer has
+   more protein per 100 g. Design this so the honesty reads as confidence.
+5. "Teen cheezein" — soybean, water, coagulant. The ingredient list as a
+   photographic hero. This carries the whole trust argument without a single
+   word about anyone else's product.
+6. The protein calculator, embedded.
+7. Six recipe cards with filter chips.
+8. Kitchen and trust — real faces, batch days, FSSAI licence number.
+9. Signup + the early-bird ladder.
+10. FAQ — does it taste like paneer, shelf life, soy allergy, storage, what's
+    actually in it, when do you launch.
+11. Sticky bottom bar on mobile: "Get early-bird coupon" + a WhatsApp icon.
+
+THE PROTEIN CALCULATOR — the most important screen on the site
+It must model a real Indian kitchen, not multiply heads by 100 g. Two modes,
+switchable with a tab at the top.
+
+MODE 1 — "Swap my paneer" (default, because it anchors to known behaviour)
+  Inputs: how much paneer the house buys per week (slider 250 g–3 kg, default
+  1 kg); how much of it to swap (chips 25% / 50% / 100%, default 50%); and a
+  "match my protein" toggle, off by default.
+  Logic: recipe swap is 1:1 by weight. With "match my protein" on, multiply by
+  1.8. Packs = round(grams / 200) — round to NEAREST, never up.
+  Output must include the protein trade-off stated plainly: a 1:1 swap gives
+  less protein, and we say so, because the calorie and cholesterol numbers are
+  doing the selling and the honesty buys credibility for everything else.
+
+MODE 2 — "Plan my week"
+  Portions are set by the DISH, not the person: shared gravy sabzi 60 g per
+  adult portion, bhurji 75 g, grilled/tikka plate 110 g, quick add-on (Maggi,
+  roll, sandwich) 50 g.
+  Eaters are weighted: adult 1.0, teen 0.85, child 10–12 0.7, child 4–9 0.45.
+  A "trains 4+ days a week" bonus of 1.4 applies ONLY to personal plates,
+  never to a shared gravy.
+  Ask who EATS it, not who lives in the house — in most homes at least one
+  person won't touch it in week one, and asking honestly produces an honest
+  basket.
+  Add ~12% for prep loss (pressing and searing), then round to nearest pack.
+  Fresh tofu keeps ~5 days, so anything over 5 packs must split across two
+  deliveries — let the calculator say this, because it explains the Tuesday/
+  Friday schedule better than any sales copy could.
+  For any first-timer result above 4 packs, show a "start with X for two weeks"
+  nudge. People over-order in week one, throw tofu away, and quit.
+
+RESULT SCREEN, in this order of visual weight:
+  - Packs per week and which days they arrive (not grams, not servings)
+  - Calories saved this week versus the same paneer — the largest number
+    on the screen, because it is the one people screenshot
+  - The honest protein line, with the trade-off and the "match my protein"
+    option, footnoted to ICMR-NIN RDA 2020
+  - A share-to-WhatsApp button sending the result as plain text
+  - The pre-filled plan flowing straight into the four-field form
+Design the result card as something a person would forward to their family
+group. That is the entire growth loop.
+
+NEVER ASK FOR SOMETHING WE ALREADY KNOW
+Instagram does not pass user identity to a website — Meta gives us only ad
+attribution (fbclid plus the URL parameters we configure). So build the
+"don't ask twice" behaviour on our side:
+- Read UTM and ad-id parameters off the landing URL and carry them into a
+  hidden field on the form, so every signup row knows which creative made it
+- Persist household inputs, pincode and chosen plan to localStorage — a
+  returning visitor re-enters nothing, ever
+- Build a /r/[token] route: people who came through a WhatsApp chat or a Meta
+  Instant Form get a personal link that greets them by name, pre-loads their
+  area and plan, and asks for nothing. Design this arrival state — it should
+  feel like being recognised, not like a form that happens to be filled in.
+- Design an "already signed up" state for someone who returns: show their
+  coupon code and their plan, not the form again
+
+MOBILE RULES
+- Every primary action in the bottom third; 56 px sticky bar
+- Under 2 s LCP on 4G — no carousel library, no chat widget, no font FOIT
+- The keyboard appears exactly twice: phone and pincode. Everything else is
+  steppers, sliders and chips.
+- Hinglish headlines, English body copy
+- A floating wa.me button with a pre-filled message on every page — many
+  people will message instead of filling the form, and that is fine
+- Desktop is the same design on a wider grid; only /bulk needs to feel like a
+  laptop page, because that is where a gym owner reads it
+
+TONE
+Warm, direct, local, specific. Two people making tofu in a house in Ghaziabad
+and driving it to your door — never pretend to be a large brand. Real numbers,
+real dates, real faces. No wellness-speak, no "clean eating", no stock photo of
+a smiling woman with a salad.
+
+DELIVER
+The full mobile home page and both calculator modes as rendered, working HTML I
+can open on a phone, with the desktop layout shown too. Then the remaining page
+layouts as high-fidelity designs. Include the empty, loading, error, already-
+signed-up and out-of-delivery-zone states — in a pilot, out-of-zone is a real
+conversion opportunity, not an error message.</pre>
+    </div>
+    <div class="callout good">
+      <span class="tag">One note on running these</span>
+      <p>Prompt A demands <b>three directions before one recommendation</b> on purpose. The first identity any tool produces for a plant-based Indian brand will be sage green with a leaf on it. Forcing three genuinely different ideas and a defended choice is how you get past that &mdash; and how you end up with a pack that belongs to <em>Maharaja</em> Tofu specifically, rather than to any tofu at all.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><b>Maharaja Tofu</b> &mdash; validation pilot plan, August 2026. Costs, yields, ad rates and conversion figures are working assumptions to be replaced with real numbers after batch one and week one of spend. Nutrition figures are typical published ranges &mdash; get a NABL lab analysis before printing any claim or hard-coding the calculator constant. Nothing here is legal, tax or nutritional advice: confirm FSSAI claim thresholds, GST classification and DPDP consent wording with a professional before you sell or send a single message.</p>
+  </div>
+</footer>

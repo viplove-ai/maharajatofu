@@ -1,0 +1,43 @@
+# Fly.io config for the Maharaja Tofu site.
+# Secrets (DATABASE_URL) are set with `fly secrets set` and never live here —
+# this file is committed.
+
+app = "maharaja-tofu"
+
+# Mumbai, not Singapore. Almost every request on this site is a statically
+# rendered page that never touches Postgres, so the trip that matters is the one
+# to a phone in Noida — not the one to Neon. The handful of signup inserts a day
+# can afford the hop to ap-southeast-1.
+primary_region = "bom"
+
+[build]
+  dockerfile = "Dockerfile"
+  build-target = "prod"
+
+  [build.args]
+    NEXT_PUBLIC_SITE_URL = "https://maharajatofu.com"
+    # Replace with the real WhatsApp Business number before the first deploy.
+    NEXT_PUBLIC_WHATSAPP = "910000000000"
+    NEXT_PUBLIC_FSSAI = "FSSAI registration in progress"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_start_machines = true
+  # Node cold-starts in about a second and most pages are prerendered, so
+  # suspending to zero between visits is nearly free. Revisit if the ads ever
+  # push steady traffic through the machine.
+  auto_stop_machines = "suspend"
+  min_machines_running = 0
+  processes = ["app"]
+
+  [[http_service.checks]]
+    grace_period = "10s"
+    interval = "30s"
+    timeout = "5s"
+    method = "GET"
+    path = "/api/health"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "512mb"   # Next's server needs more headroom than an nginx SPA
