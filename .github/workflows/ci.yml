@@ -1,9 +1,11 @@
 name: CI
 
+# Runs on every pull request, and is called by the deploy workflow as its gate
+# before anything ships. Deliberately NOT triggered on push to main: deploy.yml
+# calls it there, and a plain push trigger would run the whole thing twice.
 on:
   pull_request:
-  push:
-    branches: [main, release]
+  workflow_call:
 
 concurrency:
   group: ci-${{ github.ref }}

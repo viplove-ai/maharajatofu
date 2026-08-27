@@ -1,11 +1,15 @@
 name: Deploy
 
-# Production deploys come off `release` only. `main` is the integration branch:
-# work lands there freely and CI proves it, but nothing ships until main is
-# merged into release. Same discipline as nirman.
+# Production deploys straight off `main`. There is no release branch: everything
+# lands on main and ships from there.
+#
+# Because deploy and CI would otherwise trigger on the same push, CI is not a
+# separate workflow here — it is called as this pipeline's first job, so a push
+# that fails lint, typecheck, tests or build never reaches Fly. That is what
+# replaces the safety a release branch used to provide.
 on:
   push:
-    branches: [release]
+    branches: [main]
   workflow_dispatch:
 
 # One deploy at a time, and never cancelled mid-flight: a half-applied
@@ -15,8 +19,13 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  verify:
+    name: CI
+    uses: ./.github/workflows/ci.yml
+
   migrate:
     name: Apply migrations
+    needs: verify
     runs-on: ubuntu-latest
     environment: production
     steps:

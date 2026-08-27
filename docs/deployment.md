@@ -89,7 +89,7 @@ npm run db:migrate
 flyctl deploy --remote-only
 ```
 
-After that, merging `main` into `release` does both automatically.
+After that, every push to `main` does both automatically.
 
 ### 6. Custom domain
 
@@ -105,16 +105,22 @@ build time, so a secret would not work and a redeploy is required.
 
 ## The pipeline
 
-**`.github/workflows/ci.yml`** — every PR and every push to `main` or `release`.
-Lint, typecheck, unit tests, production build; plus a job that regenerates the Drizzle
-migrations and fails if `drizzle/` comes out different from what was committed.
+**`.github/workflows/ci.yml`** — every pull request, and called by the deploy workflow.
+Lint, typecheck, unit tests, a check that the migration runner actually loads, and a
+production build; plus a job that regenerates the Drizzle migrations and fails if `drizzle/`
+comes out different from what was committed. It has no push trigger of its own — deploy.yml
+calls it on `main`, and a push trigger as well would run everything twice.
 
-**`.github/workflows/deploy.yml`** — push to `release`, or manual dispatch.
-Migrations first, then `flyctl deploy`, then a smoke test on `/api/health` followed by the
-home page. `concurrency` serializes deploys and never cancels one in flight.
+**`.github/workflows/deploy.yml`** — every push to `main`, or manual dispatch.
+Four stages: CI, then migrations, then `flyctl deploy`, then a smoke test on `/api/health`
+followed by the home page. `concurrency` serializes deploys and never cancels one in flight.
 
-CI is not a hard gate on deploy — protect `release` and require the CI checks if you want
-it to be.
+**There is no release branch.** Anything merged to `main` is live within a few minutes, so
+CI is wired in as the deploy pipeline's first job rather than as a parallel workflow — a
+push that fails lint, typecheck, tests or build never reaches Fly. What this does *not*
+protect against is a change that passes every check and is still wrong, which is what a
+release branch used to catch. Use pull requests for anything you would not want live
+immediately, and `flyctl releases` below to roll back when something slips through.
 
 ## Migrations
 

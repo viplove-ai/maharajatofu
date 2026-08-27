@@ -16,9 +16,8 @@ Next.js 15 (App Router) · TypeScript · Tailwind · Drizzle ORM · Neon Postgre
 Deliberately different from `nirman`, which is a Spring Boot API behind a React SPA. The
 reason is SEO: sixteen recipe pages are this site's most durable asset — the thing that
 keeps working after the ad budget stops — and they are statically generated here. A
-client-rendered SPA would need prerendering bolted on to rank at all. The deploy
-conventions are inherited from nirman unchanged: `release`-only production deploys,
-serialized with no mid-flight cancellation, smoke-tested after.
+client-rendered SPA would need prerendering bolted on to rank at all. Deploys go
+straight off `main`, serialized with no mid-flight cancellation and smoke-tested after.
 
 ## Setup
 

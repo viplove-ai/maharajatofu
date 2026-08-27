@@ -79,7 +79,11 @@ them means the plan document needs updating too.
 
 ## Deployment
 
-`main` is the integration branch; production deploys only from `release`. Migrations run as
-their own CI job *before* the Fly deploy, not at app startup — a bad migration should fail a
-one-off job while the running machine keeps serving, rather than crash-looping every boot.
-See `docs/deployment.md`.
+**Every push to `main` deploys to production.** There is no release branch. The deploy
+workflow calls the CI workflow as its first job, so a push that fails lint, typecheck, tests
+or build never reaches Fly — but anything that passes ships immediately. Open a PR for
+anything you would not want live within ten minutes.
+
+Migrations run as their own job *before* the Fly deploy, not at app startup — a bad
+migration should fail a one-off job while the running machine keeps serving, rather than
+crash-looping every boot. See `docs/deployment.md`.
