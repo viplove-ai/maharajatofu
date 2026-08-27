@@ -31,10 +31,10 @@ export default function PlansPage() {
       <Section>
         <Wrap className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {PLANS.map((p) => (
-            <Card key={p.id} className={p.id === 'thrice' ? 'border-accent' : ''}>
+            <Card key={p.id} className={p.id === 'ghar' ? 'border-accent' : ''}>
               <p className="font-mono text-[11px] uppercase tracking-[0.11em] text-muted">
                 {p.deliveriesPerWeek} {p.deliveriesPerWeek === 1 ? 'delivery' : 'deliveries'} a week
-                {p.id === 'thrice' && ' · most common'}
+                {p.id === 'ghar' && ' · most common'}
               </p>
               <h3 className="mt-1 font-display text-xl font-semibold">{p.name}</h3>
               <p className="mt-3 font-mono text-2xl font-semibold">₹{p.pricePerWeek}</p>

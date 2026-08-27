@@ -60,8 +60,8 @@ export function Calculator({ onResult }: { onResult?: (o: CalculatorOutcome) => 
   const [teens, setTeens] = useState(0)
   const [kids10to12, setKids10to12] = useState(0)
   const [kids4to9, setKids4to9] = useState(0)
-  const [trainingAdults, setTrainingAdults] = useState(0)
-  const [meals, setMeals] = useState<Record<Dish, number>>({ gravy: 2, bhurji: 1, grill: 0, addon: 0 })
+  const [trains, setTrains] = useState(false)
+  const [meals, setMeals] = useState<Record<Dish, number>>({ gravy: 2, bhurji: 1, tikka: 0, addon: 0 })
 
   function begin() {
     if (started.current) return
@@ -74,8 +74,8 @@ export function Calculator({ onResult }: { onResult?: (o: CalculatorOutcome) => 
     [paneer, share, matchProtein],
   )
   const plan = useMemo(
-    () => calculatePlan({ adults, teens, kids10to12, kids4to9, trainingAdults, meals }),
-    [adults, teens, kids10to12, kids4to9, trainingAdults, meals],
+    () => calculatePlan({ adults, teens, kids10to12, kids4to9, trains, meals }),
+    [adults, teens, kids10to12, kids4to9, trains, meals],
   )
   const result = mode === 'swap' ? swap : plan
 
@@ -164,8 +164,21 @@ export function Calculator({ onResult }: { onResult?: (o: CalculatorOutcome) => 
               <Stepper label="Teenagers (13–17)" value={teens} onChange={setTeens} />
               <Stepper label="Children (10–12)" value={kids10to12} onChange={setKids10to12} />
               <Stepper label="Children (4–9)" value={kids4to9} onChange={setKids4to9} />
-              <Stepper label="Of the adults, how many train 4+ days a week?" value={trainingAdults} onChange={setTrainingAdults} max={adults} />
             </div>
+            <label className="mt-3 flex items-start gap-3 text-sm">
+              <input
+                type="checkbox"
+                checked={trains}
+                onChange={(e) => setTrains(e.target.checked)}
+                className="mt-1 h-5 w-5 accent-[var(--c-accent)]"
+              />
+              <span>
+                Someone here trains 4+ days a week
+                <span className="block text-muted">
+                  Adds to grilled and snack plates only — nobody gets a bigger share of the shared sabzi.
+                </span>
+              </span>
+            </label>
           </div>
           <div className="space-y-2">
             <p className="text-sm font-semibold">How will you cook it, in a week?</p>
@@ -173,7 +186,7 @@ export function Calculator({ onResult }: { onResult?: (o: CalculatorOutcome) => 
               [
                 ['gravy', 'Sabzi or gravy (shared)'],
                 ['bhurji', 'Bhurji or scramble'],
-                ['grill', 'Tikka, grilled or a snack plate'],
+                ['tikka', 'Tikka, grilled or a snack plate'],
                 ['addon', 'Quick add-on — Maggi, roll, salad'],
               ] as const
             ).map(([dish, label]) => (
@@ -197,10 +210,9 @@ export function Calculator({ onResult }: { onResult?: (o: CalculatorOutcome) => 
             {result.packsPerWeek} {result.packsPerWeek === 1 ? 'pack' : 'packs'} a week
           </p>
           <p className="text-sm text-muted">
-            {result.deliveries === 1
-              ? 'One delivery — Tuesday.'
-              : `Two deliveries — ${result.packsPerDrop} on Tuesday, ${result.packsPerWeek - result.packsPerDrop} on Friday.`}{' '}
-            {result.deliveries === 2 && 'Fresh tofu keeps about five days, so we split it rather than dropping a week at once.'}
+            {result.split
+              ? `Two drops — ${result.tue} on Tuesday, ${result.fri} on Friday. Fresh tofu keeps about five days, so ${result.packsPerWeek} packs come in two — which is exactly why we deliver twice.`
+              : 'One delivery, Tuesday.'}
           </p>
         </div>
 
@@ -211,22 +223,37 @@ export function Calculator({ onResult }: { onResult?: (o: CalculatorOutcome) => 
           </p>
           <p className="text-sm text-muted">
             every week, versus the same paneer — plus {result.satFatSavedGrams} g of saturated fat, and zero cholesterol.
-            Nothing about your cooking changes.
+            Over four weeks that is {result.kcalSavedFourWeeks.toLocaleString('en-IN')} kcal. Nothing about your
+            cooking changes.
           </p>
         </div>
 
         <div className="border-t border-line pt-4 text-sm">
           <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">The protein, honestly</p>
           <p className="mt-1">
-            {result.proteinPerWeek} g of protein a week
+            {result.actualGrams} g of tofu carries about {result.tofuProtein} g of protein
             {/* Only quote a share of the household need in plan mode, where we
                 actually asked who is in the house. In swap mode we never asked,
                 so a percentage would be a denominator we invented. */}
-            {mode === 'plan' && <> — about {proteinSharePct(result, dailyNeed)}% of what your household needs</>}.{' '}
+            {mode === 'plan' && <> — around {proteinSharePct(result, dailyNeed)}% of what your household needs</>}.{' '}
             {mode === 'swap' && !matchProtein && (
               <>
-                The paneer you&rsquo;re replacing would have given {swap.paneerProteinPerWeek} g. Tick &ldquo;match my
-                protein&rdquo; above to close that gap.
+                The paneer it replaces was giving {result.paneerProtein} g. That is less, and we would rather say it
+                than hide it — tick &ldquo;match my protein&rdquo; above and we send 1.8&times; the weight to make it
+                level.
+              </>
+            )}
+            {mode === 'swap' && matchProtein && (
+              <>
+                Level with the {result.paneerProtein} g the paneer was giving you, and still{' '}
+                {result.kcalSaved.toLocaleString('en-IN')} kcal lighter this week.
+              </>
+            )}
+            {mode === 'plan' && (
+              <>
+                {' '}
+                The same dishes made with paneer would give roughly {result.paneerProtein} g — a little more, at more
+                than double the calories.
               </>
             )}
           </p>
@@ -236,11 +263,12 @@ export function Calculator({ onResult }: { onResult?: (o: CalculatorOutcome) => 
           </p>
         </div>
 
-        {result.startSmallerPacks && (
+        {result.nudgePacks && (
           <div className="border-t border-line pt-4 text-sm">
-            <p className="font-semibold">Start with {result.startSmallerPacks} packs for the first two weeks.</p>
+            <p className="font-semibold">Start with {result.nudgePacks} packs for the first two weeks.</p>
             <p className="text-muted">
-              Almost everyone over-orders in week one and throws some away. Move up once you know your rhythm.
+              Week one is where people over-order, throw tofu away and quit. Move up once you know your rhythm — we
+              change your plan on WhatsApp in one message.
             </p>
           </div>
         )}

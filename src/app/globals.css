@@ -1,46 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=Mukta:wght@400;600;800&family=Yatra+One&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /*
- * The entire visual identity lives in this block. The design work coming back
- * from the brand session replaces these values and nothing else — no component
- * hard-codes a colour, so a new palette is one edit in one file.
+ * "Enamel Board" — the approved brand direction, from
+ * design_handoff_maharaja_tofu/tokens.json. Every colour, typeface and control
+ * size on the site resolves through these variables; no component holds a hex.
  *
- * PLACEHOLDER PALETTE. Swap for the approved brand direction.
+ * Single theme on purpose. An enamel sign is a printed object with one set of
+ * colours — it has no dark mode, and the handoff defines no dark palette. This
+ * is a commitment, not an omission, so every surface below paints itself
+ * explicitly rather than inheriting anything from the viewer.
  */
 :root {
-  --c-bg: #f2f3ee;
-  --c-surface: #ffffff;
-  --c-surface-2: #eaece4;
-  --c-ink: #17203d;
-  --c-muted: #5c6478;
-  --c-line: #d8dbd1;
-  --c-accent: #c8452f;
-  --c-gold: #b5820f;
-  --c-plant: #3f7a4b;
+  color-scheme: light;
 
-  --f-display: Georgia, 'Times New Roman', serif;
-  --f-body: system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --f-mono: ui-monospace, 'SF Mono', Menlo, monospace;
-}
+  /* ground and ink */
+  --c-bg: #fbf7ee; /* paper */
+  --c-surface: #f4ebda; /* cream */
+  --c-surface-2: #dcd3c0; /* stone */
+  --c-ink: #14224a; /* indigo */
+  --c-ink-deep: #0e1526;
+  --c-indigo-raise: #1b2c58;
+  --c-slate: #2a3350;
+  --c-muted: #7e7768; /* warm grey */
+  --c-muted-dark: #6e6757;
+  --c-line: #dcd3c0;
+  --c-line-strong: #c9c0ac;
+  --c-placeholder: #a8a08c;
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) {
-    --c-bg: #131725;
-    --c-surface: #1a1f30;
-    --c-surface-2: #222840;
-    --c-ink: #e9e8e1;
-    --c-muted: #9aa3b8;
-    --c-line: #2c3348;
-    --c-accent: #ec7458;
-    --c-gold: #e0ab3e;
-    --c-plant: #74b47f;
-  }
-}
+  /* accents */
+  --c-accent: #e1442a; /* vermilion */
+  --c-gold: #f2a118; /* marigold */
+  --c-chilli: #b4202a;
+  --c-plant: #1e7b34; /* green */
 
-html {
-  color-scheme: light dark;
+  /* SKU identity — must read from three metres inside a fridge */
+  --c-sku-classic: #f2a118;
+  --c-sku-masala: #b4202a;
+
+  /* type */
+  --f-display: 'Archivo Black', Archivo, Helvetica, sans-serif;
+  --f-headline: Mukta, 'Segoe UI', sans-serif;
+  --f-devanagari: 'Yatra One', Mukta, serif;
+  --f-body: Archivo, Helvetica, Arial, sans-serif;
+  --f-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+
+  /* controls — from tokens.control, all comfortably past the 44px minimum */
+  --h-input: 56px;
+  --h-button: 58px;
+  --h-chip: 52px;
+  --h-sticky: 56px;
+
+  --rule-section: 3px solid var(--c-accent);
 }
 
 body {
@@ -50,9 +64,18 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Square corners are the system, and nothing casts a shadow. Enforced here
+ * rather than left to each component, so a stray `rounded` cannot creep in. */
+*,
+*::before,
+*::after {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
 /* Room for the sticky mobile action bar so it never covers the last element. */
 main {
-  padding-bottom: 5.5rem;
+  padding-bottom: calc(var(--h-sticky) + 2rem);
 }
 
 @media (min-width: 768px) {
@@ -62,9 +85,27 @@ main {
 }
 
 :focus-visible {
-  outline: 2px solid var(--c-accent);
+  outline: 3px solid var(--c-accent);
   outline-offset: 2px;
-  border-radius: 2px;
+}
+
+::placeholder {
+  color: var(--c-placeholder);
+}
+
+/* Colour and opacity only. The handoff explicitly forbids count-up numbers,
+ * parallax, reveal-on-scroll and countdown timers — an enamel board does not
+ * animate, and a fake countdown would undercut a scarcity claim that is real. */
+a,
+button,
+input,
+select,
+textarea {
+  transition:
+    color 140ms ease-out,
+    background-color 140ms ease-out,
+    border-color 140ms ease-out,
+    opacity 140ms ease-out;
 }
 
 @media (prefers-reduced-motion: reduce) {

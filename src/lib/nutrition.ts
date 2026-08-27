@@ -29,6 +29,13 @@ export const PROTEIN_MATCH_RATIO = PANEER_PROTEIN_PER_100G / TOFU_PROTEIN_PER_10
 export const PACK_GRAMS = 200
 
 /**
+ * Pressing and searing take weight off, so the raw grams you buy exceed the
+ * cooked grams you eat. A multiplier, matching the handoff spec — not 1/0.88,
+ * which is a slightly different number and would drift from the design.
+ */
+export const PREP_LOSS = 1.12
+
+/**
  * ICMR-NIN RDA 2020: 0.83 g of protein per kg of body weight per day for a
  * healthy adult. The higher figures are sports-nutrition convention, not ICMR —
  * label them as such anywhere they are shown.
@@ -37,4 +44,4 @@ export const PROTEIN_FACTOR = { desk: 0.83, active: 1.0, trains: 1.4 } as const
 export type Activity = keyof typeof PROTEIN_FACTOR
 
 /** Approximate daily protein RDA in grams, by age band. */
-export const KID_PROTEIN_RDA = { '4-9': 23, '10-12': 32, '13-17': 45 } as const
+export const KID_PROTEIN_RDA = { '4-9': 23, '10-12': 32, '13-19': 45 } as const
