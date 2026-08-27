@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 import { calcSwap, calcWeek, noEaters, type Dishes, type Eaters } from '@/lib/calculator'
 import { comparison } from '@/content'
 import { scrollToId, usePilot, type Pct } from '@/lib/store'
-import { Eyebrow, HeadingHi, Meta, Num } from './ui'
+import { Eyebrow, Heading, Meta, Num } from './ui'
 
 const TAB = 'h-[46px] flex-1 font-headline text-[15px] font-extrabold'
 const CHIP_ON = 'border-2 border-indigo bg-indigo text-cream'
@@ -30,7 +30,7 @@ function Stepper({
       <span className="flex shrink-0 items-center gap-1">
         <button
           type="button"
-          aria-label={`${label} — kam`}
+          aria-label={`Fewer ${label}`}
           onClick={() => onChange(Math.max(0, value - 1))}
           className={`h-target w-target border-2 text-[20px] leading-none ${border}`}
         >
@@ -41,7 +41,7 @@ function Stepper({
         </span>
         <button
           type="button"
-          aria-label={`${label} — zyada`}
+          aria-label={`More ${label}`}
           onClick={() => onChange(Math.min(max, value + 1))}
           className={`h-target w-target border-2 text-[20px] leading-none ${border}`}
         >
@@ -73,7 +73,7 @@ export function Calculator({ standalone = false }: { standalone?: boolean }) {
   const setEaters = (patch: Partial<Eaters>) => set({ eaters: { ...eaters, ...patch } })
   const setDishes = (patch: Partial<Dishes>) => set({ dishes: { ...dishes, ...patch } })
 
-  const shareText = `${result.packs} packs/week — Tue ${result.tue}${result.fri ? `, Fri ${result.fri}` : ''}. Wahi sabzi, ${result.kcalSaved.toLocaleString('en-IN')} kcal kam. Maharaja Tofu, Ghaziabad — maharajatofu.com`
+  const shareText = `${result.packs} packs/week — Tue ${result.tue}${result.fri ? `, Fri ${result.fri}` : ''}. Same sabzi, ${result.kcalSaved.toLocaleString('en-IN')} kcal less. Maharaja Tofu, Ghaziabad — maharajatofu.com`
 
   return (
     <div className="grid gap-4 md:grid-cols-2 md:items-start">
@@ -86,7 +86,7 @@ export function Calculator({ standalone = false }: { standalone?: boolean }) {
             onClick={() => set({ mode: 'swap' })}
             className={`${TAB} ${mode === 'swap' ? 'bg-indigo text-cream' : 'bg-transparent text-indigo'}`}
           >
-            Paneer swap करें
+            Swap my paneer
           </button>
           <button
             role="tab"
@@ -94,7 +94,7 @@ export function Calculator({ standalone = false }: { standalone?: boolean }) {
             onClick={() => set({ mode: 'week' })}
             className={`${TAB} ${mode === 'week' ? 'bg-indigo text-cream' : 'bg-transparent text-indigo'}`}
           >
-            हफ़्ते का plan
+            Plan my week
           </button>
         </div>
 
@@ -104,7 +104,7 @@ export function Calculator({ standalone = false }: { standalone?: boolean }) {
             <div className="space-y-4">
               <div>
                 <label htmlFor="paneerG" className="block text-body-sm text-slate">
-                  हफ़्ते में कितना पनीर आता है?
+                  How much paneer does your house buy in a week?
                 </label>
                 <p className="mt-1 font-display text-[28px] leading-none text-indigo">
                   <Num>{paneerG}</Num>
@@ -124,7 +124,7 @@ export function Calculator({ standalone = false }: { standalone?: boolean }) {
               </div>
 
               <div>
-                <span className="block text-body-sm text-slate">कितना बदलना है?</span>
+                <span className="block text-body-sm text-slate">How much of it to swap?</span>
                 <div className="mt-2 grid grid-cols-3 gap-2">
                   {([25, 50, 100] as Pct[]).map((p) => (
                     <button
@@ -160,7 +160,7 @@ export function Calculator({ standalone = false }: { standalone?: boolean }) {
           ) : (
             <div className="space-y-4">
               <div>
-                <p className="text-body-sm font-semibold text-slate">कौन खाएगा?</p>
+                <p className="text-body-sm font-semibold text-slate">Who will actually eat it?</p>
                 <p className="text-body-sm text-grey-warm-dark">
                   Count only the people who will actually eat it — in most houses one person won&rsquo;t touch it in
                   week one, and an honest count gives an honest basket.
@@ -174,11 +174,11 @@ export function Calculator({ standalone = false }: { standalone?: boolean }) {
               </div>
 
               <div>
-                <p className="text-body-sm font-semibold text-slate">हफ़्ते में कैसे बनेगा?</p>
+                <p className="text-body-sm font-semibold text-slate">How will you cook it, in a week?</p>
                 <div className="mt-2 divide-y divide-stone">
-                  <Stepper label="सब्ज़ी / gravy (shared)" value={dishes.gravy} onChange={(n) => setDishes({ gravy: n })} max={7} />
-                  <Stepper label="भुर्जी / scramble" value={dishes.bhurji} onChange={(n) => setDishes({ bhurji: n })} max={7} />
-                  <Stepper label="टिक्का / grilled plate" value={dishes.tikka} onChange={(n) => setDishes({ tikka: n })} max={7} />
+                  <Stepper label="Sabzi or gravy (shared)" value={dishes.gravy} onChange={(n) => setDishes({ gravy: n })} max={7} />
+                  <Stepper label="Bhurji or scramble" value={dishes.bhurji} onChange={(n) => setDishes({ bhurji: n })} max={7} />
+                  <Stepper label="Tikka or grilled plate" value={dishes.tikka} onChange={(n) => setDishes({ tikka: n })} max={7} />
                   <Stepper label="Roll, Maggi, salad" value={dishes.addon} onChange={(n) => setDishes({ addon: n })} max={7} />
                 </div>
               </div>
@@ -191,7 +191,7 @@ export function Calculator({ standalone = false }: { standalone?: boolean }) {
                   className="mt-0.5 h-6 w-6 shrink-0 accent-[var(--c-green)]"
                 />
                 <span className="text-slate">
-                  <span className="font-semibold">कोई हफ़्ते में 4+ दिन gym जाता है</span>
+                  <span className="font-semibold">Someone here trains 4+ days a week</span>
                   <span className="block text-grey-warm-dark">
                     Adds to grilled and snack plates only. Nobody gets a bigger share of the sabzi everyone is eating
                     out of the same pan.
@@ -207,14 +207,14 @@ export function Calculator({ standalone = false }: { standalone?: boolean }) {
       <div className="bg-indigo p-5 text-cream md:sticky md:top-20">
         {empty ? (
           <div className="py-8">
-            <HeadingHi size="sm">कौन खाएगा?</HeadingHi>
+            <Heading size="sm">Who will actually eat it?</Heading>
             <p className="mt-2 text-body text-cream/70">
               Add at least one person above and we&rsquo;ll work out the week.
             </p>
           </div>
         ) : (
           <>
-            <Eyebrow tone="cream">आपको चाहिए</Eyebrow>
+            <Eyebrow tone="cream">You need</Eyebrow>
             <p className="mt-1 font-display text-num-lg leading-none text-cream">
               <Num>{result.packs}</Num>
               <span className="ml-2 font-mono text-[14px] tracking-[0.12em]">{result.packs === 1 ? 'PACK' : 'PACKS'} / WEEK</span>
@@ -246,7 +246,7 @@ export function Calculator({ standalone = false }: { standalone?: boolean }) {
                 Deliberately not animated: a count-up would undercut the honesty
                 this whole card is built on. */}
             <div className="mt-4 bg-marigold p-4 text-ink">
-              <Eyebrow tone="grey">इतनी कैलोरी बचेंगी</Eyebrow>
+              <Eyebrow tone="grey">And it saves you</Eyebrow>
               <p className="mt-1 font-display text-num leading-none">
                 <Num>{result.kcalSaved.toLocaleString('en-IN')}</Num>
               </p>
@@ -257,7 +257,7 @@ export function Calculator({ standalone = false }: { standalone?: boolean }) {
 
             {/* The honest protein line — required copy, including the admission. */}
             <div className="mt-4 border-2 border-cream/30 p-3">
-              <Eyebrow tone="cream">प्रोटीन — सीधी बात</Eyebrow>
+              <Eyebrow tone="cream">The protein, honestly</Eyebrow>
               <p className="mt-1.5 text-body-sm text-cream/85">
                 {mode === 'swap' && !match && (
                   <>
@@ -289,7 +289,7 @@ export function Calculator({ standalone = false }: { standalone?: boolean }) {
             {result.nudge && (
               <div className="mt-4 bg-paper p-3 text-ink">
                 <p lang="hi" className="font-headline text-[16px] font-extrabold">
-                  पहले 2 हफ़्ते {result.nudgePacks} पैक से शुरू करें
+                  Start with {result.nudgePacks} packs for the first two weeks
                 </p>
                 <p className="mt-1 text-body-sm text-grey-warm-dark">
                   Week one is where people over-order, throw tofu away and quit. Start smaller, then move up — we change
@@ -303,7 +303,7 @@ export function Calculator({ standalone = false }: { standalone?: boolean }) {
                 onClick={() => (standalone ? (window.location.href = '/#form') : scrollToId('form'))}
                 className="flex h-button w-full items-center justify-center bg-vermilion px-4 font-headline text-[18px] font-extrabold text-white"
               >
-                <span lang="hi">यही plan चुनें</span>
+                <span>Choose this plan</span>
                 <span className="ml-2">— {result.plan.name}</span>
               </button>
               <Meta className="text-center text-cream/55">
@@ -315,7 +315,7 @@ export function Calculator({ standalone = false }: { standalone?: boolean }) {
                 rel="noopener noreferrer"
                 className="flex h-[56px] w-full items-center justify-center bg-green px-4 font-headline text-[16px] font-extrabold text-white"
               >
-                WhatsApp पर भेजें
+                Share on WhatsApp
               </a>
             </div>
 

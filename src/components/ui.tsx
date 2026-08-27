@@ -51,10 +51,12 @@ export function Eyebrow({ children, tone = 'grey' }: { children: ReactNode; tone
 }
 
 /**
- * Devanagari headline. Always Mukta 800, and always tagged lang="hi" so a screen
- * reader switches voice rather than spelling Latin letters at the listener.
+ * The headline face — Mukta 800, per the handoff's type scale. Named for the
+ * Devanagari it originally set; the site ships in English for now, so there is
+ * no lang tag. Put one back on any element that carries Devanagari again, or a
+ * screen reader will read English words in a Hindi voice.
  */
-export function HeadingHi({
+export function Heading({
   children,
   size = 'md',
   className = '',
@@ -72,7 +74,7 @@ export function HeadingHi({
     hero: 'text-hero md:text-hero-lg',
   }[size]
   return (
-    <Tag lang="hi" className={`font-headline font-extrabold ${scale} text-balance ${className}`}>
+    <Tag className={`font-headline font-extrabold ${scale} text-balance ${className}`}>
       {children}
     </Tag>
   )

@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { FSSAI, brand } from '@/content'
 import { BulkForm } from '@/components/BulkForm'
 import { Photo } from '@/components/Photo'
-import { Body, Eyebrow, HeadingHi, Meta, Num, Section } from '@/components/ui'
+import { Body, Eyebrow, Heading, Meta, Num, Section } from '@/components/ui'
 
 export const metadata: Metadata = {
   title: 'Bulk tofu for gyms, cafés & cloud kitchens',
@@ -21,9 +21,9 @@ export default function BulkPage() {
     <>
       <Section ground="indigo" className="pt-8">
         <Eyebrow tone="marigold">FOR GYMS, CAFÉS &amp; CLOUD KITCHENS</Eyebrow>
-        <HeadingHi as="h1" size="lg" className="mt-2">
+        <Heading as="h1" size="lg" className="mt-2">
           1 kg blocks, pressed to your delivery day.
-        </HeadingHi>
+        </Heading>
         <Body className="mt-3 text-cream/80">
           One kilo yields about 34 portions of 30 g. It holds its cut in a gravy and on a griddle, arrives on two fixed
           batch days, and invoices monthly. The FSSAI licence and our lab report go out attached to every quote.
@@ -34,9 +34,9 @@ export default function BulkPage() {
       <Section ground="paper">
         <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr]">
           <div>
-            <HeadingHi size="md" className="text-ink">
-              बता दीजिए क्या चाहिए।
-            </HeadingHi>
+            <Heading size="md" className="text-ink">
+              Tell us what you need.
+            </Heading>
             <p className="mb-5 mt-1.5 text-body-sm text-grey-warm-dark">We call back within a day, usually the same one.</p>
             <BulkForm />
           </div>
@@ -57,7 +57,7 @@ export default function BulkPage() {
                 ))}
               </dl>
             </div>
-            <Photo caption="1 KG BLOCK ON A COMMERCIAL BOARD, CHEF'S HANDS CUTTING" on="cream" />
+            <Photo caption="A 1 kg block being cut on a commercial board" src="/img/block-1kg.svg" />
             <Meta className="text-grey-warm">
               YIELD · ~34 PORTIONS OF 30 G PER KG · MONTHLY INVOICING · SAMPLE BLOCK AT EVERY FIRST MEETING
             </Meta>

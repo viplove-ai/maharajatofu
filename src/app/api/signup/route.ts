@@ -89,7 +89,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error('signup failed', error)
     return NextResponse.json(
-      { error: 'नहीं गया — पर आपका data सुरक्षित है' },
+      { error: "That didn't send — but nothing you typed is lost" },
       { status: 500 },
     )
   }

@@ -28,11 +28,11 @@ export function StickyBar() {
         onClick={toForm}
         className="h-sticky flex-1 bg-vermilion px-4 font-headline text-[17px] font-extrabold text-white"
       >
-        Early-bird coupon लें
+        Get early-bird coupon
       </button>
       <WhatsAppLink
         message={brand.whatsappPrefill}
-        label="WhatsApp par poochhiye"
+        label="Ask us on WhatsApp"
         className="flex h-sticky w-sticky shrink-0 items-center justify-center bg-green text-white"
       >
         <WhatsAppIcon className="h-6 w-6" />

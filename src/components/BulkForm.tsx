@@ -41,7 +41,7 @@ export function BulkForm() {
         }),
       })
       if (!res.ok) {
-        setError('Kuch gadbad — please WhatsApp us instead.')
+        setError('Something went wrong — please WhatsApp us instead.')
         return
       }
       setDone(true)
@@ -56,7 +56,7 @@ export function BulkForm() {
     return (
       <div className="border-2 border-green bg-paper p-5">
         <p lang="hi" className="font-headline text-[19px] font-extrabold text-ink">
-          मिल गया — इस हफ़्ते call करेंगे।
+          Got it — we will call you this week.
         </p>
         <p className="mt-2 text-body-sm text-grey-warm-dark">
           We bring a sample block to every first meeting. Nobody should sign a standing order for something they have
@@ -73,7 +73,7 @@ export function BulkForm() {
         <input id="b-business" name="businessName" required className={INPUT} />
       </div>
       <div>
-        <FieldLabel htmlFor="b-contact">AAPKA NAAM</FieldLabel>
+        <FieldLabel htmlFor="b-contact">YOUR NAME</FieldLabel>
         <input id="b-contact" name="contactName" required className={INPUT} />
       </div>
       <div>
@@ -145,7 +145,7 @@ export function BulkForm() {
       </div>
 
       <div>
-        <FieldLabel htmlFor="b-notes">AUR KUCH?</FieldLabel>
+        <FieldLabel htmlFor="b-notes">ANYTHING ELSE?</FieldLabel>
         <textarea id="b-notes" name="notes" rows={3} className={`${INPUT} h-auto py-3`} />
       </div>
 
@@ -156,7 +156,7 @@ export function BulkForm() {
         className="flex h-button w-full items-center justify-center gap-2 bg-vermilion px-4 font-headline text-[19px] font-extrabold text-white"
       >
         {busy && <Spinner className="text-white" />}
-        Enquiry भेजिए
+        Send enquiry
       </button>
       <Meta className="text-grey-warm">FSSAI LICENCE &amp; LAB REPORT ATTACHED TO EVERY QUOTE</Meta>
     </form>

@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { outOfZone, zoneForPincode } from '@/content'
 import { digitsOnly } from '@/lib/validation'
 import { scrollToId, usePilot } from '@/lib/store'
-import { Eyebrow, HeadingHi, INPUT_MONO, Meta, Spinner } from './ui'
+import { Eyebrow, Heading, INPUT_MONO, Meta, Spinner } from './ui'
 
 interface Slots {
   served: boolean | null
@@ -56,13 +56,13 @@ export function PincodeCheck() {
   return (
     <div>
       <Eyebrow tone="vermilion">02 — DELIVERY CHECK</Eyebrow>
-      <HeadingHi size="md" className="mt-2 text-ink">
-        आपके यहाँ पहुँचाते हैं?
-      </HeadingHi>
+      <Heading size="md" className="mt-2 text-ink">
+        Do we deliver to you?
+      </Heading>
 
       <div className="mt-3 flex gap-2">
         <label htmlFor="pincode-check" className="sr-only">
-          Aapka pincode
+          Your pincode
         </label>
         <input
           id="pincode-check"
@@ -115,7 +115,7 @@ export function PincodeCheck() {
                 ✓
               </span>
               <div>
-                <HeadingHi size="sm">{slots?.zone ?? zoneForPincode(pin)} — हाँ जी, पहुँचाते हैं</HeadingHi>
+                <Heading size="sm">{slots?.zone ?? zoneForPincode(pin)}  — yes, we deliver here</Heading>
                 <Meta className="mt-2 text-cream/60">DELIVERY DAYS · TUE &amp; FRI, 6–9 PM</Meta>
                 {slots?.left != null && (
                   <Meta className="text-marigold">FOUNDING SLOTS LEFT HERE · {slots.left}</Meta>
@@ -127,9 +127,9 @@ export function PincodeCheck() {
 
         {status === 'out' && (
           <div className="border-2 border-marigold bg-paper p-4">
-            <HeadingHi size="sm" className="text-ink">
+            <Heading size="sm" className="text-ink">
               {outOfZone.copy.headline}
-            </HeadingHi>
+            </Heading>
             <p className="mt-2 text-body-sm text-slate">
               You are outside the 5 km pilot circle for now. {outOfZone.copy.body}
               {slots?.requests != null && <> Yours is #{slots.requests}.</>}

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { brand, recipeBySlug, recipes } from '@/content'
 import { Photo } from '@/components/Photo'
-import { Body, Eyebrow, HeadingHi, Meta, Num, Section } from '@/components/ui'
+import { Body, Eyebrow, Heading, Meta, Num, Section } from '@/components/ui'
 
 /** Statically generated — these pages are the long-tail search entry points and
  *  the asset that keeps working after the ad budget stops. */
@@ -46,10 +46,10 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
           {r.minutes} MIN · {r.packs} {r.packs === 1 ? 'PACK' : 'PACKS'}
           {r.serves ? ` · SERVES ${r.serves}` : ''}
         </Eyebrow>
-        <HeadingHi as="h1" size="lg" className="mt-2">
+        <Heading as="h1" size="lg" className="mt-2">
           {r.name}
-        </HeadingHi>
-        <Photo caption={`${r.name} — HARD SIDE LIGHT, HANDS IN FRAME`} className="mt-5" />
+        </Heading>
+        <Photo caption={r.name} src={`/img/recipes/${r.slug}.svg`} className="mt-5" priority />
       </Section>
 
       {/* Every recipe shows the paneer version's calories for contrast — the
@@ -79,7 +79,7 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
       )}
 
       <Section ground="paper">
-        <Eyebrow tone="vermilion">TAREEKA</Eyebrow>
+        <Eyebrow tone="vermilion">METHOD</Eyebrow>
         {r.steps?.length ? (
           <ol className="mt-4 space-y-4">
             {r.steps.map((s, i) => (
@@ -108,12 +108,12 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
       </Section>
 
       <Section ground="cream">
-        <Eyebrow tone="vermilion">AUR BHI</Eyebrow>
+        <Eyebrow tone="vermilion">MORE RECIPES</Eyebrow>
         <div className="mt-4 grid grid-cols-3 gap-3">
           {others.map((o) => (
             <Link key={o.slug} href={`/recipes/${o.slug}`} className="bg-paper p-3">
               <Meta className="text-grey-warm">{o.minutes} MIN</Meta>
-              <h3 lang="hi" className="mt-1 font-headline text-[14px] font-bold text-ink">
+              <h3 className="mt-1 font-headline text-[14px] font-bold text-ink">
                 {o.name}
               </h3>
             </Link>

@@ -4,7 +4,7 @@ import { eq } from 'drizzle-orm'
 import { db, schema } from '@/db'
 import { RecognisedArrival } from '@/components/RecognisedArrival'
 
-export const metadata: Metadata = { title: 'आपके लिए', robots: { index: false } }
+export const metadata: Metadata = { title: 'For you', robots: { index: false } }
 export const dynamic = 'force-dynamic'
 
 /**

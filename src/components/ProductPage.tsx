@@ -25,14 +25,16 @@ export function ProductPage({ slug }: { slug: string }) {
           <Num>₹{p.price}</Num>
         </p>
         <Photo
-          caption={p.sku === 'masala' ? 'MASALA ON THE TAWA, CHARRED, HAND IN FRAME' : 'TUB IN A HOME FRIDGE, DOOR LIGHT ONLY'}
+          caption={p.sku === 'masala' ? 'Masala tofu charring on a tawa' : 'A tub of Classic tofu in a home fridge'}
+          src={p.sku === 'masala' ? '/img/masala-tawa.svg' : '/img/classic-tub.svg'}
           className="mt-6"
+          priority
         />
       </Section>
 
       {/* The three-ingredient panel is the hero element on Classic. */}
       <Section ground="paper">
-        <Eyebrow tone="vermilion">ISMEIN KYA HAI</Eyebrow>
+        <Eyebrow tone="vermilion">WHAT&rsquo;S IN IT</Eyebrow>
         <ol className="mt-3 font-mono text-[24px] font-semibold leading-[1.5] text-ink">
           {p.ingredients.map((ing, i) => (
             <li key={ing}>
@@ -82,13 +84,13 @@ export function ProductPage({ slug }: { slug: string }) {
       </Section>
 
       <Section ground="paper">
-        <Eyebrow tone="vermilion">ISSE BANAAIYE</Eyebrow>
+        <Eyebrow tone="vermilion">COOK IT LIKE THIS</Eyebrow>
         <div className="mt-4 grid grid-cols-2 gap-3">
           {related.map((r) => (
             <Link key={r.slug} href={`/recipes/${r.slug}`} className="bg-cream">
-              <Photo caption={r.name} on="cream" ratio="aspect-[4/3]" />
+              <Photo caption={r.name} src={`/img/recipes/${r.slug}.svg`} ratio="aspect-[4/3]" />
               <div className="p-3">
-                <h3 lang="hi" className="font-headline text-[14.5px] font-bold text-ink">
+                <h3 className="font-headline text-[14.5px] font-bold text-ink">
                   {r.name}
                 </h3>
                 <Meta className="mt-1 text-grey-warm">
@@ -99,7 +101,7 @@ export function ProductPage({ slug }: { slug: string }) {
           ))}
         </div>
         <Link href="/protein-calculator" className="mt-5 inline-block font-mono text-[12px] uppercase tracking-[0.12em] text-indigo underline">
-          Kitna chahiye? Calculate kariye →
+          Work out how much you need →
         </Link>
       </Section>
     </>

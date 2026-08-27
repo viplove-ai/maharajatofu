@@ -7,7 +7,7 @@ import { Photo } from './Photo'
 import { Meta } from './ui'
 
 const FILTERS = [
-  { key: 'all', label: 'सब' },
+  { key: 'all', label: 'All' },
   { key: 'quick', label: 'Under 5 minutes' },
   { key: 'family', label: 'Family dinner' },
 ] as const
@@ -36,9 +36,9 @@ export function RecipeGrid({ recipes }: { recipes: Recipe[] }) {
       <div className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3">
         {shown.map((r) => (
           <Link key={r.slug} href={`/recipes/${r.slug}`} className="bg-paper">
-            <Photo caption={r.name} on="cream" ratio="aspect-[4/3]" />
+            <Photo caption={r.name} src={`/img/recipes/${r.slug}.svg`} ratio="aspect-[4/3]" />
             <div className="p-3">
-              <h3 lang="hi" className="font-headline text-[14.5px] font-bold text-ink">
+              <h3 className="font-headline text-[14.5px] font-bold text-ink">
                 {r.name}
               </h3>
               <Meta className="mt-1 text-grey-warm">

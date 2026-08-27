@@ -9,7 +9,7 @@ export function HeroCta() {
       onClick={() => scrollToId('calculator')}
       className="flex h-button w-full items-center justify-between bg-vermilion px-5 font-headline text-[19px] font-extrabold text-white"
     >
-      <span lang="hi">कितना चाहिए? Calculate करें</span>
+      <span>How much do you need?</span>
       <span aria-hidden>→</span>
     </button>
   )

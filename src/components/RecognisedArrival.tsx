@@ -7,7 +7,7 @@ import { CONSENT_SUB, CONSENT_TEXT } from '@/lib/consent'
 import { digitsOnly, normalisePhone } from '@/lib/validation'
 import { usePilot } from '@/lib/store'
 import { AlreadyIn } from './AlreadyIn'
-import { ErrorText, Eyebrow, HeadingHi, INPUT, INPUT_MONO, Meta, Section, Spinner } from './ui'
+import { ErrorText, Eyebrow, Heading, INPUT, INPUT_MONO, Meta, Section, Spinner } from './ui'
 
 interface Props {
   token: string
@@ -49,7 +49,7 @@ export function RecognisedArrival({ token, referrer, society, area, pincode, pla
   async function submit(e: React.FormEvent) {
     e.preventDefault()
     const next: typeof errors = {}
-    if (!state.form.name.trim()) next.name = 'Naam likh dijiye'
+    if (!state.form.name.trim()) next.name = 'Please tell us your name'
     if (!normalisePhone(state.form.phone)) next.phone = copy.errors.phone
     if (!state.form.consent) next.consent = copy.errors.consent
     setErrors(next)
@@ -101,10 +101,10 @@ export function RecognisedArrival({ token, referrer, society, area, pincode, pla
   return (
     <Section ground="indigo" className="pt-10">
       <div className="mx-auto max-w-[700px]">
-        <Eyebrow tone="marigold">{referrer.toUpperCase()} NE AAPKO BHEJA HAI</Eyebrow>
-        <HeadingHi as="h1" size="lg" className="mt-2">
-          नमस्ते. सब भर दिया है।
-        </HeadingHi>
+        <Eyebrow tone="marigold">{referrer.toUpperCase()} SENT YOU THIS</Eyebrow>
+        <Heading as="h1" size="lg" className="mt-2">
+          Hello. It&rsquo;s all filled in.
+        </Heading>
         <p className="mt-3 max-w-measure text-body text-cream/80">
           {referrer} {society ? `from ${society}` : 'from your area'} is already on the list. Everything below came
           across with the link — change anything you like, or leave it as it is.
@@ -225,7 +225,7 @@ export function RecognisedArrival({ token, referrer, society, area, pincode, pla
               className="mt-0.5 h-7 w-7 shrink-0 accent-[var(--c-green)]"
             />
             <span>
-              <span lang="hi" className="block font-headline text-[15px] font-bold leading-[1.4] text-cream">
+              <span className="block font-headline text-[15px] font-bold leading-[1.4] text-cream">
                 {CONSENT_TEXT}
               </span>
               <span className="mt-1 block text-[11.5px] leading-[1.6] text-cream/60">{CONSENT_SUB}</span>
@@ -238,7 +238,7 @@ export function RecognisedArrival({ token, referrer, society, area, pincode, pla
             className="flex h-button w-full items-center justify-center gap-2 bg-vermilion px-4 font-headline text-[19px] font-extrabold text-white"
           >
             {busy && <Spinner className="text-white" />}
-            <span lang="hi">हाँ, मुझे जोड़ लीजिए</span>
+            <span>Yes, add me</span>
           </button>
 
           <Meta className="text-cream/40">

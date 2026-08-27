@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { plans } from '@/content'
 import { Ladder } from '@/components/Ladder'
-import { Body, Eyebrow, HeadingHi, Meta, Num, Section } from '@/components/ui'
+import { Body, Eyebrow, Heading, Meta, Num, Section } from '@/components/ui'
 
 export const metadata: Metadata = {
   title: 'Plans — ₹155 to ₹765 a week',
@@ -14,9 +14,9 @@ export default function PlansPage() {
     <>
       <Section ground="indigo" className="pt-8">
         <Eyebrow tone="marigold">PLANS</Eyebrow>
-        <HeadingHi as="h1" size="lg" className="mt-2">
-          जितना चाहिए, उतना ही।
-        </HeadingHi>
+        <Heading as="h1" size="lg" className="mt-2">
+          Only as much as you need.
+        </Heading>
         <Body className="mt-3 text-cream/80">
           Every plan pauses any week, skips any delivery and cancels any time. No joining fee and no lock-in — we are
           asking strangers to trust a brand that does not exist yet, so the least we can do is make leaving easy.
@@ -28,7 +28,7 @@ export default function PlansPage() {
           {plans.map((p) => (
             <div key={p.name} className={`border-2 p-4 ${p.packs === 4 ? 'border-vermilion' : 'border-stone'}`}>
               <Meta className="text-grey-warm">
-                {p.packs} PACKS / WEEK{p.packs === 4 ? ' · SABSE ZYADA' : ''}
+                {p.packs} PACKS / WEEK{p.packs === 4 ? '  · MOST COMMON' : ''}
               </Meta>
               <h2 className="mt-1 font-display text-sku uppercase text-ink">{p.name}</h2>
               <p className="mt-3 font-display text-[26px] leading-none text-vermilion">
@@ -46,15 +46,15 @@ export default function PlansPage() {
 
       <Section ground="indigo">
         <Eyebrow tone="marigold">BEFORE WE LAUNCH</Eyebrow>
-        <HeadingHi size="md" className="mt-2">
-          पहले 100 लोग Founding Members हैं
-        </HeadingHi>
+        <Heading size="md" className="mt-2">
+          The first 100 people are Founding Members
+        </Heading>
         <Body className="mb-5 mt-2 text-cream/75">
           We are not taking any money yet. Sign up now and we message you once, on launch day, with your coupon.
         </Body>
         <Ladder />
         <Link href="/#form" className="mt-6 inline-block font-mono text-[12px] uppercase tracking-[0.12em] text-marigold underline">
-          Coupon le lijiye →
+          Get your coupon →
         </Link>
       </Section>
     </>

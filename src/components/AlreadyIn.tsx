@@ -5,7 +5,7 @@ import { brand, planByPacks } from '@/content'
 import { FOUNDING_LIMIT } from '@/lib/ladder'
 import { usePilot } from '@/lib/store'
 import { WhatsAppLink } from './WhatsApp'
-import { Body, HeadingHi, Meta, Num } from './ui'
+import { Body, Heading, Meta, Num } from './ui'
 
 /**
  * Shown instead of the form to anyone already on the list — identified from the
@@ -26,18 +26,18 @@ export function AlreadyIn() {
       <Meta className="text-green">
         CONFIRMED · {founding ? `FOUNDING MEMBER #${s.rank}` : `EARLY BIRD #${s.rank}`}
       </Meta>
-      <HeadingHi size="lg" className="mt-2 text-ink">
-        {s.name} ji, आप पहले से अंदर हैं।
-      </HeadingHi>
+      <Heading size="lg" className="mt-2 text-ink">
+        {s.name}, you&rsquo;re already in.
+      </Heading>
       <Body className="mt-2 text-grey-warm-dark">No form again. We have everything we need.</Body>
 
       <div className="mt-5 border-2 border-dashed border-marigold bg-indigo p-4">
-        <Meta className="text-cream/60">AAPKA COUPON</Meta>
+        <Meta className="text-cream/60">YOUR COUPON</Meta>
         <p className="mt-1 font-mono text-[22px] font-semibold tracking-[0.1em] text-marigold">{s.code}</p>
       </div>
 
       <div className="mt-3 bg-cream p-4">
-        <Meta className="text-grey-warm">AAPKA PLAN</Meta>
+        <Meta className="text-grey-warm">YOUR PLAN</Meta>
         <p className="mt-1 font-headline text-[17px] font-bold text-ink">{s.plan || plan.name}</p>
         <div className="mt-3 space-y-0.5">
           <Meta className="text-grey-warm">AREA · {s.area.toUpperCase()}</Meta>
@@ -49,13 +49,13 @@ export function AlreadyIn() {
             href="/protein-calculator"
             className="flex h-[52px] flex-1 items-center justify-center border-2 border-indigo px-4 font-headline text-[16px] font-extrabold text-indigo"
           >
-            Plan बदलें
+            Change plan
           </Link>
           <WhatsAppLink
             message={`Namaste! Coupon ${s.code}. `}
             className="flex h-[52px] flex-1 items-center justify-center bg-green px-4 font-headline text-[16px] font-extrabold text-white"
           >
-            WhatsApp करें
+            Message us
           </WhatsAppLink>
         </div>
       </div>

@@ -6,9 +6,7 @@ export function Footer() {
   return (
     <footer className="bg-indigo px-5 py-10 text-cream md:px-10">
       <div className="mx-auto max-w-shell">
-        <p lang="hi" className="font-devanagari text-[22px]">
-          {brand.devanagari}
-        </p>
+        <p className="font-display text-[20px] uppercase tracking-[0.02em]">{brand.name}</p>
 
         <div className="mt-6 grid gap-6 sm:grid-cols-3">
           <div>

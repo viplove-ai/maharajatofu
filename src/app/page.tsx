@@ -8,7 +8,7 @@ import { PincodeCheck } from '@/components/PincodeCheck'
 import { Scarcity } from '@/components/Scarcity'
 import { SignupBlock } from '@/components/SignupBlock'
 import { HeroCta } from '@/components/HeroCta'
-import { Body, Eyebrow, HeadingHi, Meta, Num, PullQuote, Section } from '@/components/ui'
+import { Body, Eyebrow, Heading, Meta, Num, PullQuote, Section } from '@/components/ui'
 
 const SKU_BAR: Record<string, string> = { classic: 'bg-marigold', masala: 'bg-chilli' }
 const SKU_TEXT: Record<string, string> = { classic: 'text-marigold', masala: 'text-vermilion' }
@@ -24,17 +24,21 @@ export default function Home() {
       <Section ground="indigo" className="pt-8 md:pt-14">
         <div className="md:grid md:grid-cols-2 md:items-center md:gap-10">
           <div>
-            <HeadingHi as="h1" size="hero">
+            <Heading as="h1" size="hero">
               <span className="block">{brand.heroHeadline.line1}</span>
               <span className="block text-marigold">{brand.heroHeadline.line2}</span>
-            </HeadingHi>
+            </Heading>
             <Body className="mt-4 text-cream/80">{brand.heroSub}</Body>
             <div className="mt-6 hidden md:block">
               <PincodeCheckPanel />
             </div>
           </div>
           <div className="mt-6 md:mt-0">
-            <Photo caption="HERO 4:3 — CUT TOFU FACE, HARD SIDE LIGHT, STEEL PLATE, HAND IN FRAME" />
+            <Photo
+              caption="Freshly cut tofu on a steel plate, a hand reaching in"
+              src="/img/hero.svg"
+              priority
+            />
             <div className="mt-5">
               <HeroCta />
               <Meta className="mt-2 text-center text-cream/50">40 SECONDS · NO PAYMENT · NO ACCOUNT</Meta>
@@ -50,12 +54,16 @@ export default function Home() {
 
       {/* 3 — Two products */}
       <Section ground="paper">
-        <Eyebrow tone="vermilion">03 — DO CHEEZEIN</Eyebrow>
+        <Eyebrow tone="vermilion">03 — TWO PRODUCTS</Eyebrow>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
           {shelf.map((p) => (
             <Link key={p.slug} href={`/${p.slug}`} className="flex bg-indigo text-cream">
               <div className={`w-[118px] shrink-0 border-r-[6px] ${SKU_BAR[p.sku]}`}>
-                <Photo caption={p.sku === 'classic' ? 'TUB IN A HOME FRIDGE' : 'MASALA ON THE TAWA, CHARRED'} ratio="h-full min-h-[150px]" />
+                <Photo
+                  caption={p.sku === 'classic' ? 'A tub of Classic tofu in a home fridge' : 'Masala tofu charring on a tawa'}
+                  src={p.sku === 'classic' ? '/img/classic-tub.svg' : '/img/masala-tawa.svg'}
+                  ratio="h-full min-h-[150px]"
+                />
               </div>
               <div className="flex-1 p-4">
                 <h3 className={`font-display text-sku uppercase ${SKU_TEXT[p.sku]}`}>{p.name}</h3>
@@ -72,10 +80,10 @@ export default function Home() {
 
       {/* 4 — The honest comparison. The admission is the point of the block. */}
       <Section ground="cream">
-        <Eyebrow tone="vermilion">04 — HISAAB</Eyebrow>
-        <HeadingHi size="lg" className="mt-2 text-ink">
-          एक ही प्रोटीन, आधी कैलोरी। हिसाब देख लीजिए।
-        </HeadingHi>
+        <Eyebrow tone="vermilion">04 — THE ARITHMETIC</Eyebrow>
+        <Heading size="lg" className="mt-2 text-ink">
+          Same protein, half the calories. Here is the arithmetic.
+        </Heading>
 
         <div className="mt-5 grid gap-3 sm:grid-cols-2">
           <div className="bg-indigo p-4 text-cream">
@@ -112,8 +120,12 @@ export default function Home() {
 
       {/* 5 — Teen cheezein. The ingredient list IS the hero element. */}
       <Section ground="indigo">
-        <Eyebrow tone="marigold">05 — TEEN CHEEZEIN</Eyebrow>
-        <Photo caption="SOYBEANS IN A STEEL BOWL, WATER, MUSLIN, THE PRESS — 06:00 WINDOW LIGHT" className="mt-4" />
+        <Eyebrow tone="marigold">05 — THREE THINGS</Eyebrow>
+        <Photo
+          caption="Soybeans in a steel bowl, water, muslin and the press"
+          src="/img/ingredients.svg"
+          className="mt-4"
+        />
 
         <ol className="mt-6 font-mono text-[27px] font-semibold leading-[1.5] text-cream">
           <li>1 SOYBEAN</li>
@@ -122,24 +134,24 @@ export default function Home() {
         </ol>
         <hr className="mt-4 h-[2px] w-full border-0 bg-vermilion" />
 
-        <HeadingHi size="sm" className="mt-4">
-          बस इतना ही। पूरी लिस्ट।
-        </HeadingHi>
+        <Heading size="sm" className="mt-4">
+          That is the whole list.
+        </Heading>
         <Body className="mt-2 text-cream/75">
           No starch, no preservative, no colour. Every tub carries its batch number and the date it was pressed. Saturday
           visits welcome — {brand.visitSlots}.
         </Body>
         <Link href="/kitchen" className="mt-4 inline-block font-mono text-[12px] uppercase tracking-[0.12em] text-marigold underline">
-          Kitchen dekhiye →
+          See the kitchen →
         </Link>
       </Section>
 
       {/* 6 — The calculator */}
       <Section ground="paper" id="calculator">
-        <Eyebrow tone="vermilion">06 — KITNA CHAHIYE</Eyebrow>
-        <HeadingHi size="lg" className="mt-2 text-ink">
-          हिसाब लगा लीजिए।
-        </HeadingHi>
+        <Eyebrow tone="vermilion">06 — HOW MUCH</Eyebrow>
+        <Heading size="lg" className="mt-2 text-ink">
+          Work out what you need.
+        </Heading>
         <Body className="mb-5 mt-2 text-grey-warm-dark">
           Not people × meals × 100 g — that is nonsense in an Indian kitchen, where a shared sabzi for four uses about
           60 g a head. Tell us what you already buy, or how you cook.
@@ -149,16 +161,16 @@ export default function Home() {
 
       {/* 7 — Recipes */}
       <Section ground="cream">
-        <Eyebrow tone="vermilion">07 — BANEGA KAISE</Eyebrow>
-        <HeadingHi size="md" className="mt-2 text-ink">
-          हर recipe वही है — बस पनीर की जगह टोफ़ू।
-        </HeadingHi>
+        <Eyebrow tone="vermilion">07 — HOW TO COOK IT</Eyebrow>
+        <Heading size="md" className="mt-2 text-ink">
+          Every recipe stays the same — tofu instead of paneer.
+        </Heading>
         <div className="mt-4 grid grid-cols-2 gap-3">
           {six.map((r) => (
             <Link key={r.slug} href={`/recipes/${r.slug}`} className="bg-paper">
-              <Photo caption={r.name} on="cream" ratio="aspect-[4/3]" />
+              <Photo caption={r.name} src={`/img/recipes/${r.slug}.svg`} ratio="aspect-[4/3]" />
               <div className="p-3">
-                <h3 lang="hi" className="font-headline text-[14.5px] font-bold text-ink">
+                <h3 className="font-headline text-[14.5px] font-bold text-ink">
                   {r.name}
                 </h3>
                 <Meta className="mt-1 text-grey-warm">
@@ -169,20 +181,20 @@ export default function Home() {
           ))}
         </div>
         <Link href="/recipes" className="mt-4 inline-block font-mono text-[12px] uppercase tracking-[0.12em] text-indigo underline">
-          Saari recipes →
+          All the recipes →
         </Link>
       </Section>
 
       {/* 8 — Kitchen, price and trust */}
       <Section ground="paper">
-        <Eyebrow tone="vermilion">08 — RASOI</Eyebrow>
+        <Eyebrow tone="vermilion">08 — THE KITCHEN</Eyebrow>
         <div className="mt-4 grid grid-cols-2 gap-3">
-          <Photo caption="RITU AT THE PRESS · 06:10" on="cream" ratio="h-[128px]" />
-          <Photo caption="ARJUN LOADING THE INSULATED BAG" on="cream" ratio="h-[128px]" />
+          <Photo caption="Hands at the press, half past six in the morning" src="/img/press.svg" ratio="h-[128px]" />
+          <Photo caption="Tubs going into the insulated delivery bag" src="/img/delivery-bag.svg" ratio="h-[128px]" />
         </div>
-        <HeadingHi size="md" className="mt-5 text-ink">
-          दो लोग, एक रसोई, हफ़्ते में दो बार।
-        </HeadingHi>
+        <Heading size="md" className="mt-5 text-ink">
+          Two people, one kitchen, twice a week.
+        </Heading>
         <Body className="mt-2 text-grey-warm-dark">
           {brand.founders.map((f) => `${f.name} ${f.role}`).join('; ')}. Come and see it — {brand.visitSlots}.
         </Body>
@@ -209,9 +221,9 @@ export default function Home() {
       {/* 9 — Signup + ladder */}
       <Section ground="indigo" id="form">
         <Eyebrow tone="marigold">09 — FOUNDING 100</Eyebrow>
-        <HeadingHi size="lg" className="mt-2">
-          पहले 100 लोग Founding Members हैं
-        </HeadingHi>
+        <Heading size="lg" className="mt-2">
+          The first 100 people are Founding Members
+        </Heading>
 
         <div className="mt-5">
           <Scarcity />
@@ -227,7 +239,7 @@ export default function Home() {
 
       {/* 10 — FAQ */}
       <Section ground="paper">
-        <Eyebrow tone="vermilion">10 — SAWAAL</Eyebrow>
+        <Eyebrow tone="vermilion">10 — QUESTIONS</Eyebrow>
         <div className="mt-4">
           <Faq />
         </div>

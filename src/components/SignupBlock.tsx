@@ -3,7 +3,7 @@
 import { usePilot } from '@/lib/store'
 import { AlreadyIn } from './AlreadyIn'
 import { SignupForm } from './SignupForm'
-import { HeadingHi } from './ui'
+import { Heading } from './ui'
 
 /** Never show the form to someone already in. */
 export function SignupBlock({ referredBy }: { referredBy?: string }) {
@@ -17,9 +17,9 @@ export function SignupBlock({ referredBy }: { referredBy?: string }) {
 
   return (
     <div className="bg-paper p-5 text-ink">
-      <HeadingHi size="md" className="text-ink">
-        चार चीज़ें, बस।
-      </HeadingHi>
+      <Heading size="md" className="text-ink">
+        Four things. That is all.
+      </Heading>
       <p className="mb-5 mt-1.5 text-body-sm text-grey-warm-dark">
         No payment, no account. We message you once when we launch, with your coupon.
       </p>

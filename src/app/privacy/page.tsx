@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { brand, privacy } from '@/content'
 import { CONSENT_SUB, CONSENT_TEXT } from '@/lib/consent'
-import { Body, Eyebrow, HeadingHi, Meta, Section } from '@/components/ui'
+import { Body, Eyebrow, Heading, Meta, Section } from '@/components/ui'
 
 export const metadata: Metadata = {
   title: 'Privacy',
@@ -17,9 +17,9 @@ export default function PrivacyPage() {
   return (
     <Section ground="paper" className="pt-8">
       <Eyebrow tone="vermilion">PRIVACY</Eyebrow>
-      <HeadingHi as="h1" size="lg" className="mt-2 text-ink">
-        आपका number, आपका है।
-      </HeadingHi>
+      <Heading as="h1" size="lg" className="mt-2 text-ink">
+        Your number is yours.
+      </Heading>
       <Body className="mt-3 text-grey-warm-dark">
         We are {brand.name} — two people making tofu in Sector 10, Ghaziabad. This page is short because what we do with
         your details is small.

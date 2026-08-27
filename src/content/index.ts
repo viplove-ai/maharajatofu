@@ -1,4 +1,12 @@
-import raw from './content.json'
+import raw from './content.en.json'
+
+/**
+ * The site ships in English for now. `content.json` holds the original Hinglish
+ * set from the design handoff and is deliberately kept — switching back is this
+ * one import, not a rewrite. The handoff's rule that Devanagari appears only in
+ * the brand name and the headline claim still holds; here it is narrower still,
+ * and only the म mark carries it.
+ */
 
 /**
  * content.json is the source of truth for copy, areas, pincode zones, plans,

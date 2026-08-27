@@ -35,10 +35,10 @@ export function SignupForm({ referredBy }: { referredBy?: string }) {
 
   function validate(): Errors {
     const next: Errors = {}
-    if (!form.name.trim()) next.name = 'Naam likh dijiye'
+    if (!form.name.trim()) next.name = 'Please tell us your name'
     if (!normalisePhone(form.phone)) next.phone = copy.errors.phone
-    if (!form.area) next.area = 'Area chun lijiye'
-    if (!/^\d{6}$/.test(form.pin)) next.pin = '6 digits chahiye'
+    if (!form.area) next.area = 'Please choose your area'
+    if (!/^\d{6}$/.test(form.pin)) next.pin = 'Six digits, please'
     if (!form.consent) next.consent = copy.errors.consent
     return next
   }
@@ -161,7 +161,7 @@ export function SignupForm({ referredBy }: { referredBy?: string }) {
           aria-invalid={!!errors.area}
           className={INPUT}
         >
-          <option value="">Area chuniye</option>
+          <option value="">Choose your area</option>
           {areas.map((a) => (
             <option key={a} value={a}>
               {a}
@@ -240,7 +240,7 @@ export function SignupForm({ referredBy }: { referredBy?: string }) {
           className="mt-0.5 h-7 w-7 shrink-0 accent-[var(--c-green)]"
         />
         <span>
-          <span lang="hi" className="block font-headline text-[15px] font-bold leading-[1.4] text-ink">
+          <span className="block font-headline text-[15px] font-bold leading-[1.4] text-ink">
             {CONSENT_TEXT}
           </span>
           <span className="mt-1 block text-[11.5px] leading-[1.6] text-grey-warm-dark">
@@ -257,20 +257,20 @@ export function SignupForm({ referredBy }: { referredBy?: string }) {
       {submitState === 'error' && (
         <div className="border-2 border-chilli bg-paper p-3">
           <p lang="hi" className="font-headline text-[16px] font-extrabold text-ink">
-            नहीं गया — पर आपका data सुरक्षित है
+            That didn&rsquo;t send — but nothing you typed is lost
           </p>
           <div className="mt-3 flex gap-2">
             <button
               type="submit"
               className="h-[52px] flex-1 bg-vermilion px-3 font-headline text-[16px] font-extrabold text-white"
             >
-              फिर से भेजें
+              Try again
             </button>
             <WhatsAppLink
               message={`${brand.whatsappPrefill} Naam: ${form.name}. Area: ${form.area}.`}
               className="flex h-[52px] flex-1 items-center justify-center bg-green px-3 font-headline text-[16px] font-extrabold text-white"
             >
-              WhatsApp करें
+              Message us instead
             </WhatsAppLink>
           </div>
         </div>
@@ -281,7 +281,7 @@ export function SignupForm({ referredBy }: { referredBy?: string }) {
         className="flex h-button w-full items-center justify-center gap-2 bg-vermilion px-4 font-headline text-[19px] font-extrabold text-white"
       >
         {busy && <Spinner className="text-white" />}
-        <span lang="hi">{busy ? copy.submit.loading : copy.submit.idle}</span>
+        <span>{busy ? copy.submit.loading : copy.submit.idle}</span>
       </button>
 
       <Eyebrow tone="grey">

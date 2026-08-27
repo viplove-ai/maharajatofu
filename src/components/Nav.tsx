@@ -24,8 +24,8 @@ export function Nav() {
         <Link href="/" className="flex items-center gap-2.5" onClick={() => setOpen(false)}>
           <Mark />
           <span>
-            <span lang="hi" className="block font-devanagari text-[17px] leading-none">
-              {brand.devanagari}
+            <span className="block font-display text-[15px] uppercase leading-none tracking-[0.02em]">
+              {brand.name}
             </span>
             <Meta className="mt-0.5 text-marigold">GHAZIABAD · 5 KM</Meta>
           </span>

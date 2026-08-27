@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { ThanksView } from '@/components/ThanksView'
 
-export const metadata: Metadata = { title: 'हो गया', robots: { index: false } }
+export const metadata: Metadata = { title: 'You are on the list', robots: { index: false } }
 
 export default async function ThanksPage({
   searchParams,
