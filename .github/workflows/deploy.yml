@@ -55,8 +55,11 @@ jobs:
       - uses: actions/checkout@v4
       - uses: superfly/flyctl-actions/setup-flyctl@master
 
+      # --ha=false: Fly provisions two machines by default for high availability.
+      # A pilot site that suspends to zero does not need a standby, and each
+      # machine bills for its rootfs even while suspended.
       - name: Deploy
-        run: flyctl deploy --remote-only --wait-timeout 600
+        run: flyctl deploy --remote-only --ha=false --wait-timeout 600
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 

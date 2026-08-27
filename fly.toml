@@ -4,11 +4,16 @@
 
 app = "maharaja-tofu"
 
-# Mumbai, not Singapore. Almost every request on this site is a statically
-# rendered page that never touches Postgres, so the trip that matters is the one
-# to a phone in Noida — not the one to Neon. The handful of signup inserts a day
-# can afford the hop to ap-southeast-1.
-primary_region = "bom"
+# Singapore, because Fly deprecated `bom` and there is no longer any India
+# region — `sin` is the closest thing available, roughly 60-80 ms from Delhi.
+#
+# The consolation is that it colocates with the Neon project (ap-southeast-1),
+# which matters more now than it would have from Mumbai: the pages that do touch
+# Postgres — the signup POST, /thanks, /r/[code] — make their round trips inside
+# one datacentre instead of across the Bay of Bengal. Every other page is
+# prerendered and never queries at all, so the user-facing cost is a single
+# extra hop on first byte.
+primary_region = "sin"
 
 [build]
   dockerfile = "Dockerfile"

@@ -14,7 +14,8 @@ live in the same Next.js server as the pages, so there is no second machine and 
 
 | Choice | Reason |
 |---|---|
-| Region `bom` (Mumbai) | Nearly every request is a prerendered page that never touches Postgres. The trip that matters is the one to a phone in Noida, not the one to Neon. |
+| Region `sin` (Singapore) | Fly deprecated `bom` and now has no India region at all, so this is the closest available — about 60–80 ms from Delhi. It does at least colocate with the Neon project, so the few routes that hit Postgres do their round trips inside one datacentre. |
+| One machine (`--ha=false`) | Fly provisions two by default for high availability. A pilot site that suspends to zero does not need a standby, and each machine bills for its rootfs even while suspended. |
 | `auto_stop_machines = "suspend"`, `min_machines_running = 0` | Node resumes in about a second and most pages are static, so suspending between visits costs almost nothing. Nirman keeps a machine warm because a JVM cold start is ~20s; that does not apply here. |
 | Migrations in CI, not at boot | A bad migration fails a one-off job while the running machine keeps serving, instead of putting every boot into a crash loop. |
 | Neon **pooled** endpoint | `@neondatabase/serverless` speaks HTTP and holds no prepared-statement state, so PgBouncer in transaction mode is fine — the opposite of nirman's constraint. |
